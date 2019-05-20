@@ -3,18 +3,30 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		888C6013228EE4490047A736 /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6012228EE4490047A736 /* Receipt.swift */; };
+		888C6015228EE4650047A736 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6014228EE4650047A736 /* Item.swift */; };
+		888C6017228EE91D0047A736 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6016228EE91D0047A736 /* DummyData.swift */; };
+		888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6018228EFE540047A736 /* DashboardViewController.swift */; };
+		888C601B228EFE540047A736 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888C6019228EFE540047A736 /* DashboardViewController.xib */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
 		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
 		88E3FF3B228D9C0A002871BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF3A228D9C0A002871BB /* Assets.xcassets */; };
 		88E3FF3E228D9C0A002871BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */; };
+		929049F4711CBB63B2197CF0 /* Pods_TiQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A157028FE12064BFDB472578 /* Pods_TiQuest.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		74ADADF95A9C723D4614757E /* Pods-TiQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiQuest.release.xcconfig"; path = "Target Support Files/Pods-TiQuest/Pods-TiQuest.release.xcconfig"; sourceTree = "<group>"; };
+		888C6012228EE4490047A736 /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
+		888C6014228EE4650047A736 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		888C6016228EE91D0047A736 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
+		888C6018228EFE540047A736 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		888C6019228EFE540047A736 /* DashboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DashboardViewController.xib; sourceTree = "<group>"; };
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +34,8 @@
 		88E3FF3A228D9C0A002871BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88E3FF3D228D9C0A002871BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88E3FF3F228D9C0A002871BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		942147E7A55F5239922D3590 /* Pods-TiQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiQuest.debug.xcconfig"; path = "Target Support Files/Pods-TiQuest/Pods-TiQuest.debug.xcconfig"; sourceTree = "<group>"; };
+		A157028FE12064BFDB472578 /* Pods_TiQuest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TiQuest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +43,67 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				929049F4711CBB63B2197CF0 /* Pods_TiQuest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		469A29D5DB2AC430543BCFF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A157028FE12064BFDB472578 /* Pods_TiQuest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7D712CBF5D317E3791393C25 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				942147E7A55F5239922D3590 /* Pods-TiQuest.debug.xcconfig */,
+				74ADADF95A9C723D4614757E /* Pods-TiQuest.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		888C600F228EE1890047A736 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				888C6012228EE4490047A736 /* Receipt.swift */,
+				888C6014228EE4650047A736 /* Item.swift */,
+				888C6016228EE91D0047A736 /* DummyData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		888C6010228EE19C0047A736 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88E3FF37228D9C08002871BB /* Main.storyboard */,
+				88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		888C6011228EE1A80047A736 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				88E3FF33228D9C08002871BB /* AppDelegate.swift */,
+				88E3FF35228D9C08002871BB /* ViewController.swift */,
+				888C6018228EFE540047A736 /* DashboardViewController.swift */,
+				888C6019228EFE540047A736 /* DashboardViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		88E3FF27228D9C08002871BB = {
 			isa = PBXGroup;
 			children = (
 				88E3FF32228D9C08002871BB /* TiQuest */,
 				88E3FF31228D9C08002871BB /* Products */,
+				7D712CBF5D317E3791393C25 /* Pods */,
+				469A29D5DB2AC430543BCFF5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,11 +118,10 @@
 		88E3FF32228D9C08002871BB /* TiQuest */ = {
 			isa = PBXGroup;
 			children = (
-				88E3FF33228D9C08002871BB /* AppDelegate.swift */,
-				88E3FF35228D9C08002871BB /* ViewController.swift */,
-				88E3FF37228D9C08002871BB /* Main.storyboard */,
+				888C600F228EE1890047A736 /* Model */,
+				888C6011228EE1A80047A736 /* Controller */,
+				888C6010228EE19C0047A736 /* View */,
 				88E3FF3A228D9C0A002871BB /* Assets.xcassets */,
-				88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */,
 				88E3FF3F228D9C0A002871BB /* Info.plist */,
 			);
 			path = TiQuest;
@@ -71,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88E3FF42228D9C0A002871BB /* Build configuration list for PBXNativeTarget "TiQuest" */;
 			buildPhases = (
+				2A81C13178E6AB09B39AE63B /* [CP] Check Pods Manifest.lock */,
 				88E3FF2C228D9C08002871BB /* Sources */,
 				88E3FF2D228D9C08002871BB /* Frameworks */,
 				88E3FF2E228D9C08002871BB /* Resources */,
+				BACB66FACF85799FC0A13247 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,17 +190,64 @@
 				88E3FF3E228D9C0A002871BB /* LaunchScreen.storyboard in Resources */,
 				88E3FF3B228D9C0A002871BB /* Assets.xcassets in Resources */,
 				88E3FF39228D9C08002871BB /* Main.storyboard in Resources */,
+				888C601B228EFE540047A736 /* DashboardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A81C13178E6AB09B39AE63B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TiQuest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BACB66FACF85799FC0A13247 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TiQuest/Pods-TiQuest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TiQuest/Pods-TiQuest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TiQuest/Pods-TiQuest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		88E3FF2C228D9C08002871BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888C6015228EE4650047A736 /* Item.swift in Sources */,
+				888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */,
+				888C6013228EE4490047A736 /* Receipt.swift in Sources */,
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
+				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +392,7 @@
 		};
 		88E3FF43228D9C0A002871BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 942147E7A55F5239922D3590 /* Pods-TiQuest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,13 +404,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.EricOrdonneau.TiQuest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		88E3FF44228D9C0A002871BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74ADADF95A9C723D4614757E /* Pods-TiQuest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -309,7 +423,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.EricOrdonneau.TiQuest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
