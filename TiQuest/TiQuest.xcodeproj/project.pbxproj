@@ -100,10 +100,10 @@
 		888C6010228EE19C0047A736 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
 				880DFD412292F0EA0054F2C8 /* CalendarCollectionView */,
 				88E3FF37228D9C08002871BB /* Main.storyboard */,
 				88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */,
-				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

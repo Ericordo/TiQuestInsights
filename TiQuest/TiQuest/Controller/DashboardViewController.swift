@@ -8,17 +8,23 @@
 
 import UIKit
 import Macaw
+import Charts
 
 
 class DashboardViewController: UIViewController {
     
 let calendarView = Calendar()
+let todaySales = UIView()
  
 
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        todaySales.frame = CGRect(x: 0, y: calendarView.calendarHeight+20, width: view.frame.width, height: 350)
+        todaySales.backgroundColor = .red
+        view.addSubview(todaySales)
+//        todaySales.addSubview(TodaySales())
 
 
         // TODO: Delete line below
