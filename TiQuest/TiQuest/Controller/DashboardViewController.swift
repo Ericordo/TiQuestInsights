@@ -13,18 +13,19 @@ import Charts
 
 class DashboardViewController: UIViewController {
     
-let calendarView = Calendar()
-let todaySales = UIView()
+    let calendarView = Calendar()
+    var todaySalesView : TodaySales!
  
 
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        todaySales.frame = CGRect(x: 0, y: calendarView.calendarHeight+20, width: view.frame.width, height: 350)
-        todaySales.backgroundColor = .red
-        view.addSubview(todaySales)
-//        todaySales.addSubview(TodaySales())
+        // MARK: Configuration of the Today Sales Chart
+        todaySalesView = TodaySales(frame: CGRect(x: 0, y: calendarView.calendarHeight+20, width: view.frame.width, height: 350))
+        todaySalesView.contentMode = .scaleAspectFit
+        view.addSubview(todaySalesView)
+        
 
 
         // TODO: Delete line below

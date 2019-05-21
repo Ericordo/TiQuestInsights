@@ -48,6 +48,11 @@ class TodaySales: MacawView {
     })
     static var animations: [Animation] = []
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.node = TodaySales.createChart()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(node: TodaySales.createChart(), coder: aDecoder)
     }
@@ -55,8 +60,11 @@ class TodaySales: MacawView {
     private static func createChart() -> Group {
         var items: [Node] = addYAxisItem() + addXAxisItem()
         items.append(createBars())
+        
         return Group(contents: items, place: .identity)
     }
+    
+    
     
     private static func addYAxisItem() -> [Node] {
         let maxLines = 10
