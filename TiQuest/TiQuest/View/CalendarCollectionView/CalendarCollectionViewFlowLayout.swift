@@ -19,6 +19,7 @@ class CalendarCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     func setUpLayout() {
         self.scrollDirection = .horizontal
+        self.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     

@@ -13,7 +13,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpCell()
-        // Initialization code
+
+        
     }
     
     override var isSelected: Bool {
@@ -25,7 +26,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
  let dateLabel : UILabel = {
         let label = UILabel()
-        label.frame.size = CGSize(width: 100, height: 50)
+//        label.frame.size = CGSize(width: 100, height: 50)
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .center
@@ -36,9 +37,12 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     func setUpCell() {
         
-        self.frame.size = CGSize(width: 100, height: 50)
+//        self.frame.size = CGSize(width: 100, height: 50)
         self.addSubview(dateLabel)
-        
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
+        dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+        print("hello")
         
     }
     

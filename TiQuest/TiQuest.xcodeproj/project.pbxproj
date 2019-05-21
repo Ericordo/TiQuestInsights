@@ -18,6 +18,7 @@
 		888C6015228EE4650047A736 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6014228EE4650047A736 /* Item.swift */; };
 		888C6017228EE91D0047A736 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6016228EE91D0047A736 /* DummyData.swift */; };
 		888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6018228EFE540047A736 /* DashboardViewController.swift */; };
+		88BA1C812294116D00F96603 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C802294116D00F96603 /* Calendar.swift */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
 		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		888C6014228EE4650047A736 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		888C6016228EE91D0047A736 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		888C6018228EFE540047A736 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		88BA1C802294116D00F96603 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				880DFD422292F1150054F2C8 /* CalendarCollectionView.swift */,
 				880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */,
 				880DFD482292F4E60054F2C8 /* CalendarCollectionViewFlowLayout.swift */,
+				88BA1C802294116D00F96603 /* Calendar.swift */,
 			);
 			path = CalendarCollectionView;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
 				880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */,
+				88BA1C812294116D00F96603 /* Calendar.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
