@@ -10,12 +10,18 @@ import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setUpCell()
-
-        
     }
+    
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     
     override var isSelected: Bool {
         didSet {
@@ -26,23 +32,25 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
  let dateLabel : UILabel = {
         let label = UILabel()
-//        label.frame.size = CGSize(width: 100, height: 50)
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .center
-        label.backgroundColor = .cyan
         return label
         }()
     
     
     func setUpCell() {
         
-//        self.frame.size = CGSize(width: 100, height: 50)
+//        let lineSeparator = CALayer()
+//        lineSeparator.frame = CGRect(x: self.frame.width, y: 0, width: 0.5, height: self.frame.height)
+//        lineSeparator.backgroundColor = UIColor.lightGray.cgColor
+//        layer.addSublayer(lineSeparator)
+        self.backgroundColor = .white
         self.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        print("hello")
+        dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
         
     }
     

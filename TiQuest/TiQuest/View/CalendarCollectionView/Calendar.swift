@@ -25,7 +25,7 @@ class Calendar: NSObject {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsHorizontalScrollIndicator = false
         cv.decelerationRate = .fast
-        cv.backgroundColor = .white
+        cv.backgroundColor = .gray
         return cv
     }()
     
@@ -52,6 +52,7 @@ class Calendar: NSObject {
 }
 
 extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         return dates.count
@@ -59,10 +60,13 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCollectionViewCell
-//        cell.dateLabel.text = dates[indexPath.item]
-        cell.dateLabel.text = "hello"
-//        cell.backgroundColor = .cyan
+        cell.dateLabel.text = dates[indexPath.item]
+
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
     }
     
     
@@ -74,6 +78,6 @@ extension Calendar : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 0.5
     }
 }
