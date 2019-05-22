@@ -23,6 +23,8 @@ struct dailySales {
 
 class TodaySales: MacawView {
     
+    
+    
     static let salesOfOneDay = [Sales(hour: "11 AM", sales: 453),
                                 Sales(hour: "12 AM", sales: 792),
                                 Sales(hour: "1 PM", sales: 928),
@@ -40,7 +42,8 @@ class TodaySales: MacawView {
     //    MARK: Max Value for the Y axis, make it dynamic with calculations
     static let maxValue = 1000
     static let maxValueLineHeight = 180
-    static let lineWidth : Double = 275
+    //   MARK: Width of the graph:
+    static let lineWidth : Double = 500
     
     static let dataDivisor = Double(maxValue/maxValueLineHeight)
     static let adjustedData: [Double] = salesOfOneDay.map({
@@ -51,10 +54,12 @@ class TodaySales: MacawView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.node = TodaySales.createChart()
+        self.backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(node: TodaySales.createChart(), coder: aDecoder)
+        
     }
     
     private static func createChart() -> Group {
@@ -77,25 +82,57 @@ class TodaySales: MacawView {
         for i in 1...maxLines {
             let y = yAxisHeight - (Double(i) * lineSpacing)
             
-            let valueLine = Line(x1: -5, y1: y, x2: lineWidth, y2: y).stroke(fill: Color.white.with(a: 0.1))
+            let valueLine = Line(x1: -5, y1: y, x2: lineWidth, y2: y).stroke(fill: Color.black.with(a: 0.1))
             let valueText = Text(text: "\(i * lineInterval)", align: .max, baseline: .mid, place: .move(dx: -10, dy: y))
-            valueText.fill = Color.white
+            valueText.fill = Color.black
             newNodes.append(valueLine)
             newNodes.append(valueText)
         }
         
-        let yAxis = Line(x1: 0, y1: 0, x2: 0, y2: yAxisHeight).stroke(fill: Color.white.with(a: 0.25))
+        let yAxis = Line(x1: 0, y1: 0, x2: 0, y2: yAxisHeight).stroke(fill: Color.black.with(a: 0.25))
         newNodes.append(yAxis)
         return newNodes
     }
     
     private static func addXAxisItem() -> [Node] {
-        return []
+        let chartBaseY : Double = 400
+        var newNodes : [Node] = []
+        
+        for i in 1...adjustedData.count {
+//            With start with 1 and not 0 cause we do not want the first bar to touch the Y Axis
+//            The value 50 is the spacing between the bars
+            let x = (Double(i) * 50)
+            let valueText = Text(text: salesOfOneDay[i-1].hour, align: .max, baseline: .mid, place: .move(dx: x, dy: chartBaseY + 15))
+            valueText.fill = Color.black
+            newNodes.append(valueText)
+        }
+        
+        let xAxis = Line(x1: 0, y1: chartBaseY, x2: lineWidth, y2: chartBaseY).stroke(fill: Color.black.with(a: 0.25))
+        newNodes.append(xAxis)
+        return newNodes
     }
     
     private static func createBars() -> Group {
-        return Group()
+        let fill = LinearGradient(degree: 90, from: Color(val: 0x5Aa33e1), to: Color(val: 0x5Aa33e1).with(a: 0.33))
+        let items = adjustedData.map { _ in Group() }
+        
+        animations = items.enumerated().map { (i: Int, item: Group) in
+            item.contentsVar.animation(delay: Double(i) * 0.1) { t in
+                let height = adjustedData[i] * t
+                let rect = Rect(x: Double(i) * 50 + 25, y: 200 - height, w: 30, h: height)
+                return [rect.fill(with: fill)]
+            }
+        }
+        return items.group()
     }
+    
+     static func playAnimations() {
+        animations.combine().play()
+    }
+    
+
+    
+
     
     
 }
