@@ -17,9 +17,8 @@
 		888C6017228EE91D0047A736 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6016228EE91D0047A736 /* DummyData.swift */; };
 		888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6018228EFE540047A736 /* DashboardViewController.swift */; };
 		88BA1C812294116D00F96603 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C802294116D00F96603 /* Calendar.swift */; };
-		88BA1C852295A6FE00F96603 /* TopCategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C842295A6FE00F96603 /* TopCategoriesTableView.swift */; };
 		88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */; };
-		88BA1C8A2296982E00F96603 /* TopCategoriesTableViewBis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C892296982E00F96603 /* TopCategoriesTableViewBis.swift */; };
+		88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
 		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
@@ -40,9 +39,8 @@
 		888C6016228EE91D0047A736 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		888C6018228EFE540047A736 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		88BA1C802294116D00F96603 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
-		88BA1C842295A6FE00F96603 /* TopCategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableView.swift; sourceTree = "<group>"; };
 		88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableViewCell.swift; sourceTree = "<group>"; };
-		88BA1C892296982E00F96603 /* TopCategoriesTableViewBis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableViewBis.swift; sourceTree = "<group>"; };
+		88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableView.swift; sourceTree = "<group>"; };
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,9 +128,8 @@
 		88BA1C882295A7D500F96603 /* TopCategoriesTableView */ = {
 			isa = PBXGroup;
 			children = (
-				88BA1C842295A6FE00F96603 /* TopCategoriesTableView.swift */,
 				88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */,
-				88BA1C892296982E00F96603 /* TopCategoriesTableViewBis.swift */,
+				88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */,
 			);
 			path = TopCategoriesTableView;
 			sourceTree = "<group>";
@@ -290,12 +287,11 @@
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
 				880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */,
-				88BA1C852295A6FE00F96603 /* TopCategoriesTableView.swift in Sources */,
 				88BA1C812294116D00F96603 /* Calendar.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
 				88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
-				88BA1C8A2296982E00F96603 /* TopCategoriesTableViewBis.swift in Sources */,
+				88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
