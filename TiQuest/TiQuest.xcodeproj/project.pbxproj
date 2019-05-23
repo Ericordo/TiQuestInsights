@@ -19,6 +19,7 @@
 		88BA1C812294116D00F96603 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C802294116D00F96603 /* Calendar.swift */; };
 		88BA1C852295A6FE00F96603 /* TopCategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C842295A6FE00F96603 /* TopCategoriesTableView.swift */; };
 		88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */; };
+		88BA1C8A2296982E00F96603 /* TopCategoriesTableViewBis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C892296982E00F96603 /* TopCategoriesTableViewBis.swift */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
 		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		88BA1C802294116D00F96603 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		88BA1C842295A6FE00F96603 /* TopCategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableView.swift; sourceTree = "<group>"; };
 		88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		88BA1C892296982E00F96603 /* TopCategoriesTableViewBis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableViewBis.swift; sourceTree = "<group>"; };
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				88BA1C842295A6FE00F96603 /* TopCategoriesTableView.swift */,
 				88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */,
+				88BA1C892296982E00F96603 /* TopCategoriesTableViewBis.swift */,
 			);
 			path = TopCategoriesTableView;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
 				88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
+				88BA1C8A2296982E00F96603 /* TopCategoriesTableViewBis.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,7 @@ import Charts
 class DashboardViewController: UIViewController {
     
     let calendarView = Calendar()
+    let topCategoriesView = TopCategoriesTableViewBis()
     var todaySalesView : TodaySales!
     var topCategories = TopCategoriesTableView()
     
@@ -27,9 +28,9 @@ class DashboardViewController: UIViewController {
         view.addSubview(todaySalesView)
         todaySalesView.contentMode = .scaleAspectFit
         TodaySales.playAnimations()
-        topCategories = TopCategoriesTableView(frame: CGRect(x: 10, y: 500, width: 200, height: 200), style: .plain
-        )
-        view.addSubview(topCategories)
+//        topCategories = TopCategoriesTableView(frame: CGRect(x: 10, y: 500, width: 200, height: 200), style: .plain
+//        )
+//        view.addSubview(topCategories)
         
   
 
@@ -40,6 +41,7 @@ class DashboardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         calendarView.showCalendar()
+        topCategoriesView.showtopCategories()
     }
     
    

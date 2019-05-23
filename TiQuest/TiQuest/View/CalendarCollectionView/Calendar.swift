@@ -66,7 +66,7 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
+      TodaySales.playAnimations()
     }
     
     
