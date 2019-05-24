@@ -36,9 +36,20 @@ let salesOfTuesday21 = [Sales(hour: "11 AM", sales: 543),
                        Sales(hour: "8 PM", sales: 823),
                        Sales(hour: "9 PM", sales: 623)]
 
+let salesOfSunday2 = [Sales(hour: "11 AM", sales: 443),
+                        Sales(hour: "12 AM", sales: 520),
+                        Sales(hour: "1 PM", sales: 830),
+                        Sales(hour: "2 PM", sales: 634),
+                        Sales(hour: "3 PM", sales: 432),
+                        Sales(hour: "4 PM", sales: 758),
+                        Sales(hour: "5 PM", sales: 203),
+                        Sales(hour: "6 PM", sales: 517),
+                        Sales(hour: "7 PM", sales: 830),
+                        Sales(hour: "8 PM", sales: 823),
+                        Sales(hour: "9 PM", sales: 623)]
 
 let dates = Dates().dates
 
-let salesOfTheWeek : [String : [Sales]] = ["Monday, 20" : salesOfMonday20,
+ let salesOfTheWeek : [String : [Sales]] = ["Monday, 20" : salesOfMonday20,
                                            "Tuesday 21" : salesOfTuesday21,
-                                            ]
+                                           "Sunday 2" : salesOfSunday2]

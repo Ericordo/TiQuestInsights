@@ -16,7 +16,8 @@ class DashboardViewController: UIViewController {
     let calendarView = Calendar()
     let topCategoriesView = TopCategoriesTableView()
     var todaySalesView : TodaySales!
-    var topCategories = TopCategoriesTableView()
+    var todaySalesLabel = TodaySalesLabel()
+
     
 
 
@@ -25,8 +26,8 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         //        MARK: Configuration of the Navigation Bar
         self.navigationItem.title = "Name of your Store"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
     
         
         
@@ -51,7 +52,27 @@ class DashboardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         calendarView.showCalendar()
         topCategoriesView.showtopCategories()
+        todaySalesLabel.showTodaySalesLabel()
     }
+
+    @objc func didTapToday() {
+        let lastCellIndexPath = IndexPath.init(row: dates.count-1, section: 0)
+        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
+    }
+    
+    @objc func didTapSelect() {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

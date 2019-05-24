@@ -37,6 +37,8 @@ class TodaySales: MacawView {
                                 Sales(hour: "8 PM", sales: 958),
                                 Sales(hour: "9 PM", sales: 728)]
     
+   
+    
 //    Make a dictionary, the key being a String with the day and the value being an array of Sales
     
     //    MARK: Max Value for the Y axis, make it dynamic with calculations
