@@ -16,7 +16,7 @@ class DashboardViewController: UIViewController {
     let calendarView = Calendar()
     let topCategoriesView = TopCategoriesTableView()
     var todaySalesView : TodaySales!
-    var topCategories = TopCategoriesTableView()
+  
     
 
 
