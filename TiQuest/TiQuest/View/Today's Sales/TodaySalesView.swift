@@ -41,9 +41,9 @@ class TodaySales: MacawView {
     
     //    MARK: Max Value for the Y axis, make it dynamic with calculations
     static let maxValue = 1000
-    static let maxValueLineHeight = 180
+    static let maxValueLineHeight = 400
     //   MARK: Width of the graph:
-    static let lineWidth : Double = 500
+    static let lineWidth : Double = 2500
     
     static let dataDivisor = Double(maxValue/maxValueLineHeight)
     static let adjustedData: [Double] = salesOfOneDay.map({
@@ -100,8 +100,8 @@ class TodaySales: MacawView {
         
         for i in 1...adjustedData.count {
 //            With start with 1 and not 0 cause we do not want the first bar to touch the Y Axis
-//            The value 50 is the spacing between the bars
-            let x = (Double(i) * 50)
+//            The value multiplied by Double(i) is the spacing between the bars
+            let x = (Double(i) * 100)
             let valueText = Text(text: salesOfOneDay[i-1].hour, align: .max, baseline: .mid, place: .move(dx: x, dy: chartBaseY + 15))
             valueText.fill = Color.black
             newNodes.append(valueText)
@@ -119,7 +119,7 @@ class TodaySales: MacawView {
         animations = items.enumerated().map { (i: Int, item: Group) in
             item.contentsVar.animation(delay: Double(i) * 0.1) { t in
                 let height = adjustedData[i] * t
-                let rect = Rect(x: Double(i) * 50 + 25, y: 200 - height, w: 30, h: height)
+                let rect = Rect(x: Double(i) * 100 + 50, y: 400 - height, w: 60, h: height)
                 return [rect.fill(with: fill)]
             }
         }
@@ -128,6 +128,7 @@ class TodaySales: MacawView {
     
      static func playAnimations() {
         animations.combine().play()
+        
     }
     
 

@@ -12,13 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navigationController : UINavigationController?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow()
-        window?.makeKeyAndVisible()
-        let rootControoler = DashboardViewController()
-        window?.rootViewController = rootControoler
+//        window = UIWindow()
+//        window?.makeKeyAndVisible()
+//        let rootControoler = DashboardViewController()
+//        window?.rootViewController = rootControoler
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        if let window = window {
+            let mainVC = DashboardViewController()
+            navigationController = UINavigationController(rootViewController: mainVC)
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
         
         return true
     }

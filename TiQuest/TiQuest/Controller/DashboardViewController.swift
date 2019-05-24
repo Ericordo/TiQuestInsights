@@ -14,7 +14,7 @@ import Charts
 class DashboardViewController: UIViewController {
     
     let calendarView = Calendar()
-    let topCategoriesView = TopCategoriesTableViewBis()
+    let topCategoriesView = TopCategoriesTableView()
     var todaySalesView : TodaySales!
     var topCategories = TopCategoriesTableView()
     
@@ -23,14 +23,23 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //        MARK: Configuration of the Navigation Bar
+        self.navigationItem.title = "Name of your Store"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: nil)
+    
+        
+        
         // MARK: Configuration of the Today Sales Chart
-        todaySalesView = TodaySales(frame: CGRect(x: 0, y: calendarView.calendarHeight+20, width: view.frame.width, height: 250))
+        todaySalesView = TodaySales(frame: CGRect(x: 0, y: calendarView.calendarHeight+70, width: view.frame.width, height: 250))
         view.addSubview(todaySalesView)
         todaySalesView.contentMode = .scaleAspectFit
         TodaySales.playAnimations()
-//        topCategories = TopCategoriesTableView(frame: CGRect(x: 10, y: 500, width: 200, height: 200), style: .plain
-//        )
-//        view.addSubview(topCategories)
+        
+        
+        print(view.frame.height)
+        
+
         
   
 
@@ -42,6 +51,20 @@ class DashboardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         calendarView.showCalendar()
         topCategoriesView.showtopCategories()
+    }
+    
+    
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let topSpace:CGFloat?
+        if #available(iOS 11.0, *) {
+            topSpace = self.view.safeAreaInsets.top
+        } else {
+            topSpace = self.topLayoutGuide.length
+        }
+        print(topSpace)
     }
     
    

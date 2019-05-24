@@ -22,7 +22,7 @@ class TopCategoriesTableView: NSObject {
     func showtopCategories() {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(topCategoriesTableView)
-            topCategoriesTableView.frame = CGRect(x: 10, y: 500, width: 300, height: 300)
+            topCategoriesTableView.frame = CGRect(x: 0, y: 500, width: view.frame.width/2, height: 300)
             
             
         }

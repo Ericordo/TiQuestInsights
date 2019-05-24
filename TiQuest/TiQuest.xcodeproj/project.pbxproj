@@ -19,6 +19,8 @@
 		88BA1C812294116D00F96603 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C802294116D00F96603 /* Calendar.swift */; };
 		88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */; };
 		88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */; };
+		88BA1C8D2296CC8600F96603 /* TodaySalesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C8C2296CC8600F96603 /* TodaySalesLabel.swift */; };
+		88BA1C912296DE4000F96603 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C902296DE4000F96603 /* Constants.swift */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
 		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
@@ -41,6 +43,8 @@
 		88BA1C802294116D00F96603 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableView.swift; sourceTree = "<group>"; };
+		88BA1C8C2296CC8600F96603 /* TodaySalesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesLabel.swift; sourceTree = "<group>"; };
+		88BA1C902296DE4000F96603 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,8 +108,8 @@
 		888C6010228EE19C0047A736 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				88BA1C8B2296C52D00F96603 /* Today's Sales */,
 				88BA1C882295A7D500F96603 /* TopCategoriesTableView */,
-				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
 				880DFD412292F0EA0054F2C8 /* CalendarCollectionView */,
 				88E3FF37228D9C08002871BB /* Main.storyboard */,
 				88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */,
@@ -134,6 +138,15 @@
 			path = TopCategoriesTableView;
 			sourceTree = "<group>";
 		};
+		88BA1C8B2296C52D00F96603 /* Today's Sales */ = {
+			isa = PBXGroup;
+			children = (
+				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
+				88BA1C8C2296CC8600F96603 /* TodaySalesLabel.swift */,
+			);
+			path = "Today's Sales";
+			sourceTree = "<group>";
+		};
 		88E3FF27228D9C08002871BB = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +173,7 @@
 				888C6010228EE19C0047A736 /* View */,
 				88E3FF3A228D9C0A002871BB /* Assets.xcassets */,
 				88E3FF3F228D9C0A002871BB /* Info.plist */,
+				88BA1C902296DE4000F96603 /* Constants.swift */,
 			);
 			path = TiQuest;
 			sourceTree = "<group>";
@@ -285,10 +299,12 @@
 				888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */,
 				888C6013228EE4490047A736 /* Receipt.swift in Sources */,
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
+				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
 				880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */,
 				88BA1C812294116D00F96603 /* Calendar.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
+				88BA1C8D2296CC8600F96603 /* TodaySalesLabel.swift in Sources */,
 				88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
 				88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */,
