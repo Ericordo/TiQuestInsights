@@ -18,8 +18,16 @@ class WeatherCollectionView : NSObject {
         
     }
     
+    let weatherHeight : CGFloat = 50
+    let cellWidth : CGFloat = 100
     let weatherCollectionView : UICollectionView = {
-        let cv = UICollectionView()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+        cv.isScrollEnabled = false
         return cv
     }()
     
@@ -27,18 +35,24 @@ class WeatherCollectionView : NSObject {
     
     
     func showWeather() {
-        
+        if let view = UIApplication.shared.keyWindow {
+            view.addSubview(weatherCollectionView)
+            weatherCollectionView.frame = CGRect(x: 0, y: 370, width: view.frame.width, height: weatherHeight)
+            print(view.frame.width)
+            
+        }
     }
     
 }
 
 extension WeatherCollectionView : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 11
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = weatherCollectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath)
+        
         return cell
     }
 
@@ -47,7 +61,7 @@ extension WeatherCollectionView : UICollectionViewDelegate, UICollectionViewData
 
 extension WeatherCollectionView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 0, height: 0)
+        return CGSize(width: cellWidth, height: weatherHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

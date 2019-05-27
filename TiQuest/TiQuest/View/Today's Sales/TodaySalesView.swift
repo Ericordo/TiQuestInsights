@@ -45,7 +45,7 @@ class TodaySales: MacawView {
     static let maxValue = 1000
     static let maxValueLineHeight = 400
     //   MARK: Width of the graph:
-    static let lineWidth : Double = 2500
+    static let lineWidth : Double = 2700
     
     static let dataDivisor = Double(maxValue/maxValueLineHeight)
     static let adjustedData: [Double] = salesOfOneDay.map({
@@ -56,7 +56,7 @@ class TodaySales: MacawView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.node = TodaySales.createChart()
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -85,7 +85,7 @@ class TodaySales: MacawView {
             let y = yAxisHeight - (Double(i) * lineSpacing)
             
             let valueLine = Line(x1: -5, y1: y, x2: lineWidth, y2: y).stroke(fill: Color.black.with(a: 0.1))
-            let valueText = Text(text: "\(i * lineInterval)", align: .max, baseline: .mid, place: .move(dx: -10, dy: y))
+            let valueText = Text(text: "\(i * lineInterval)", font: .init(name: "Helvetica", size: 30), align: .max, baseline: .mid, place: .move(dx: -20, dy: y))
             valueText.fill = Color.black
             newNodes.append(valueLine)
             newNodes.append(valueText)
@@ -102,9 +102,10 @@ class TodaySales: MacawView {
         
         for i in 1...adjustedData.count {
 //            With start with 1 and not 0 cause we do not want the first bar to touch the Y Axis
-//            The value multiplied by Double(i) is the spacing between the bars
-            let x = (Double(i) * 100)
-            let valueText = Text(text: salesOfOneDay[i-1].hour, align: .max, baseline: .mid, place: .move(dx: x, dy: chartBaseY + 15))
+//            The value multiplied by Double(i) is the spacing between x values
+            let x = (Double(i) * 200)
+            let valueText = Text(text: salesOfOneDay[i-1].hour, font: .init(name: "Helvetica", size: 30), align: .max, baseline: .mid, place: .move(dx: x + 20, dy: chartBaseY + 30))
+
             valueText.fill = Color.black
             newNodes.append(valueText)
         }
@@ -121,7 +122,7 @@ class TodaySales: MacawView {
         animations = items.enumerated().map { (i: Int, item: Group) in
             item.contentsVar.animation(delay: Double(i) * 0.1) { t in
                 let height = adjustedData[i] * t
-                let rect = Rect(x: Double(i) * 100 + 50, y: 400 - height, w: 60, h: height)
+                let rect = Rect(x: Double(i) * 200 + 135, y: 400 - height, w: 100, h: height)
                 return [rect.fill(with: fill)]
             }
         }

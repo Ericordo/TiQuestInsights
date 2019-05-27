@@ -28,7 +28,7 @@ class TodaySalesLabel: NSObject {
 //        var litteralValue = NSMutableAttributedString(string: "\(value)€", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor(cgColor: UIColor.black.cgColor)])
 //        let description = NSMutableAttributedString(string: "Total sales", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor(cgColor: UIColor.lightGray.cgColor)])
         label.numberOfLines = 2
-        label.backgroundColor = .white
+        label.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 0.5)
         let attrText = customizeColor(string: "\(value) €\n", color: UIColor.black)
         attrText.append(customizeColor(string: "Total sales", color: UIColor.lightGray))
         label.attributedText = attrText
@@ -43,7 +43,7 @@ class TodaySalesLabel: NSObject {
     func showTodaySalesLabel() {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(todaySalesLabel)
-            todaySalesLabel.frame = CGRect(x: 50, y: 130, width: 100, height: 50)
+            todaySalesLabel.frame = CGRect(x: 70, y: 130, width: 100, height: 50)
         }
         
     }

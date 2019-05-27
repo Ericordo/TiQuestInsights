@@ -16,7 +16,7 @@ class Calendar: NSObject {
     
     let dates = Dates().dates
     let calendarHeight : CGFloat = 50
-    let cellWdith : CGFloat = 150
+    let cellWidth : CGFloat = 150
     
     let calendarCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -25,7 +25,7 @@ class Calendar: NSObject {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsHorizontalScrollIndicator = false
         cv.decelerationRate = .fast
-        cv.backgroundColor = .gray
+        cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         return cv
     }()
     
@@ -74,7 +74,7 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
 
 extension Calendar : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellWdith, height: calendarHeight)
+        return CGSize(width: cellWidth, height: calendarHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

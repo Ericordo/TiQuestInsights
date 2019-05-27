@@ -23,6 +23,8 @@
 		88BA1C912296DE4000F96603 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C902296DE4000F96603 /* Constants.swift */; };
 		88BA1C97229834CB00F96603 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C96229834CB00F96603 /* WeatherCollectionViewCell.swift */; };
 		88BA1C992298354D00F96603 /* WeatherCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C982298354D00F96603 /* WeatherCollectionView.swift */; };
+		88BA1C9E229C1DA800F96603 /* DetailedHourCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C9D229C1DA800F96603 /* DetailedHourCollectionView.swift */; };
+		88BA1CA0229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C9F229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
 		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
@@ -49,6 +51,8 @@
 		88BA1C902296DE4000F96603 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		88BA1C96229834CB00F96603 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		88BA1C982298354D00F96603 /* WeatherCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionView.swift; sourceTree = "<group>"; };
+		88BA1C9D229C1DA800F96603 /* DetailedHourCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedHourCollectionView.swift; sourceTree = "<group>"; };
+		88BA1C9F229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedHourCollectionViewCell.swift; sourceTree = "<group>"; };
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 		888C6010228EE19C0047A736 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				88BA1C9C229C1D8100F96603 /* DetailedHourView */,
 				88BA1C952298318C00F96603 /* WeatherCollectionView */,
 				88BA1C8B2296C52D00F96603 /* Today's Sales */,
 				88BA1C882295A7D500F96603 /* TopCategoriesTableView */,
@@ -166,6 +171,15 @@
 				88BA1C982298354D00F96603 /* WeatherCollectionView.swift */,
 			);
 			path = WeatherCollectionView;
+			sourceTree = "<group>";
+		};
+		88BA1C9C229C1D8100F96603 /* DetailedHourView */ = {
+			isa = PBXGroup;
+			children = (
+				88BA1C9D229C1DA800F96603 /* DetailedHourCollectionView.swift */,
+				88BA1C9F229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift */,
+			);
+			path = DetailedHourView;
 			sourceTree = "<group>";
 		};
 		88E3FF27228D9C08002871BB = {
@@ -332,6 +346,8 @@
 				88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
 				88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */,
+				88BA1C9E229C1DA800F96603 /* DetailedHourCollectionView.swift in Sources */,
+				88BA1CA0229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

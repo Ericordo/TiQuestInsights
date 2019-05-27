@@ -17,6 +17,9 @@ class DashboardViewController: UIViewController {
     let topCategoriesView = TopCategoriesTableView()
     var todaySalesView : TodaySales!
     var todaySalesLabel = TodaySalesLabel()
+    let weatherView = WeatherCollectionView()
+    let detailedHourView = DetailedHourView()
+    
 
     
 
@@ -32,7 +35,7 @@ class DashboardViewController: UIViewController {
         
         
         // MARK: Configuration of the Today Sales Chart
-        todaySalesView = TodaySales(frame: CGRect(x: 0, y: calendarView.calendarHeight+70, width: view.frame.width, height: 250))
+        todaySalesView = TodaySales(frame: CGRect(x: 20, y: calendarView.calendarHeight+70, width: view.frame.width - 20, height: 250))
         view.addSubview(todaySalesView)
         todaySalesView.contentMode = .scaleAspectFit
         TodaySales.playAnimations()
@@ -45,7 +48,7 @@ class DashboardViewController: UIViewController {
   
 
         // TODO: Delete line below
-        self.view.backgroundColor = .lightGray
+        self.view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
     }
     
     
@@ -53,6 +56,9 @@ class DashboardViewController: UIViewController {
         calendarView.showCalendar()
         topCategoriesView.showtopCategories()
         todaySalesLabel.showTodaySalesLabel()
+        weatherView.showWeather()
+        detailedHourView.showDetailedHourView()
+        
     }
 
     @objc func didTapToday() {
