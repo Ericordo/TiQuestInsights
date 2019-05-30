@@ -25,6 +25,7 @@ class Calendar: NSObject {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsHorizontalScrollIndicator = false
         cv.decelerationRate = .fast
+        
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         return cv
     }()
@@ -32,7 +33,7 @@ class Calendar: NSObject {
     func showCalendar() {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(calendarCollectionView)
-            calendarCollectionView.frame = CGRect(x: 0, y: 70, width: view.frame.width, height: calendarHeight)
+            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
             print(view.frame.width)
             
         }

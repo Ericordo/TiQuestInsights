@@ -19,7 +19,7 @@ class WeatherCollectionView : NSObject {
     }
     
     let weatherHeight : CGFloat = 50
-    let cellWidth : CGFloat = 100
+    let cellWidth : CGFloat = 72
     let weatherCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -37,7 +37,7 @@ class WeatherCollectionView : NSObject {
     func showWeather() {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(weatherCollectionView)
-            weatherCollectionView.frame = CGRect(x: 0, y: 370, width: view.frame.width, height: weatherHeight)
+            weatherCollectionView.frame = CGRect(x: 84, y: 371, width: view.frame.width, height: weatherHeight)
             print(view.frame.width)
             
         }

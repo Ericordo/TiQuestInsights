@@ -12,19 +12,49 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.addSubview(confirmButton)
+        confirmButton.addTarget(self, action: #selector(didTapConfirm), for: .touchUpInside)
+        
+        
         // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    let userNameField : UITextField = {
+        let textField = UITextField()
+        
+    
+        return textField
+    }()
+    
+    let passwordField : UITextField = {
+        let textField = UITextField()
+        
+        
+        
+        return textField
+    }()
+    
+    let confirmButton : UIButton = {
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        button.backgroundColor = UIColor.black
+        
+        
+        
+        return button
+    }()
+    
+    
+    
+    
+    @objc func didTapConfirm() {
+        let destinationVC = DashboardViewController()
+        destinationVC.modalPresentationStyle = .overFullScreen
+        destinationVC.modalTransitionStyle = .crossDissolve
+        self.present(destinationVC, animated: true, completion: nil)
+        
+        
     }
-    */
+
+
 
 }

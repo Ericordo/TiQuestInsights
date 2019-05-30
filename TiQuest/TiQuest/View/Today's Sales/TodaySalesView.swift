@@ -53,10 +53,13 @@ class TodaySales: MacawView {
     })
     static var animations: [Animation] = []
     
+    static var bars = Group()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.node = TodaySales.createChart()
         self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,7 +70,6 @@ class TodaySales: MacawView {
     private static func createChart() -> Group {
         var items: [Node] = addYAxisItem() + addXAxisItem()
         items.append(createBars())
-        
         return Group(contents: items, place: .identity)
     }
     
@@ -116,22 +118,42 @@ class TodaySales: MacawView {
     }
     
     private static func createBars() -> Group {
+        
         let fill = LinearGradient(degree: 90, from: Color(val: 0x5Aa33e1), to: Color(val: 0x5Aa33e1).with(a: 0.33))
         let items = adjustedData.map { _ in Group() }
         
         animations = items.enumerated().map { (i: Int, item: Group) in
+            
             item.contentsVar.animation(delay: Double(i) * 0.1) { t in
                 let height = adjustedData[i] * t
                 let rect = Rect(x: Double(i) * 200 + 135, y: 400 - height, w: 100, h: height)
                 return [rect.fill(with: fill)]
             }
+            
         }
+       
+        bars = items.group()
+        
         return items.group()
     }
     
+    
+    
+    
+    
      static func playAnimations() {
         animations.combine().play()
+        bars.contents.forEach( { node in
+            node.onTap(f: { action in TodaySales.didTapBar() })
+        })
         
+    }
+    
+    
+    
+    static func didTapBar() {
+        print("hello")
+        bars.contents[0].opacity = 0.0
     }
     
 

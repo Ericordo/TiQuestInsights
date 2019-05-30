@@ -12,6 +12,7 @@
 		880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */; };
 		88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88557EDB2292ECDC007DBE21 /* LoginViewController.swift */; };
 		88557EDE2292ECDC007DBE21 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88557EDC2292ECDC007DBE21 /* LoginViewController.xib */; };
+		8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8874614E229EDA2000D65346 /* WeekNumberLabel.swift */; };
 		888C6013228EE4490047A736 /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6012228EE4490047A736 /* Receipt.swift */; };
 		888C6015228EE4650047A736 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6014228EE4650047A736 /* Item.swift */; };
 		888C6017228EE91D0047A736 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6016228EE91D0047A736 /* DummyData.swift */; };
@@ -40,6 +41,7 @@
 		880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesView.swift; sourceTree = "<group>"; };
 		88557EDB2292ECDC007DBE21 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		88557EDC2292ECDC007DBE21 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		8874614E229EDA2000D65346 /* WeekNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekNumberLabel.swift; sourceTree = "<group>"; };
 		888C6012228EE4490047A736 /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
 		888C6014228EE4650047A736 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		888C6016228EE91D0047A736 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
@@ -98,8 +100,16 @@
 			children = (
 				880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */,
 				88BA1C802294116D00F96603 /* Calendar.swift */,
+				8874614E229EDA2000D65346 /* WeekNumberLabel.swift */,
 			);
 			path = CalendarCollectionView;
+			sourceTree = "<group>";
+		};
+		8874614D229ED7D200D65346 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LogIn;
 			sourceTree = "<group>";
 		};
 		888C600F228EE1890047A736 /* Model */ = {
@@ -116,6 +126,7 @@
 		888C6010228EE19C0047A736 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8874614D229ED7D200D65346 /* LogIn */,
 				88BA1C9C229C1D8100F96603 /* DetailedHourView */,
 				88BA1C952298318C00F96603 /* WeatherCollectionView */,
 				88BA1C8B2296C52D00F96603 /* Today's Sales */,
@@ -339,6 +350,7 @@
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
 				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
+				8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */,
 				880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */,
 				88BA1C812294116D00F96603 /* Calendar.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,

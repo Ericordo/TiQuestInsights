@@ -39,8 +39,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
 //        weatherIcon.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         weatherIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         weatherIcon.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-        weatherIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        weatherIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+        weatherIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        weatherIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15).isActive = true
         
     }
 }

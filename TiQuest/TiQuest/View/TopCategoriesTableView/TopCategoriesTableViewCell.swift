@@ -11,6 +11,8 @@ import UIKit
 class TopCategoriesTableViewCell: UITableViewCell {
     
     
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -51,6 +51,10 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
         dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         
+        let bottomLineSeparator = CALayer()
+        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
+        bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+        layer.addSublayer(bottomLineSeparator)
         
     }
     
