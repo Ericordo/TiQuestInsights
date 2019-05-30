@@ -15,6 +15,7 @@ class DashboardViewController: UIViewController {
     
     let calendarView = Calendar()
     let topCategoriesView = TopCategoriesTableView()
+    let topSellersView = TopSellersTableView()
     var todaySalesView : TodaySales!
   
     
@@ -50,7 +51,12 @@ class DashboardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         calendarView.showCalendar()
-        topCategoriesView.showtopCategories()
+        
+        topCategoriesView.showTopCategories()
+        topCategoriesView.addItems()
+        
+        topSellersView.showTopSellers()
+        topSellersView.addTopSellersItems()
     }
     
     
