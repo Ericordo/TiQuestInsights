@@ -25,7 +25,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.backgroundColor = isSelected ? UIColor.red : UIColor.white
+            self.backgroundColor = isSelected ? UIColor.red : UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         }
     }
     
@@ -45,12 +45,16 @@ class CalendarCollectionViewCell: UICollectionViewCell {
 //        lineSeparator.frame = CGRect(x: self.frame.width, y: 0, width: 0.5, height: self.frame.height)
 //        lineSeparator.backgroundColor = UIColor.lightGray.cgColor
 //        layer.addSublayer(lineSeparator)
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         self.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
         dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         
+        let bottomLineSeparator = CALayer()
+        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
+        bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+        layer.addSublayer(bottomLineSeparator)
         
     }
     

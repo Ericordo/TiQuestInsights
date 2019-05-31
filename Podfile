@@ -8,5 +8,7 @@ target 'TiQuest' do
 
 pod "Macaw", "0.9.5"
 pod "Charts"
+pod "SwiftyJSON"
+pod "Alamofire"
 
 end
