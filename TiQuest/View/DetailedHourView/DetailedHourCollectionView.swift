@@ -66,36 +66,17 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
 
         switch indexPath.item {
         case 0:
-            let attr = NSMutableAttributedString(string: "")
-            attr.append(NSAttributedString(string: "Time\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.lightGray.cgColor]))
-            attr.append(NSAttributedString(string: "20:00", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
-        
-            cell.infoLabel.attributedText = attr
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: "20:00")
         case 1:
-            let attr = NSMutableAttributedString(string: "")
-            attr.append(NSAttributedString(string: "Weather\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.lightGray.cgColor]))
-            attr.append(NSAttributedString(string: "17°C Partly cloudy", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
-            cell.infoLabel.attributedText = attr
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Weather\n", downString: "17°C Partly cloudy")
         case 2:
-            let attr = NSMutableAttributedString(string: "")
-            attr.append(NSAttributedString(string: "Sales\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.lightGray.cgColor]))
-            attr.append(NSAttributedString(string: "432,55€", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
-            cell.infoLabel.attributedText = attr
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "432,55€")
         case 3:
-            let attr = NSMutableAttributedString(string: "")
-            attr.append(NSAttributedString(string: "Top Seller\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.lightGray.cgColor]))
-            attr.append(NSAttributedString(string: "Pineapple pizza", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
-            cell.infoLabel.attributedText = attr
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "Pineapple pizza")
         case 4:
-            let attr = NSMutableAttributedString(string: "")
-            attr.append(NSAttributedString(string: "Total receipts\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.lightGray.cgColor]))
-            attr.append(NSAttributedString(string: "87", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
-            cell.infoLabel.attributedText = attr
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "87")
         case 5:
-            let attr = NSMutableAttributedString(string: "")
-            attr.append(NSAttributedString(string: "Average ticket\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.lightGray.cgColor]))
-            attr.append(NSAttributedString(string: "32,20€", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
-            cell.infoLabel.attributedText = attr
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: "32,20€")
         default:
             break
         }
