@@ -89,14 +89,14 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         
         headerView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
         
-        let headerLabel = UILabel(frame: CGRect(x: 10, y: 0, width:
+        let headerLabel = UILabel(frame: CGRect(x: 10, y: headerView.center.y, width:
             tableView.bounds.size.width, height: 70))
         headerLabel.font = UIFont.boldSystemFont(ofSize: 40)
         headerLabel.textColor = UIColor.black
         headerLabel.text = "Top categories"
         headerLabel.textAlignment = .left
         
-        let headerSeparator = UILabel(frame: CGRect(x: 0, y: 69, width: tableView.bounds.size.width, height: 0.5))
+        let headerSeparator = UILabel(frame: CGRect(x: 0, y: 69.5, width: tableView.bounds.size.width, height: 0.5))
         headerSeparator.backgroundColor = .lightGray
         
         headerView.addSubview(headerLabel)
@@ -104,11 +104,12 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         
         // code for adding SEE ALL BUTTON to right corner of the header
         
-//        let seeAllButton: UIButton = UIButton(frame: CGRect(x:  tableView.bounds.size.width - 100, y: 20, width: 100, height: 30))
-//        seeAllButton.setTitle("See All", for: .normal)
-//        seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-//        seeAllButton.setTitleColor(.blue, for: .normal)
-//        headerView.addSubview(seeAllButton)
+        let seeAllButton: UIButton = UIButton(frame: CGRect(x:  tableView.bounds.size.width - 100, y: headerView.center.y, width: 100, height: 70))
+        seeAllButton.setTitle("Bottom", for: .normal)
+        seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        seeAllButton.setTitleColor(.blue, for: .normal)
+//        seeAllButton.backgroundColor = .gray
+        headerView.addSubview(seeAllButton)
         
         return headerView
     }
