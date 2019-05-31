@@ -18,6 +18,10 @@ class WeatherCollectionView : NSObject {
         
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let weatherHeight : CGFloat = 50
     let cellWidth : CGFloat = 72
     let weatherCollectionView : UICollectionView = {
@@ -38,7 +42,6 @@ class WeatherCollectionView : NSObject {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(weatherCollectionView)
             weatherCollectionView.frame = CGRect(x: 84, y: 371, width: view.frame.width, height: weatherHeight)
-            print(view.frame.width)
             
         }
     }

@@ -34,8 +34,9 @@ class Calendar: NSObject {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(calendarCollectionView)
             calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
+
             print(view.frame.width)
-            
+
         }
     }
     
@@ -46,7 +47,12 @@ class Calendar: NSObject {
         calendarCollectionView.dataSource = self
         
         calendarCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: "CalendarCell")
+   
         
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     
