@@ -10,9 +10,11 @@ import UIKit
 
 class TopCategoriesTableViewCell: UITableViewCell {
     
+    var itemsCategory: MenuItems?
+    
     var itemTopCategories : String? {
         didSet {
-            itemNameLabelTopCategories.text = itemTopCategories
+            itemNameLabelTopCategories.text = itemsCategory?.data[0].category
         }
     }
     
@@ -63,7 +65,7 @@ class TopCategoriesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         
-        itemImageTopCategories.layer.cornerRadius = 15
+        itemImageTopCategories.layer.cornerRadius = 12
         itemImageTopCategories.clipsToBounds = true
         progressBarTopCategories.layer.cornerRadius = 6
         progressBarTopCategories.clipsToBounds = true
@@ -79,8 +81,8 @@ class TopCategoriesTableViewCell: UITableViewCell {
         progressBarTopCategories.translatesAutoresizingMaskIntoConstraints = false
         
         itemImageTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        itemImageTopCategories.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
-        itemImageTopCategories.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1, constant: -20).isActive = true
+        itemImageTopCategories.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        itemImageTopCategories.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1, constant: -25).isActive = true
         itemImageTopCategories.widthAnchor.constraint(equalTo: itemImageTopCategories.heightAnchor, multiplier: 1, constant: 0).isActive = true
         
         itemNameLabelTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -20).isActive = true
@@ -91,7 +93,7 @@ class TopCategoriesTableViewCell: UITableViewCell {
         
         progressBarTopCategories.leadingAnchor.constraint(equalTo: itemQuantityTopCategories.trailingAnchor, constant: 10).isActive = true
         progressBarTopCategories.centerYAnchor.constraint(equalTo: itemQuantityTopCategories.centerYAnchor, constant: 0).isActive = true
-        progressBarTopCategories.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        progressBarTopCategories.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
         progressBarTopCategories.heightAnchor.constraint(equalToConstant: 13).isActive = true
     }
     

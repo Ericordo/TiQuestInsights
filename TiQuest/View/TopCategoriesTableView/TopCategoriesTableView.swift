@@ -17,7 +17,7 @@ class TopCategoriesTableView: NSObject {
         let topView = UIView()
         
         topView.layer.shadowColor = UIColor.gray.cgColor
-        topView.layer.shadowOpacity = 1
+        topView.layer.shadowOpacity = 0.3
         topView.layer.shadowOffset = .zero
         topView.layer.shadowRadius = 10
         topView.layer.shouldRasterize = true
@@ -35,9 +35,13 @@ class TopCategoriesTableView: NSObject {
     func showTopCategories() {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(topCategoriesView)
-            topCategoriesView.frame = CGRect(x: 50, y: 500, width: view.frame.width/2-80, height: 470)
+            topCategoriesView.frame = CGRect(x: 50, y: 525, width: view.frame.width/2-80, height: 470)
             topCategoriesView.addSubview(topCategoriesTableView)
             topCategoriesTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width/2-80, height: 470)
+            
+            topCategoriesView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 71).isActive = true
+            topCategoriesView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60).isActive = true
+            
         }
     }
     
@@ -48,21 +52,10 @@ class TopCategoriesTableView: NSObject {
         topCategoriesTableView.register(TopCategoriesTableViewCell.self, forCellReuseIdentifier: "TopCategoriesCell")
     }
     
-    func addItems() {
-        itemsTopCategories.append(cheeseburger.category!)
-        itemsTopCategories.append(margherita.category!)
-        itemsTopCategories.append(redWine.category!)
-        itemsTopCategories.append(whiteWine.category!)
-        itemsTopCategories.append(beer.category!)
-        itemsTopCategories.append(coke.category!)
-        itemsTopCategories.append(fanta.category!)
-        itemsTopCategories.append(tomateMoza.category!)
-        itemsTopCategories.append(pannaCotta.category!)
-        itemsTopCategories.append(chocolateIceCream.category!)
-//        itemsTopCategories.append(bruschetta.category!)
-        itemsTopCategories.append(pastaCabonara.category!)
-        itemsTopCategories.append(pastaBolognese.category!)
+    func add(items: [String]) {
+        itemsTopCategories.append(contentsOf: items)
     }
+    
 }
 
 extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
@@ -107,7 +100,7 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         let seeAllButton: UIButton = UIButton(frame: CGRect(x:  tableView.bounds.size.width - 100, y: headerView.center.y, width: 100, height: 70))
         seeAllButton.setTitle("Bottom", for: .normal)
         seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        seeAllButton.setTitleColor(.blue, for: .normal)
+        seeAllButton.setTitleColor(.darkGray, for: .normal)
 //        seeAllButton.backgroundColor = .gray
         headerView.addSubview(seeAllButton)
         

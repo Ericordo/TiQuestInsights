@@ -10,7 +10,7 @@ import Foundation
 
 
 
-let cheeseburger = Item.init(name: "Cheeseburger", id: 1, price: 9.50, category: "burger", subcategory: "main", profit: 2.20)
+let cheeseburger = Item.init(name: "Cheeseburger", id: 1, price: 9.50, category: "burger", subcategory: "", profit: 2.20)
 let margherita = Item.init(name: "Margherita", id: 2, price: 6.70, category: "pizza", subcategory: "main", profit: 3.10)
 let redWine = Item.init(name: "Red wine", id: 3, price: 3.00, category: "alcohol", subcategory: "wine", profit: 1.00)
 let whiteWine = Item.init(name: "White wine", id: 4, price: 3.00, category: "alcohol", subcategory: "wine", profit: 1.10)

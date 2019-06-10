@@ -14,21 +14,16 @@ import Charts
 class DashboardViewController: UIViewController {
     
     var calendarView = Calendar()
-    let topCategoriesView = TopCategoriesTableView()
+    
     var todaySalesView : TodaySales!
     var todaySalesLabel = TodaySalesLabel()
     let weatherView = WeatherCollectionView()
     let detailedHourView = DetailedHourView()
     
-    
+    let topCategoriesView = TopCategoriesTableView()
     let topSellersView = TopSellersTableView()
     
     var exportButton : UIBarButtonItem?
-    
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,20 +56,25 @@ class DashboardViewController: UIViewController {
         
         
         //         MARK: Configuration of the TableViews
-        //        topCategoriesView.showtopCategories()
         topCategoriesView.showTopCategories()
-        topCategoriesView.addItems()
         
         topSellersView.showTopSellers()
-        topSellersView.addTopSellersItems()
         
         
         
-        
+        if let jsonData = jsonString.data(using: .utf8)
+        {
+            let decoder = JSONDecoder()
+            
+            do {
+                let menuItems = try decoder.decode(MenuItems.self, from: jsonData)
+                topCategoriesView.add(items: menuItems.data.map {$0.category})
+                topSellersView.add(items: menuItems.data.map {$0.name})
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
-    
-    
-    
     
     @objc func didTapToday() {
         let lastCellIndexPath = IndexPath.init(row: dates.count-1, section: 0)

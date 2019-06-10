@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E3A432E22A00E2400FE660F /* TopSellersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3A432D22A00E2400FE660F /* TopSellersTableView.swift */; };
 		3E3A433022A00E7F00FE660F /* TopSellersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3A432F22A00E7F00FE660F /* TopSellersTableViewCell.swift */; };
+		3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E657B1622A56F9A0017A4A2 /* DummyJson.swift */; };
 		880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */; };
 		880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */; };
 		880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		3E3A432D22A00E2400FE660F /* TopSellersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSellersTableView.swift; sourceTree = "<group>"; };
 		3E3A432F22A00E7F00FE660F /* TopSellersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSellersTableViewCell.swift; sourceTree = "<group>"; };
+		3E657B1622A56F9A0017A4A2 /* DummyJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyJson.swift; sourceTree = "<group>"; };
 		74ADADF95A9C723D4614757E /* Pods-TiQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiQuest.release.xcconfig"; path = "Target Support Files/Pods-TiQuest/Pods-TiQuest.release.xcconfig"; sourceTree = "<group>"; };
 		880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCalendarData.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				888C6014228EE4650047A736 /* Item.swift */,
 				888C6016228EE91D0047A736 /* DummyData.swift */,
 				880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */,
+				3E657B1622A56F9A0017A4A2 /* DummyJson.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				88BA1C9E229C1DA800F96603 /* DetailedHourCollectionView.swift in Sources */,
 				88BA1CA0229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
+				3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
