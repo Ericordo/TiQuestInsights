@@ -28,6 +28,7 @@ class TopCategoriesTableViewCell: UITableViewCell {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.font = UIFont.systemFont(ofSize: 25)
+        lbl.adjustsFontSizeToFitWidth = true
         lbl.textAlignment = .left
         return lbl
     }()
@@ -35,7 +36,8 @@ class TopCategoriesTableViewCell: UITableViewCell {
     private let itemQuantityTopCategories : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
-        lbl.font = UIFont.systemFont(ofSize: 22)
+        lbl.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        lbl.adjustsFontSizeToFitWidth = true
         lbl.textAlignment = .left
         lbl.text = "64"
         return lbl
@@ -64,10 +66,9 @@ class TopCategoriesTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
-        itemImageTopCategories.layer.cornerRadius = 12
+        itemImageTopCategories.layer.cornerRadius = (self.frame.height / 2) / 2
         itemImageTopCategories.clipsToBounds = true
-        progressBarTopCategories.layer.cornerRadius = 6
+        progressBarTopCategories.layer.cornerRadius = (self.frame.width / 30) / 2
         progressBarTopCategories.clipsToBounds = true
         
         addSubview(itemNameLabelTopCategories)
@@ -81,20 +82,22 @@ class TopCategoriesTableViewCell: UITableViewCell {
         progressBarTopCategories.translatesAutoresizingMaskIntoConstraints = false
         
         itemImageTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        itemImageTopCategories.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
-        itemImageTopCategories.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1, constant: -25).isActive = true
+        itemImageTopCategories.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: self.frame.width / 30).isActive = true
+        itemImageTopCategories.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1, constant: -(self.frame.height / 2)).isActive = true
         itemImageTopCategories.widthAnchor.constraint(equalTo: itemImageTopCategories.heightAnchor, multiplier: 1, constant: 0).isActive = true
         
-        itemNameLabelTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -20).isActive = true
-        itemNameLabelTopCategories.leadingAnchor.constraint(equalTo: itemImageTopCategories.trailingAnchor, constant: 10).isActive = true
+        itemNameLabelTopCategories.leadingAnchor.constraint(equalTo: itemImageTopCategories.trailingAnchor, constant: self.frame.width / 30).isActive = true
+        itemNameLabelTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -(self.frame.width / 20)).isActive = true
+        itemNameLabelTopCategories.adjustsFontSizeToFitWidth = true
         
-        itemQuantityTopCategories.leadingAnchor.constraint(equalTo: itemImageTopCategories.trailingAnchor, constant: 10).isActive = true
-        itemQuantityTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 20).isActive = true
+        itemQuantityTopCategories.leadingAnchor.constraint(equalTo: itemNameLabelTopCategories.trailingAnchor, constant: self.frame.width / 30).isActive = true
+        itemQuantityTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -(self.frame.width / 20)).isActive = true
+        itemQuantityTopCategories.adjustsFontSizeToFitWidth = true
         
-        progressBarTopCategories.leadingAnchor.constraint(equalTo: itemQuantityTopCategories.trailingAnchor, constant: 10).isActive = true
-        progressBarTopCategories.centerYAnchor.constraint(equalTo: itemQuantityTopCategories.centerYAnchor, constant: 0).isActive = true
-        progressBarTopCategories.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
-        progressBarTopCategories.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        progressBarTopCategories.leadingAnchor.constraint(equalTo: itemImageTopCategories.trailingAnchor, constant: self.frame.width / 30).isActive = true
+        progressBarTopCategories.centerYAnchor.constraint(equalTo: itemImageTopCategories.centerYAnchor, constant: self.frame.width / 20).isActive = true
+        progressBarTopCategories.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -(self.frame.width / 30)).isActive = true
+        progressBarTopCategories.heightAnchor.constraint(equalToConstant: self.frame.width / 30).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
