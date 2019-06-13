@@ -10,13 +10,14 @@ import UIKit
 import Foundation
 
 class TopSellersTableView: NSObject {
-    var itemsTopSellers : [Item] = [Item]()
+    
+    var itemsTopSellers : [String] = []
     
     let topSellersView : UIView = {
         let topView = UIView()
         
         topView.layer.shadowColor = UIColor.gray.cgColor
-        topView.layer.shadowOpacity = 1
+        topView.layer.shadowOpacity = 0.3
         topView.layer.shadowOffset = .zero
         topView.layer.shadowRadius = 10
         topView.layer.shouldRasterize = true
@@ -34,7 +35,7 @@ class TopSellersTableView: NSObject {
     func showTopSellers() {
         if let view = UIApplication.shared.keyWindow {
             view.addSubview(topSellersView)
-            topSellersView.frame = CGRect(x: (view.frame.width-(view.frame.width/2-80))-50, y: 500, width: view.frame.width/2-80, height: 470)
+            topSellersView.frame = CGRect(x: (view.frame.width-(view.frame.width/2-80))-50, y: 525, width: view.frame.width/2-80, height: 470)
             topSellersView.addSubview(topSellersTableView)
             topSellersTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width/2-80, height: 470)
         }
@@ -47,21 +48,10 @@ class TopSellersTableView: NSObject {
         topSellersTableView.register(TopSellersTableViewCell.self, forCellReuseIdentifier: "TopSellersCell")
     }
     
-    func addTopSellersItems() {
-        itemsTopSellers.append(cheeseburger)
-        itemsTopSellers.append(margherita)
-        itemsTopSellers.append(redWine)
-        itemsTopSellers.append(whiteWine)
-        itemsTopSellers.append(beer)
-        itemsTopSellers.append(coke)
-        itemsTopSellers.append(fanta)
-        itemsTopSellers.append(tomateMoza)
-        itemsTopSellers.append(pannaCotta)
-        itemsTopSellers.append(chocolateIceCream)
-        itemsTopSellers.append(bruschetta)
-        itemsTopSellers.append(pastaCabonara)
-        itemsTopSellers.append(pastaBolognese)
+    func add(items: [String]) {
+        itemsTopSellers.append(contentsOf: items)
     }
+    
 }
 
 extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
@@ -73,7 +63,7 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = topSellersTableView.dequeueReusableCell(withIdentifier: "TopSellersCell", for: indexPath) as! TopSellersTableViewCell
         let currentItem = itemsTopSellers[indexPath.row]
-        cell.itemNameLabelTopSellers.text = currentItem.name
+        cell.itemNameLabelTopSellers.text = currentItem
         cell.backgroundColor = .white
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
         return cell
@@ -107,7 +97,7 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         let seeAllButton: UIButton = UIButton(frame: CGRect(x: tableView.bounds.size.width - 100, y: headerView.center.y, width: 100, height: 70))
         seeAllButton.setTitle("Worst", for: .normal)
         seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        seeAllButton.setTitleColor(.blue, for: .normal)
+        seeAllButton.setTitleColor(.darkGray, for: .normal)
 //        seeAllButton.backgroundColor = .gray
         headerView.addSubview(seeAllButton)
         
