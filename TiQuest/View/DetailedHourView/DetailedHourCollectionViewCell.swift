@@ -30,6 +30,13 @@ class DetailedHourCollectionViewCell: UICollectionViewCell {
     
     func setUpCell() {
 //        self.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+        
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        self.contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        self.contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        self.contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+
 
         self.addSubview(infoLabel)
         infoLabel.translatesAutoresizingMaskIntoConstraints = false

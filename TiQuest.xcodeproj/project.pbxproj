@@ -13,6 +13,7 @@
 		880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */; };
 		880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */; };
 		880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */; };
+		88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */; };
 		88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88557EDB2292ECDC007DBE21 /* LoginViewController.swift */; };
 		88557EDE2292ECDC007DBE21 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88557EDC2292ECDC007DBE21 /* LoginViewController.xib */; };
 		8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8874614E229EDA2000D65346 /* WeekNumberLabel.swift */; };
@@ -45,6 +46,7 @@
 		880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCalendarData.swift; sourceTree = "<group>"; };
 		880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesView.swift; sourceTree = "<group>"; };
+		88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesViewCharts.swift; sourceTree = "<group>"; };
 		88557EDB2292ECDC007DBE21 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		88557EDC2292ECDC007DBE21 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		8874614E229EDA2000D65346 /* WeekNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekNumberLabel.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
 				88BA1C8C2296CC8600F96603 /* TodaySalesLabel.swift */,
+				88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */,
 			);
 			path = "Today's Sales";
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				888C6013228EE4490047A736 /* Receipt.swift in Sources */,
 				3E3A432E22A00E2400FE660F /* TopSellersTableView.swift in Sources */,
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
+				88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */,
 				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
 				3E3A433022A00E7F00FE660F /* TopSellersTableViewCell.swift in Sources */,
@@ -528,7 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J7T2TC8W7K;
+				DEVELOPMENT_TEAM = DNB5G735SM;
 				INFOPLIST_FILE = TiQuest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,7 +551,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J7T2TC8W7K;
+				DEVELOPMENT_TEAM = DNB5G735SM;
 				INFOPLIST_FILE = TiQuest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

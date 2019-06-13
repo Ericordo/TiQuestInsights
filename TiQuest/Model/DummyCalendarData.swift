@@ -7,10 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 struct Dates {
-    let dates = ["Monday, 20", "Tuesday 21", "Wednesday 22", "Thursday 23", "Friday 24", "Saturday 25", "Sunday 26", "Monday 27", "Tuesday 28", "Wednesday 29", "Thursday 30", "Friday 31", "Saturday 1", "Sunday 2"]
+    let dates = ["Monday 20", "Tuesday 21", "Wednesday 22", "Thursday 23", "Friday 24", "Saturday 25", "Sunday 26", "Monday 27", "Tuesday 28", "Wednesday 29", "Thursday 30", "Friday 31", "Saturday 1", "Sunday 2"]
 }
+
+struct Date {
+    let day : String
+    let number : Int
+}
+
+struct DatesBis {
+    let dates : [Date] = [Date(day: "Monday", number: 20), Date(day: "Tuesday", number: 21), Date(day: "Wednesday", number: 22), Date(day: "Thursday", number: 23), Date(day: "Friday", number: 24), Date(day: "Saturday", number: 25), Date(day: "Sunday", number: 26), Date(day: "Monday", number: 27), Date(day: "Tuesday", number: 28), Date(day: "Wednesday", number: 29)]
+}
+
+
 
 let salesOfMonday20 = [Sales(hour: "11 AM", sales: 453),
                             Sales(hour: "12 AM", sales: 792),
@@ -49,7 +61,10 @@ let salesOfSunday2 = [Sales(hour: "11 AM", sales: 443),
                         Sales(hour: "9 PM", sales: 623)]
 
 let dates = Dates().dates
+let datesbis = DatesBis().dates
 
  let salesOfTheWeek : [String : [Sales]] = ["Monday, 20" : salesOfMonday20,
                                            "Tuesday 21" : salesOfTuesday21,
                                            "Sunday 2" : salesOfSunday2]
+
+

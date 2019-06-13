@@ -30,7 +30,6 @@ class TodaySalesLabel: NSObject {
         //        let description = NSMutableAttributedString(string: "Total sales", attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 15)!, NSAttributedString.Key.foregroundColor: UIColor(cgColor: UIColor.lightGray.cgColor)])
         label.numberOfLines = 2
         label.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 0.5)
-        
         let attrText = customizeColor(string: "\(value) €\n", color: UIColor.black)
         attrText.append(customizeColor(string: "Total sales", color: UIColor.lightGray))
         label.attributedText = attrText

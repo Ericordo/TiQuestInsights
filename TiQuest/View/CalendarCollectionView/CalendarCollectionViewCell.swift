@@ -25,9 +25,43 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.backgroundColor = isSelected ? UIColor.red : UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+            self.backgroundColor = isSelected ? UIColor(red: 51/255, green: 153/255, blue: 255/255, alpha: 1.0) : UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+            self.dateLabel.textColor = isSelected ? .white : .black
         }
     }
+    
+    func circleAroundDigit(_ num:Int, circleColor:UIColor,
+                           digitColor:UIColor, diameter:CGFloat,
+                           font:UIFont) -> UIImage {
+        precondition((0...31).contains(num), "digit is not a digit")
+        let p = NSMutableParagraphStyle()
+        p.alignment = .center
+        let s = NSAttributedString(string: String(num), attributes:
+            [.font:font, .foregroundColor:digitColor, .paragraphStyle:p])
+        let r = UIGraphicsImageRenderer(size: CGSize(width:diameter, height:diameter))
+        return r.image {con in
+            circleColor.setFill()
+            con.cgContext.fillEllipse(in:
+                CGRect(x: 0, y: 0, width: diameter, height: diameter))
+            s.draw(in: CGRect(x: 0, y: diameter / 2 - font.lineHeight / 2,
+                              width: diameter, height: diameter))
+        }
+    }
+    
+//        override var isSelected: Bool {
+//            didSet {
+//                
+//                let selectionImage = circleAroundDigit(30, circleColor: .blue,
+//                                                       digitColor: .white, diameter: 25, font:UIFont.boldSystemFont(ofSize: 17))
+//
+//                let selectedString = NSMutableAttributedString(string: "Monday  ")
+//                let selectedStringAttachment = NSTextAttachment()
+//                selectedStringAttachment.image = selectionImage
+//                let selectedImageString = NSAttributedString(attachment: selectedStringAttachment)
+//                selectedString.append(selectedImageString)
+//                self.dateLabel.attributedText = selectedString
+//            }
+//        }
     
     
  let dateLabel : UILabel = {
