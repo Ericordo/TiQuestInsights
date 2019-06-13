@@ -9,6 +9,23 @@
 import Foundation
 import UIKit
 
+struct DetailedData {
+    var date : String
+    var time : Int?
+    var formattedTime : String
+    var sales : String
+    var topSeller : String
+    var worstSeller : String
+    var totalReceipts : String
+    var averageTicket : String
+}
+
+let dataTuesday11 = DetailedData(date: "Tuesday 28", time: 11, formattedTime: "11:00", sales: "599,23€", topSeller: "Caesar Salad", worstSeller: "Fondue", totalReceipts: "49", averageTicket: "45,23€")
+let dataTuesday12 = DetailedData(date: "Tuesday 28", time: 12, formattedTime: "12:00", sales: "428,23€", topSeller: "Brocoli", worstSeller: "Burger", totalReceipts: "19", averageTicket: "32,23€")
+let dataTuesdayAll = DetailedData(date: "Tuesday 18", time: nil, formattedTime: "All Day", sales: "4234,56€", topSeller: "Banana Split", worstSeller: "Cordon bleu", totalReceipts: "234", averageTicket: "32,45€")
+
+let detailedData : [ Int : DetailedData] = [ 11 : dataTuesday11, 12 : dataTuesday12, 24 : dataTuesdayAll]
+
 class DetailedHourView: NSObject {
     override init() {
         super.init()
@@ -20,6 +37,12 @@ class DetailedHourView: NSObject {
     let detailedViewHeight : CGFloat = 60
     var cellWidth : CGFloat = 100
     
+    var formattedTime = detailedData[24]?.formattedTime
+    var sales = detailedData[24]?.sales
+    var topSeller = detailedData[24]?.topSeller
+    var worstSeller = detailedData[24]?.worstSeller
+    var totalReceipts = detailedData[24]?.totalReceipts
+    var averageTicket = detailedData[24]?.averageTicket
 
     
 
@@ -111,4 +134,12 @@ extension DetailedHourView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+extension DetailedHourView : DetailedViewUpdateDelegate {
+    func updateDetailedView() {
+        print("detailed view update delegate")
+    }
+    
+    
 }

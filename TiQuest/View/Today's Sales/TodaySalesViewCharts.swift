@@ -9,7 +9,13 @@
 import UIKit
 import Charts
 
+protocol DetailedViewUpdateDelegate {
+    func updateDetailedView() 
+}
+
 class TodaySalesChart : BarChartView, ChartViewDelegate {
+    
+    var detailedViewUpdateDelegate : DetailedViewUpdateDelegate!
     
      let salesOfOneDay = [Sales(hour: "11 AM", sales: 453),
                                 Sales(hour: "12 AM", sales: 792),
@@ -92,10 +98,6 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         chartData.barWidth = 0.6
         
         
-        
-        
-        
-        
         self.xAxis.axisMinimum = Double(timeArray[0]) - 0.5
         self.xAxis.axisMaximum = Double(timeArray[timeArray.count-1]) + 0.5
         
@@ -128,6 +130,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.rightAxis.drawAxisLineEnabled = false
         self.doubleTapToZoomEnabled = false
         self.pinchZoomEnabled = false
+        
         self.drawValueAboveBarEnabled = true
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         self.xAxis.labelTextColor = UIColor.black
@@ -153,7 +156,9 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     @objc func chartValueSelected(_ chartView: Charts.ChartViewBase, entry: Charts.ChartDataEntry, highlight: Charts.Highlight) {
         print("HELLO")
-
+        detailedViewUpdateDelegate.updateDetailedView()
+        print(highlight)
+        
         
     }
     

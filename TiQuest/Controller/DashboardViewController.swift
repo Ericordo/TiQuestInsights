@@ -84,6 +84,7 @@ class DashboardViewController: UIViewController {
         // MARK: Configuration of the Total Sales Label
 //        todaySalesLabel.showTodaySalesLabel()
         
+        
                 // MARK: Configuration of the Today Sales Chart using Charts Framework
         todaySalesChart = TodaySalesChart(frame: CGRect(x: 20, y: calendarView.calendarHeight+71, width: view.frame.width - 20, height: 250))
         todaySalesChart.contentMode = .scaleAspectFit
@@ -96,6 +97,7 @@ class DashboardViewController: UIViewController {
         
 
         calendarView.dataUpdateDelegate = todaySalesChart
+        todaySalesChart.detailedViewUpdateDelegate = detailedHourView
         
 //                 MARK: Configuration of the Weather
 //        weatherView.showWeather()
@@ -138,11 +140,11 @@ class DashboardViewController: UIViewController {
         
         
         //         MARK: Configuration of the TableViews
-//        topCategoriesView.showTopCategories()
-//        topCategoriesView.addItems()
-//
-//        topSellersView.showTopSellers()
-//        topSellersView.addTopSellersItems()
+        topCategoriesView.showTopCategories()
+        topCategoriesView.addItems()
+
+        topSellersView.showTopSellers()
+        topSellersView.addTopSellersItems()
         
         
         

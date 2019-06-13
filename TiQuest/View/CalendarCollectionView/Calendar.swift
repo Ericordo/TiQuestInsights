@@ -115,13 +115,7 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.dateLabel.backgroundColor = .red
         cell.backgroundColor = .blue
 
-        
-    
-     
-        
-        
-        
-        
+       
         dataUpdateDelegate.updateChartBar()
  
     }
