@@ -24,6 +24,8 @@ class DashboardViewController: UIViewController {
     let topCategoriesView = TopCategoriesTableView()
     let topSellersView = TopSellersTableView()
     
+    
+    
     var exportButton : UIBarButtonItem?
 
     
@@ -121,23 +123,51 @@ class DashboardViewController: UIViewController {
         detailedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         detailedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:  -40).isActive = true
 
-        
-        
-        
-
-        
-        
-        
-        
+    
 //        infoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
 //        infoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         
         
         
         //         MARK: Configuration of the TableViews
-        topCategoriesView.showTopCategories()
         
-        topSellersView.showTopSellers()
+        
+//        topCategoriesView.showTopCategories()
+        let topCategoriesTableView = topCategoriesView.topCategoriesTableView
+
+//        self.view.addSubview(topCategoriesTableView)
+//        topCategoriesTableView.translatesAutoresizingMaskIntoConstraints = false
+//        topCategoriesTableView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
+//        topCategoriesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
+//        topCategoriesTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
+//        topCategoriesTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -500).isActive = true
+        
+//        topSellersView.showTopSellers()
+        let topSellersTableView = topSellersView.topSellersTableView
+//        view.addSubview(topSellersTableView)
+//        topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
+//        topSellersTableView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
+//        topSellersTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
+//        topSellersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
+//        topSellersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.spacing = 20
+        stackView.distribution = .fillEqually
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(topCategoriesTableView)
+        stackView.addArrangedSubview(topSellersTableView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+        
+    
+
         
         
         
