@@ -18,6 +18,8 @@ class TopCategoriesTableViewCell: UITableViewCell {
         }
     }
     
+    var quantityProgress = 0.4
+    
 //    var itemTopCategories : Item? {
 //        didSet {
 //            itemNameLabelTopCategories.text = itemTopCategories?.name
@@ -91,6 +93,7 @@ class TopCategoriesTableViewCell: UITableViewCell {
         itemNameLabelTopCategories.adjustsFontSizeToFitWidth = true
         
         itemQuantityTopCategories.leadingAnchor.constraint(equalTo: itemNameLabelTopCategories.trailingAnchor, constant: self.frame.width / 30).isActive = true
+        itemQuantityTopCategories.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: self.frame.width / 30) 
         itemQuantityTopCategories.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -(self.frame.width / 20)).isActive = true
         itemQuantityTopCategories.adjustsFontSizeToFitWidth = true
         
