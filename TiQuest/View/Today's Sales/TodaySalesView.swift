@@ -118,8 +118,10 @@ class TodaySales: MacawView {
     }
     
     private static func createBars() -> Group {
-        
-        let fill = LinearGradient(degree: 90, from: Color(val: 0x5Aa33e1), to: Color(val: 0x5Aa33e1).with(a: 0.33))
+//        Purple Color
+//        let fill = LinearGradient(degree: 90, from: Color(val: 0x5Aa33e1), to: Color(val: 0x5Aa33e1).with(a: 0.33))
+//        Grey Color
+        let fill = LinearGradient(degree: 90, from: Color(val: 0xDCDBE0), to: Color(val: 0xDCDBE0).with(a: 0.33))
         let items = adjustedData.map { _ in Group() }
         
         animations = items.enumerated().map { (i: Int, item: Group) in
@@ -133,6 +135,7 @@ class TodaySales: MacawView {
         }
        
         bars = items.group()
+       
         
         return items.group()
     }
@@ -151,9 +154,26 @@ class TodaySales: MacawView {
     
     
     
-    static func didTapBar() {
+    static func didTapBar()  {
+//        print(bars.contents.index(of: <#T##Node#>))
         print("hello")
-        bars.contents[0].opacity = 0.0
+        let fill = LinearGradient(degree: 90, from: Color(val: 0x5Aa33e1), to: Color(val: 0x5Aa33e1).with(a: 0.33))
+        if bars.contents[0].opacity == 1.0 {
+            bars.contents[0].opacity = 0.0
+            
+            
+//            bars.contentsVar.animate(from: fill, to: fill, during: 1.0, delay: 0.0)
+            
+        
+            
+            
+        } else {
+            bars.contents[0].opacity = 1.0
+//            bars.contentsVar.animate(from: fill, to: fill, during: 1.0, delay: 0.0)
+            
+        }
+        
+      
     }
     
 

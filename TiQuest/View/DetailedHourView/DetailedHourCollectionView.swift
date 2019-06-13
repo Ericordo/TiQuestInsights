@@ -20,14 +20,16 @@ class DetailedHourView: NSObject {
     let detailedViewHeight : CGFloat = 60
     var cellWidth : CGFloat = 100
     
+
     
+
     
     func showDetailedHourView() {
             if let view = UIApplication.shared.keyWindow {
                 cellWidth = view.frame.width/6
                 view.addSubview(detailedHourCollectionView)
                 detailedHourCollectionView.frame = CGRect(x: 0, y: 371 + detailedViewHeight, width: view.frame.width, height: detailedViewHeight)
-                print(view.frame.width)
+                
                 
         }
     }
@@ -36,9 +38,15 @@ class DetailedHourView: NSObject {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.estimatedItemSize = CGSize(width: 100, height: 60)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
-        cv.isScrollEnabled = true
+        cv.isScrollEnabled = false
+        cv.sizeThatFits(layout.estimatedItemSize)
+        
+        
+
+        
         return cv
     }()
     
@@ -64,15 +72,21 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
         cell.clipsToBounds = true
         cell.infoLabel.adjustsFontSizeToFitWidth = true
 
+        cell.infoLabel.sizeToFit()
+        cell.autoresizesSubviews = true
+//        cell.sizeThatFits(CGSize(width: cellWidth, height: detailedViewHeight))
+   
+
         switch indexPath.item {
         case 0:
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: "20:00")
+            print(cell.infoLabel.frame.width)
         case 1:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Weather\n", downString: "17°C Partly cloudy")
-        case 2:
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "432,55€")
+        case 2:
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "Pineapple pizza bLABLA")
         case 3:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "Pineapple pizza")
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: "Snails")
         case 4:
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "87")
         case 5:
@@ -89,10 +103,11 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension DetailedHourView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         return CGSize(width: cellWidth, height: detailedViewHeight)
+        
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
