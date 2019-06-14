@@ -90,7 +90,7 @@ class DashboardViewController: UIViewController {
         todaySalesChart.topAnchor.constraint(equalTo: calendarView.calendarCollectionView.bottomAnchor, constant: 20).isActive = true
         todaySalesChart.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         todaySalesChart.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-        todaySalesChart.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        todaySalesChart.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2.5).isActive = true
         
 
         calendarView.dataUpdateDelegate = todaySalesChart
@@ -154,7 +154,7 @@ class DashboardViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
-        stackView.spacing = 20
+        stackView.spacing = 40
         stackView.distribution = .fillEqually
         view.addSubview(stackView)
         stackView.addArrangedSubview(topCategoriesTableView)
@@ -162,13 +162,9 @@ class DashboardViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-        
-    
-
-        
         
         
         if let jsonData = jsonString.data(using: .utf8)
