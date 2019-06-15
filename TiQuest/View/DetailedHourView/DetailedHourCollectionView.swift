@@ -102,18 +102,42 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
 
         switch indexPath.item {
         case 0:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: "20:00")
+            guard let formattedTime = formattedTime else {
+                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: "")
+                return cell
+            }
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: formattedTime)
             print(cell.infoLabel.frame.width)
         case 1:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "432,55€")
+            guard let sales = sales else {
+                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "")
+                return cell
+            }
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: sales)
         case 2:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "Pineapple pizza bLABLA")
+            guard let topSeller = topSeller else {
+                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "")
+                return cell
+            }
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: topSeller)
         case 3:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: "Snails")
+            guard let worstSeller = worstSeller else {
+                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: "")
+                return cell
+            }
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: worstSeller)
         case 4:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "87")
+            guard let totalReceipts = totalReceipts else {
+                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "")
+                return cell
+            }
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: totalReceipts)
         case 5:
-            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: "32,20€")
+            guard let averageTicket = averageTicket else {
+                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: "")
+                return cell
+            }
+            cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: averageTicket)
         default:
             break
         }
@@ -137,8 +161,15 @@ extension DetailedHourView : UICollectionViewDelegateFlowLayout {
 }
 
 extension DetailedHourView : DetailedViewUpdateDelegate {
-    func updateDetailedView() {
-        print("detailed view update delegate")
+    
+    func updateDetailedView(key: Int) {
+        formattedTime = detailedData[key]?.formattedTime
+        sales = detailedData[key]?.sales
+        topSeller = detailedData[key]?.topSeller
+        worstSeller = detailedData[key]?.worstSeller
+        totalReceipts = detailedData[key]?.totalReceipts
+        averageTicket = detailedData[key]?.averageTicket
+        detailedHourCollectionView.reloadData()
     }
     
     

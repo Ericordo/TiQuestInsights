@@ -13,14 +13,13 @@ import Charts
 
 class DashboardViewController: UIViewController {
     
-    var calendarView = Calendar()
+    var calendarView = CalendarView()
     
     var todaySalesView : TodaySales!
     var todaySalesLabel = TodaySalesLabel()
     let weatherView = WeatherCollectionView()
     let detailedHourView = DetailedHourView()
     var todaySalesChart = TodaySalesChart()
-    
     let topCategoriesView = TopCategoriesTableView()
     let topSellersView = TopSellersTableView()
     
@@ -34,17 +33,14 @@ class DashboardViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         let margins = self.view.layoutMarginsGuide
         
-       
-        
-
         
         //        MARK: Configuration of the Navigation Bar
         self.navigationItem.title = "Name of your Store"
         let selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
         let todayButton = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
         exportButton = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(didTapExport))
-        let logOutButton = UIBarButtonItem.init(title: "Log Out", style: .plain, target: self, action: #selector(didTapLogOut))
-        self.navigationItem.rightBarButtonItems = [logOutButton, exportButton!]
+        let settingsButton = UIBarButtonItem.init(title: "Settings", style: .plain, target: self, action: #selector(didTapSettings))
+        self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!]
         self.navigationItem.leftBarButtonItems = [selectButton, todayButton]
         
         //         MARK: Configuration of the Calendar
@@ -55,7 +51,8 @@ class DashboardViewController: UIViewController {
         calendarView.calendarCollectionView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         calendarView.calendarCollectionView.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
         calendarView.calendarCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100).isActive = true
-        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
+        
         
         
         //         MARK: Configuration of the Today Sales Chart using Macaw Framework
@@ -81,6 +78,15 @@ class DashboardViewController: UIViewController {
         // MARK: Configuration of the Total Sales Label
 //        todaySalesLabel.showTodaySalesLabel()
         
+        // MARK: Configuration of the MonthLabel
+        let monthLabel = MonthLabel(frame: CGRect(x: 0, y: 71, width: 100, height: 50))
+        view.addSubview(monthLabel)
+        monthLabel.translatesAutoresizingMaskIntoConstraints = false
+        monthLabel.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        monthLabel.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
+        monthLabel.leadingAnchor.constraint(equalTo: calendarView.calendarCollectionView.trailingAnchor, constant: 0).isActive = true
+        monthLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        
         
                 // MARK: Configuration of the Today Sales Chart using Charts Framework
         todaySalesChart = TodaySalesChart(frame: CGRect(x: 20, y: calendarView.calendarHeight+71, width: view.frame.width - 20, height: 250))
@@ -90,25 +96,11 @@ class DashboardViewController: UIViewController {
         todaySalesChart.topAnchor.constraint(equalTo: calendarView.calendarCollectionView.bottomAnchor, constant: 20).isActive = true
         todaySalesChart.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         todaySalesChart.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-        todaySalesChart.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        todaySalesChart.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2.5).isActive = true
         
 
         calendarView.dataUpdateDelegate = todaySalesChart
         todaySalesChart.detailedViewUpdateDelegate = detailedHourView
-        
-//                 MARK: Configuration of the Weather
-//        weatherView.showWeather()
-//        weatherView.weatherCollectionView.frame = CGRect(x: 84, y: 371, width: view.frame.width, height: 50)
-////        self.view.addSubview(weatherView.weatherCollectionView)
-//        let blockWidth = CGFloat(944.0 / 11.0)
-//        let barWidthInPx = 0.60 * blockWidth
-//        let spaceWidthInPx = 0.40 * blockWidth
-//        weatherView.weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//        weatherView.weatherCollectionView.topAnchor.constraint(equalTo: todaySalesChart.bottomAnchor, constant: 5).isActive = true
-//        weatherView.weatherCollectionView.heightAnchor.constraint(equalToConstant: weatherView.weatherHeight).isActive = true
-//        weatherView.weatherCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40 + barWidthInPx/2).isActive = true
-//        weatherView.weatherCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:  -40 - barWidthInPx/2).isActive = true
-//        print(todaySalesChart.frame.width)
         
 //                 MARK: Configuration of the Detailed View
 //        detailedHourView.showDetailedHourView()
@@ -134,23 +126,8 @@ class DashboardViewController: UIViewController {
         
 //        topCategoriesView.showTopCategories()
         let topCategoriesTableView = topCategoriesView.topCategoriesTableView
-
-//        self.view.addSubview(topCategoriesTableView)
-//        topCategoriesTableView.translatesAutoresizingMaskIntoConstraints = false
-//        topCategoriesTableView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-//        topCategoriesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
-//        topCategoriesTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-//        topCategoriesTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -500).isActive = true
-        
-//        topSellersView.showTopSellers()
         let topSellersTableView = topSellersView.topSellersTableView
-//        view.addSubview(topSellersTableView)
-//        topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
-//        topSellersTableView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-//        topSellersTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
-//        topSellersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-//        topSellersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-        
+
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -160,16 +137,10 @@ class DashboardViewController: UIViewController {
         stackView.addArrangedSubview(topCategoriesTableView)
         stackView.addArrangedSubview(topSellersTableView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-        
-    
-
-        
-        
         
         if let jsonData = jsonString.data(using: .utf8)
         {
@@ -185,6 +156,17 @@ class DashboardViewController: UIViewController {
         }
     }
     
+
+    override func viewDidLayoutSubviews() {
+        let lastCellIndexPath = IndexPath.init(row: datesbis.count-1, section: 0)
+        calendarView.calendarCollectionView.scrollToItem(at: lastCellIndexPath, at: .right, animated: false)
+        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
+    }
+    
+ 
+    
+    
+
     @objc func didTapToday() {
         let lastCellIndexPath = IndexPath.init(row: datesbis.count-1, section: 0)
         calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
@@ -199,6 +181,29 @@ class DashboardViewController: UIViewController {
         //        let popover = ac.popoverPresentationController
         //        popover?.sourceRect = CGRect(x: 0, y: 0, width: 100, height: 500)
         //        present(ac, animated: true)
+//        todaySalesChart.removeFromSuperview()
+//        todaySalesChart = TodaySalesChart(frame: CGRect(x: 20, y: calendarView.calendarHeight+71, width: view.frame.width - 20, height: 250))
+//        todaySalesChart.contentMode = .scaleAspectFit
+//        view.addSubview(todaySalesChart)
+//        todaySalesChart.translatesAutoresizingMaskIntoConstraints = false
+//        todaySalesChart.topAnchor.constraint(equalTo: calendarView.calendarCollectionView.bottomAnchor, constant: 20).isActive = true
+//        todaySalesChart.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
+//        todaySalesChart.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+//        todaySalesChart.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2.5).isActive = true
+        todaySalesChart.centerViewToAnimated(xValue: 12, yValue: 12, axis: .left, duration: 2, easingOption: .easeInBack)
+        
+        todaySalesChart.setNeedsLayout()
+        todaySalesView.layoutIfNeeded()
+        
+        
+        todaySalesChart.notifyDataSetChanged()
+        todaySalesChart.chartData.notifyDataChanged()
+        todaySalesChart.chartDataSet.notifyDataSetChanged()
+        todaySalesChart.data?.notifyDataChanged()
+        todaySalesChart.reloadInputViews()
+        
+        todaySalesChart.animate(xAxisDuration: 2, yAxisDuration: 2, easingOption: .easeInOutQuart)
+     
     }
     
     @objc func didTapExport() {
@@ -210,8 +215,9 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    @objc func didTapLogOut() {
-        
+    @objc func didTapSettings() {
+        let settingsVC = SettingsViewController()
+        self.navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {

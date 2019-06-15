@@ -15,15 +15,19 @@ protocol DataUpdateDelegate {
 }
 
 
-class Calendar: NSObject {
+class CalendarView: NSObject {
     
     var dataUpdateDelegate : DataUpdateDelegate!
-   
+    
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let daysOfMonth = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    var currentMonth = String()
     
     let dates = Dates().dates
     let datesbis = DatesBis().dates
     let calendarHeight : CGFloat = 50
-    let cellWidth : CGFloat = 150
+    var cellWidth : CGFloat = 150
     
     let calendarCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,6 +37,11 @@ class Calendar: NSObject {
         cv.showsHorizontalScrollIndicator = false
         cv.decelerationRate = .fast
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+
+        
+        
+        
+        
         return cv
     }()
     
@@ -55,7 +64,14 @@ class Calendar: NSObject {
         calendarCollectionView.dataSource = self
         
         calendarCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: "CalendarCell")
-       
+        currentMonth = months[month]
+        print("HELLO HELLO HELLO \(currentMonth)")
+        print(month)
+        print(day)
+        print(weekday)
+        print("\(daysOfMonth[weekday-1]) "+"\(day)")
+   
+    
         
     }
     
@@ -84,11 +100,16 @@ class Calendar: NSObject {
     
 }
 
-extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
+extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        <#code#>
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
 //        return dates.count
+//        return daysOfMonth.count
         return datesbis.count
     }
     
@@ -96,8 +117,9 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
         let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCollectionViewCell
 //        cell.dateLabel.text = dates[indexPath.item]
 //        cell.dateLabel.text = datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number)
-        let stringForCell = NSAttributedString(string: datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number))
-        cell.dateLabel.attributedText = stringForCell
+//        let stringForCell = NSAttributedString(string: datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number))
+//        cell.dateLabel.attributedText = stringForCell
+        cell.dateLabel.text = "\(daysOfMonth[weekday-1]) "+"\(day)"
 
         return cell
     }
@@ -112,10 +134,7 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
         let selectedImageString = NSAttributedString(attachment: selectedStringAttachment)
         selectedString.append(selectedImageString)
         cell.dateLabel.attributedText = selectedString
-        cell.dateLabel.backgroundColor = .red
-        cell.backgroundColor = .blue
-
-       
+    
         dataUpdateDelegate.updateChartBar()
  
     }
@@ -125,12 +144,16 @@ extension Calendar: UICollectionViewDataSource, UICollectionViewDelegate {
     
 }
 
-extension Calendar : UICollectionViewDelegateFlowLayout {
+extension CalendarView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let view = UIApplication.shared.keyWindow {
+            cellWidth = ((view.frame.width - 200) / 7)
+//            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
+        }
         return CGSize(width: cellWidth, height: calendarHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.5
+        return 0
     }
 }

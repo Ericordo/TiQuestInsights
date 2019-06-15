@@ -16,6 +16,15 @@
 		88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */; };
 		88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88557EDB2292ECDC007DBE21 /* LoginViewController.swift */; };
 		88557EDE2292ECDC007DBE21 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88557EDC2292ECDC007DBE21 /* LoginViewController.xib */; };
+		885D599722B2FBFD006B8F50 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599622B2FBFD006B8F50 /* MonthLabel.swift */; };
+		885D599922B3B3ED006B8F50 /* CalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599822B3B3ED006B8F50 /* CalendarData.swift */; };
+		885D599B22B3DE7F006B8F50 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599A22B3DE7F006B8F50 /* SettingsViewController.swift */; };
+		885D599E22B3DEBB006B8F50 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599D22B3DEBB006B8F50 /* SettingsView.swift */; };
+		885D59A122B3E908006B8F50 /* HourSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59A022B3E908006B8F50 /* HourSelectionTableViewCell.swift */; };
+		885D59A322B3E919006B8F50 /* LogOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59A222B3E919006B8F50 /* LogOutTableViewCell.swift */; };
+		885D59A522B41311006B8F50 /* XAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59A422B41311006B8F50 /* XAxisValueFormatter.swift */; };
+		885D59A722B5601C006B8F50 /* ClosingSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59A622B5601C006B8F50 /* ClosingSelectionTableViewCell.swift */; };
+		885D59A922B56F15006B8F50 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59A822B56F14006B8F50 /* UserDefaults.swift */; };
 		8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8874614E229EDA2000D65346 /* WeekNumberLabel.swift */; };
 		888C6013228EE4490047A736 /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6012228EE4490047A736 /* Receipt.swift */; };
 		888C6015228EE4650047A736 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6014228EE4650047A736 /* Item.swift */; };
@@ -49,6 +58,15 @@
 		88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesViewCharts.swift; sourceTree = "<group>"; };
 		88557EDB2292ECDC007DBE21 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		88557EDC2292ECDC007DBE21 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		885D599622B2FBFD006B8F50 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
+		885D599822B3B3ED006B8F50 /* CalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarData.swift; sourceTree = "<group>"; };
+		885D599A22B3DE7F006B8F50 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		885D599D22B3DEBB006B8F50 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		885D59A022B3E908006B8F50 /* HourSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		885D59A222B3E919006B8F50 /* LogOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutTableViewCell.swift; sourceTree = "<group>"; };
+		885D59A422B41311006B8F50 /* XAxisValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XAxisValueFormatter.swift; sourceTree = "<group>"; };
+		885D59A622B5601C006B8F50 /* ClosingSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosingSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		885D59A822B56F14006B8F50 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		8874614E229EDA2000D65346 /* WeekNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekNumberLabel.swift; sourceTree = "<group>"; };
 		888C6012228EE4490047A736 /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
 		888C6014228EE4650047A736 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -118,8 +136,20 @@
 				880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */,
 				88BA1C802294116D00F96603 /* Calendar.swift */,
 				8874614E229EDA2000D65346 /* WeekNumberLabel.swift */,
+				885D599622B2FBFD006B8F50 /* MonthLabel.swift */,
 			);
 			path = CalendarCollectionView;
+			sourceTree = "<group>";
+		};
+		885D599C22B3DE8F006B8F50 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				885D599D22B3DEBB006B8F50 /* SettingsView.swift */,
+				885D59A022B3E908006B8F50 /* HourSelectionTableViewCell.swift */,
+				885D59A622B5601C006B8F50 /* ClosingSelectionTableViewCell.swift */,
+				885D59A222B3E919006B8F50 /* LogOutTableViewCell.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		8874614D229ED7D200D65346 /* LogIn */ = {
@@ -137,6 +167,8 @@
 				888C6016228EE91D0047A736 /* DummyData.swift */,
 				880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */,
 				3E657B1622A56F9A0017A4A2 /* DummyJson.swift */,
+				885D599822B3B3ED006B8F50 /* CalendarData.swift */,
+				885D59A822B56F14006B8F50 /* UserDefaults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +176,7 @@
 		888C6010228EE19C0047A736 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				885D599C22B3DE8F006B8F50 /* Settings */,
 				8874614D229ED7D200D65346 /* LogIn */,
 				88BA1C9C229C1D8100F96603 /* DetailedHourView */,
 				88BA1C952298318C00F96603 /* WeatherCollectionView */,
@@ -165,6 +198,7 @@
 				888C6018228EFE540047A736 /* DashboardViewController.swift */,
 				88557EDB2292ECDC007DBE21 /* LoginViewController.swift */,
 				88557EDC2292ECDC007DBE21 /* LoginViewController.xib */,
+				885D599A22B3DE7F006B8F50 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -184,6 +218,7 @@
 				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
 				88BA1C8C2296CC8600F96603 /* TodaySalesLabel.swift */,
 				88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */,
+				885D59A422B41311006B8F50 /* XAxisValueFormatter.swift */,
 			);
 			path = "Today's Sales";
 			sourceTree = "<group>";
@@ -364,7 +399,10 @@
 				88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */,
 				88BA1C97229834CB00F96603 /* WeatherCollectionViewCell.swift in Sources */,
 				888C6015228EE4650047A736 /* Item.swift in Sources */,
+				885D59A522B41311006B8F50 /* XAxisValueFormatter.swift in Sources */,
+				885D59A122B3E908006B8F50 /* HourSelectionTableViewCell.swift in Sources */,
 				88BA1C992298354D00F96603 /* WeatherCollectionView.swift in Sources */,
+				885D59A722B5601C006B8F50 /* ClosingSelectionTableViewCell.swift in Sources */,
 				888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */,
 				888C6013228EE4490047A736 /* Receipt.swift in Sources */,
 				3E3A432E22A00E2400FE660F /* TopSellersTableView.swift in Sources */,
@@ -372,19 +410,25 @@
 				88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */,
 				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
+				885D59A922B56F15006B8F50 /* UserDefaults.swift in Sources */,
 				3E3A433022A00E7F00FE660F /* TopSellersTableViewCell.swift in Sources */,
 				8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */,
 				880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */,
+				885D59A322B3E919006B8F50 /* LogOutTableViewCell.swift in Sources */,
 				88BA1C812294116D00F96603 /* Calendar.swift in Sources */,
+				885D599922B3B3ED006B8F50 /* CalendarData.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
 				88BA1C8D2296CC8600F96603 /* TodaySalesLabel.swift in Sources */,
+				885D599722B2FBFD006B8F50 /* MonthLabel.swift in Sources */,
 				88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
+				885D599E22B3DEBB006B8F50 /* SettingsView.swift in Sources */,
 				88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */,
 				88BA1C9E229C1DA800F96603 /* DetailedHourCollectionView.swift in Sources */,
 				88BA1CA0229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
 				3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */,
+				885D599B22B3DE7F006B8F50 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,7 +29,7 @@ class WeekNumberLabel: UILabel {
     func setUpLabel() {
         bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
         self.layer.addSublayer(bottomLineSeparator)
-        self.text = "W21"
+        self.text = "W\(weekNumber)"
         self.textColor = .lightGray
         self.textAlignment = .center
         
