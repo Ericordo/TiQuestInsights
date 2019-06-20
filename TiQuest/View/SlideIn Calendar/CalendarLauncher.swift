@@ -51,7 +51,7 @@ class CalendarLauncher: NSObject {
     let calendarCollectionViewHeight : CGFloat = 320
     let monthLabelHeight : CGFloat = 50
     let weekdayStackViewHeight : CGFloat = 50
-    let backgroundViewHeight : CGFloat = 420
+    let backgroundViewHeight : CGFloat = 450
     
     var stackViewBottomConstant : CGFloat = 50
     

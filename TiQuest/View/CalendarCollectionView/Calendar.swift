@@ -203,6 +203,11 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
         let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
         daysOfCurrentWeek.append(calendar.component(.day, from: startDate) - 2)
         var nextDate = actualStartDate
+        print(startDate)
+        print("actualStartDate \(actualStartDate)")
+       print(calendar.component(.day, from: startDate))
+        print(calendar.component(.day, from: startDate) - 2)
+        print(calendar.component(.day, from: actualStartDate) - 2)
         while daysOfCurrentWeek.count < 7 {
             nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
             daysOfCurrentWeek.append(calendar.component(.day, from: nextDate) - 4)
@@ -245,7 +250,7 @@ extension CalendarView : CalendarUpdateDelegate {
         let endComponents = DateComponents(day:6, second: -1)
         let endDate = calendar.date(byAdding: endComponents, to: startDate)!
         print(startDate...endDate)
-        let actualStartDate = calendar.date(byAdding: .day, value: 2, to: startDate)!
+        let actualStartDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
         print(actualStartDate...actualEndDate)
 //        let actualRange = (calendar.component(.day, from: startDate)+1)...(calendar.component(.day, from: endDate)+1)
@@ -254,17 +259,21 @@ extension CalendarView : CalendarUpdateDelegate {
         print(actualRangeBeginning)
         print(actualRangeEnd)
         daysOfSelectedWeek.removeAll()
-        daysOfSelectedWeek.append(calendar.component(.day, from: actualStartDate) - 1)
+        daysOfSelectedWeek.append(calendar.component(.day, from: actualStartDate))
         var nextDate = actualStartDate
         
         while daysOfSelectedWeek.count < 7 {
             nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
-            daysOfSelectedWeek.append(calendar.component(.day, from: nextDate) - 1)
+            daysOfSelectedWeek.append(calendar.component(.day, from: nextDate))
         }
         print(daysOfSelectedWeek)
         print(date)
         print(weekNumber)
         calendarCollectionView.reloadData()
+        
+        let selectedCellIndexPath = IndexPath.init(row: selectedWeekDay-1, section: 0)
+        calendarCollectionView.selectItem(at: selectedCellIndexPath, animated: true, scrollPosition: .right)
+        dataUpdateDelegate.updateChartBar()
 
   
         
