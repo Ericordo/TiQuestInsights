@@ -11,7 +11,7 @@ import Foundation
 var topCategoriesHeaderLabel = "Top categories"
 var topCategoriesButtonLabel = "Bottom"
 var topCategoriesQuantity : [Float] = [23.0, 45.0, 76.0, 89.0, 57.0]
-var topCategoriesQuantityRandom : Float = 0.0
+//var topCategoriesQuantityRandom : Float = 0.0
 var topCategoriesQuantityProgress : Float = 0.0
 var topCategoriesDictionary : [String : Int] = [:]
 var chosenCategories : [String] = []

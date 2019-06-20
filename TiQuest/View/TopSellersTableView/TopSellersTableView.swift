@@ -79,7 +79,7 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
         cell.selectionStyle = .none
-        let topSellersQuantityRandom = Float(topSellersQuantity[indexPath.row])
+        let topSellersQuantityRandom = Float((topSellersQuantity[indexPath.row]*100)/(topSellersQuantity.reduce(0, +)))
         cell.progressBarTopSellers.setProgress(topSellersQuantityRandom/100, animated: true)
         return cell
     }
@@ -111,7 +111,7 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
         seeAllButton.contentHorizontalAlignment = .right
         seeAllButton.setTitleColor(.darkGray, for: .normal)
-        seeAllButton.addTarget(self, action:  #selector(didTapWorst), for: .touchUpInside)
+        seeAllButton.addTarget(self, action:  #selector(didTapWorst), for: .touchUpInside)
         
         let headerSeparator = UILabel(frame: CGRect(x: 0, y: topSellersTableView.frame.width / 12 - 0.5, width: headerView.frame.width, height: 0.5))
         headerSeparator.backgroundColor = .lightGray

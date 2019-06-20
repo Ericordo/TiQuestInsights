@@ -95,7 +95,8 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
         cell.selectionStyle = .none
-        cell.progressBarTopCategories.setProgress((topCategoriesQuantity[indexPath.row])/100, animated: true)
+        let topCategoriesQuantityRandom = (topCategoriesQuantity[indexPath.row]*100)/topCategoriesQuantity.reduce(0, +)
+        cell.progressBarTopCategories.setProgress(topCategoriesQuantityRandom/100, animated: true)
         return cell
     }
     
@@ -127,7 +128,7 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
         seeAllButton.contentHorizontalAlignment = .right
         seeAllButton.setTitleColor(.darkGray, for: .normal)
-        seeAllButton.addTarget(self, action:  #selector(didTapBottom), for: .touchUpInside)
+        seeAllButton.addTarget(self, action:  #selector(didTapBottom), for: .touchUpInside)
         
         let headerSeparator = UILabel(frame: CGRect(x: 0, y: topCategoriesTableView.frame.width / 12 - 0.5, width: headerView.frame.width, height: 0.5))
         headerSeparator.backgroundColor = .lightGray
