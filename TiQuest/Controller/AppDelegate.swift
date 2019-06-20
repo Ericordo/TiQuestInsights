@@ -21,13 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootControoler = DashboardViewController()
 //        window?.rootViewController = rootControoler
         
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        if let window = window {
+//            let mainVC = DashboardViewController()
+//            navigationController = UINavigationController(rootViewController: mainVC)
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
+//        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let window = window {
-            let mainVC = DashboardViewController() 
-            navigationController = UINavigationController(rootViewController: mainVC)
-            window.rootViewController = navigationController
-            window.makeKeyAndVisible()
-        }
+        window?.rootViewController = RootViewController()
+        window?.makeKeyAndVisible()
+        
         
         return true
     }
@@ -55,5 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+    static var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    var rootViewController: RootViewController {
+        return window!.rootViewController as! RootViewController
+    }
 }
 
