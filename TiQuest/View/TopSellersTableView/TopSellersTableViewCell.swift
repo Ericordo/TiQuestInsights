@@ -10,11 +10,11 @@ import UIKit
 
 class TopSellersTableViewCell: UITableViewCell {
     
-    var itemTopSellers: MenuItems? {
-        didSet {
-            itemNameLabelTopSellers.text = itemTopSellers?.data[0].name
-        }
-    }
+//    var itemTopSellers: MenuItems? {
+//        didSet {
+//            itemNameLabelTopSellers.text = itemTopSellers?.data[0].name
+//        }
+//    }
     
     let itemNameLabelTopSellers : UILabel = {
         let lbl = UILabel()
@@ -24,16 +24,15 @@ class TopSellersTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    private let itemQuantityTopSellers : UILabel = {
+    let itemQuantityTopSellers : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         lbl.textAlignment = .left
-        lbl.text = "51"
         return lbl
     }()
     
-    private let itemImageTopSellers : UIImageView = {
+    let itemImageTopSellers : UIImageView = {
         let imgView = UIImageView()
         imgView.image = UIImage(named: "screenshot")
         imgView.contentMode = .scaleAspectFit
@@ -41,10 +40,11 @@ class TopSellersTableViewCell: UITableViewCell {
         return imgView
     }()
     
-    private let progressBarTopSellers : UIProgressView = {
+    let progressBarTopSellers : UIProgressView = {
         let prgsBar = UIProgressView()
-        prgsBar.tintColor = .darkGray
-        prgsBar.setProgress(0.8, animated: true)
+        prgsBar.tintColor = .lightGray
+        prgsBar.trackTintColor = .clear
+        prgsBar.progressViewStyle = .default
         return prgsBar
     }()
     

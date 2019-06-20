@@ -132,29 +132,16 @@ class DashboardViewController: UIViewController {
         //         MARK: Configuration of the TableViews
         
         
-//        topCategoriesView.showTopCategories()
         let topCategoriesTableView = topCategoriesView.topCategoriesTableView
 
-//        self.view.addSubview(topCategoriesTableView)
-//        topCategoriesTableView.translatesAutoresizingMaskIntoConstraints = false
-//        topCategoriesTableView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-//        topCategoriesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
-//        topCategoriesTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-//        topCategoriesTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -500).isActive = true
-        
-//        topSellersView.showTopSellers()
+
         let topSellersTableView = topSellersView.topSellersTableView
-//        view.addSubview(topSellersTableView)
-//        topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
-//        topSellersTableView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-//        topSellersTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10).isActive = true
-//        topSellersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-//        topSellersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
-        stackView.spacing = 40
+        stackView.spacing = 20
         stackView.distribution = .fillEqually
         view.addSubview(stackView)
         stackView.addArrangedSubview(topCategoriesTableView)

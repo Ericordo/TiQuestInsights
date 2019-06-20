@@ -11,18 +11,21 @@ import UIKit
 
 class TopCategoriesTableView: NSObject {
     
-   var itemsTopCategories : [String] = []
+    var itemsTopCategories : [String] = []
     
     let topCategoriesTableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.cornerRadius = 10
+        tableView.clipsToBounds = true
         
-        tableView.layer.shadowColor = UIColor.gray.cgColor
-        tableView.layer.shadowOpacity = 0.3
-        tableView.layer.shadowOffset = .zero
-        tableView.layer.shadowRadius = 10
-        tableView.layer.shouldRasterize = true
-        tableView.layer.rasterizationScale = UIScreen.main.scale
+//        tableView.layer.cornerRadius = 8
+//        tableView.layer.shadowColor = UIColor.black.cgColor
+//        tableView.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        tableView.layer.shadowRadius = 3
+//        tableView.layer.shadowOpacity = 0.3
+//        tableView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+//        tableView.layer.shouldRasterize = true
+//        tableView.layer.rasterizationScale = UIScreen.main.scale
         
         return tableView
     }()
@@ -48,6 +51,33 @@ class TopCategoriesTableView: NSObject {
     
     func add(items: [String]) {
         itemsTopCategories.append(contentsOf: items)
+        let withoutDuplicates = itemsTopCategories.removeDuplicates()
+        itemsTopCategories = withoutDuplicates
+        chosenCategories = withoutDuplicates
+        topCategoriesDictionary = withoutDuplicates.reduce(into: [:]) { $0[$1] = 0 }
+        topCategoriesQuantityRandoms = topCategoriesQuantity.shuffled()
+        topCategoriesQuantityReserve = topCategoriesQuantityRandoms.reversed()
+    }
+    
+    @objc func didTapBottom() {
+        let sortedItemsTopCategories : [String] = itemsTopCategories.reversed()
+        itemsTopCategories = sortedItemsTopCategories
+        
+        let sortedTopCategoriesQuantity : [Float] = topCategoriesQuantity.reversed()
+        topCategoriesQuantity = sortedTopCategoriesQuantity
+    
+        if topCategoriesHeaderLabel == "Bottom categories" {
+            topCategoriesHeaderLabel = "Top categories"
+        } else {
+            topCategoriesHeaderLabel = "Bottom categories"
+        }
+        
+        if topCategoriesButtonLabel == "Top" {
+            topCategoriesButtonLabel = "Bottom"
+        } else {
+            topCategoriesButtonLabel = "Top"
+        }
+        topCategoriesTableView.reloadData()
     }
 }
 
@@ -61,8 +91,11 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         let cell = topCategoriesTableView.dequeueReusableCell(withIdentifier: "TopCategoriesCell", for: indexPath) as! TopCategoriesTableViewCell
         let currentItem = itemsTopCategories[indexPath.row]
         cell.itemNameLabelTopCategories.text = currentItem
+        cell.itemQuantityTopCategories.text = String(Int(topCategoriesQuantity[indexPath.row]))
         cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
+        cell.selectionStyle = .none
+        cell.progressBarTopCategories.setProgress((topCategoriesQuantity[indexPath.row])/100, animated: true)
         return cell
     }
     
@@ -85,15 +118,16 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         headerLabel.font = UIFont.boldSystemFont(ofSize: 30)
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.textColor = UIColor.black
-        headerLabel.text = "Top categories"
+        headerLabel.text = topCategoriesHeaderLabel
         headerLabel.textAlignment = .left
         
         let seeAllButton: UIButton = UIButton(frame: CGRect(x:  (headerView.frame.width - headerView.frame.width / 2) - headerView.frame.width / 40, y: 0, width: headerView.frame.width * 0.45, height: headerView.frame.height))
-        seeAllButton.setTitle("Bottom", for: .normal)
+        seeAllButton.setTitle(topCategoriesButtonLabel, for: .normal)
         seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
         seeAllButton.contentHorizontalAlignment = .right
         seeAllButton.setTitleColor(.darkGray, for: .normal)
+        seeAllButton.addTarget(self, action:  #selector(didTapBottom), for: .touchUpInside)
         
         let headerSeparator = UILabel(frame: CGRect(x: 0, y: topCategoriesTableView.frame.width / 12 - 0.5, width: headerView.frame.width, height: 0.5))
         headerSeparator.backgroundColor = .lightGray
@@ -127,5 +161,19 @@ extension UITableView {
             layer.cornerRadius = newValue
             layer.masksToBounds = true
         }
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+        
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+        
+        return result
     }
 }

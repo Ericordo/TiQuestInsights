@@ -12,11 +12,11 @@ class TopCategoriesTableViewCell: UITableViewCell {
     
     var itemsCategory: MenuItems?
     
-    var itemTopCategories : String? {
-        didSet {
-            itemNameLabelTopCategories.text = itemsCategory?.data[0].category
-        }
-    }
+//    var itemTopCategories : String? {
+//        didSet {
+//            itemNameLabelTopCategories.text = itemsCategory?.data[0].category
+//        }
+//    }
     
      let itemNameLabelTopCategories : UILabel = {
         let lbl = UILabel()
@@ -27,17 +27,16 @@ class TopCategoriesTableViewCell: UITableViewCell {
         return lbl
     }()
     
-    private let itemQuantityTopCategories : UILabel = {
+    let itemQuantityTopCategories : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         lbl.adjustsFontSizeToFitWidth = true
         lbl.textAlignment = .left
-        lbl.text = "64"
         return lbl
     }()
-    
-    private let itemImageTopCategories : UIImageView = {
+
+    let itemImageTopCategories : UIImageView = {
         let imgView = UIImageView()
         imgView.image = UIImage(named: "screenshot")
         imgView.contentMode = .scaleAspectFit
@@ -45,10 +44,11 @@ class TopCategoriesTableViewCell: UITableViewCell {
         return imgView
     }()
     
-    private let progressBarTopCategories : UIProgressView = {
-       let prgsBar = UIProgressView()
-        prgsBar.tintColor = .gray
-        prgsBar.setProgress(0.4, animated: true)
+    let progressBarTopCategories : UIProgressView = {
+        let prgsBar = UIProgressView()
+        prgsBar.tintColor = .lightGray
+        prgsBar.trackTintColor = .clear
+        prgsBar.progressViewStyle = .default
         return prgsBar
     }()
 

@@ -16,14 +16,7 @@ class TopSellersTableView: NSObject {
     let topSellersTableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.cornerRadius = 10
-        
-        tableView.layer.shadowColor = UIColor.gray.cgColor
-        tableView.layer.shadowOpacity = 0.3
-        tableView.layer.shadowOffset = .zero
-        tableView.layer.shadowRadius = 10
-        tableView.layer.shouldRasterize = true
-        tableView.layer.rasterizationScale = UIScreen.main.scale
-        
+        tableView.clipsToBounds = true
         return tableView
     }()
     
@@ -50,6 +43,26 @@ class TopSellersTableView: NSObject {
         itemsTopSellers.append(contentsOf: items)
     }
     
+    @objc func didTapWorst() {
+        let sortedItemsTopSellers : [String] = itemsTopSellers.reversed()
+        itemsTopSellers = sortedItemsTopSellers
+        
+        let sortedTopSellersQuantity : [Int] = topSellersQuantity.reversed()
+        topSellersQuantity = sortedTopSellersQuantity
+        
+        if topSellersHeaderLabel == "Worst sellers" {
+            topSellersHeaderLabel = "Top sellers"
+        } else {
+            topSellersHeaderLabel = "Worst sellers"
+        }
+        
+        if topSellersButtonLabel == "Top" {
+            topSellersButtonLabel = "Worst"
+        } else {
+            topSellersButtonLabel = "Top"
+        }
+        topSellersTableView.reloadData()
+    }
 }
 
 extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
@@ -62,8 +75,12 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         let cell = topSellersTableView.dequeueReusableCell(withIdentifier: "TopSellersCell", for: indexPath) as! TopSellersTableViewCell
         let currentItem = itemsTopSellers[indexPath.row]
         cell.itemNameLabelTopSellers.text = currentItem
-        cell.backgroundColor = .white
+        cell.itemQuantityTopSellers.text = String(topSellersQuantity[indexPath.row])
+        cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
+        cell.selectionStyle = .none
+        let topSellersQuantityRandom = Float(topSellersQuantity[indexPath.row])
+        cell.progressBarTopSellers.setProgress(topSellersQuantityRandom/100, animated: true)
         return cell
     }
     
@@ -94,6 +111,7 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
         seeAllButton.contentHorizontalAlignment = .right
         seeAllButton.setTitleColor(.darkGray, for: .normal)
+        seeAllButton.addTarget(self, action:  #selector(didTapWorst), for: .touchUpInside)
         
         let headerSeparator = UILabel(frame: CGRect(x: 0, y: topSellersTableView.frame.width / 12 - 0.5, width: headerView.frame.width, height: 0.5))
         headerSeparator.backgroundColor = .lightGray
