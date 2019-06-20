@@ -190,7 +190,8 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func getCurrentWeek() {
-        let components = DateComponents(year: year, month: month, day: day)
+        let currentMonth = calendar.component(.month, from: date) - 1
+        let components = DateComponents(year: year, month: currentMonth, day: day)
         guard let currentDate = calendar.date(from: components) else { return }
         let currentWeekNumber = calendar.component(.weekOfYear, from: currentDate)
         let startComponents = DateComponents(weekOfYear: currentWeekNumber, yearForWeekOfYear: year)
