@@ -102,11 +102,11 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         headerLabel.font = UIFont.boldSystemFont(ofSize: 30)
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.textColor = UIColor.black
-        headerLabel.text = "Top sellers"
+        headerLabel.text = topSellersHeaderLabel
         headerLabel.textAlignment = .left
         
         let seeAllButton: UIButton = UIButton(frame: CGRect(x:  (headerView.frame.width - headerView.frame.width / 2) - headerView.frame.width / 40, y: 0, width: headerView.frame.width * 0.45, height: headerView.frame.height))
-        seeAllButton.setTitle("Worst", for: .normal)
+        seeAllButton.setTitle(topSellersButtonLabel, for: .normal)
         seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
         seeAllButton.contentHorizontalAlignment = .right
