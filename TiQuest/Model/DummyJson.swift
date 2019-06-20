@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+
 struct MenuItems: Codable {
     var data: [MenuItem]
 }
@@ -69,7 +71,7 @@ let jsonString = """
    "name": "Coke",
    "price": 2.50,
    "profit": 0.50,
-   "category": "Beverage",
+   "category": "Beverages",
    "subcategory": "Soda"
    },
    {
@@ -77,7 +79,7 @@ let jsonString = """
    "name": "Fanta",
    "price": 2.50,
    "profit": 0.40,
-   "category": "Beverage",
+   "category": "Beverages",
    "subcategory": "Soda"
    },
    {

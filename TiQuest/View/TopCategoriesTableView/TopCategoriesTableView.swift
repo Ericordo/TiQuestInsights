@@ -11,54 +11,36 @@ import UIKit
 
 class TopCategoriesTableView: NSObject {
     
-   var itemsTopCategories : [String] = []
-    
-   let topCategoriesView : UIView = {
-        let topView = UIView()
-        
-        topView.layer.shadowColor = UIColor.gray.cgColor
-        topView.layer.shadowOpacity = 0.3
-        topView.layer.shadowOffset = .zero
-        topView.layer.shadowRadius = 10
-        topView.layer.shouldRasterize = true
-        topView.layer.rasterizationScale = UIScreen.main.scale
-    
-        return topView
-    }()
+    var itemsTopCategories : [String] = []
     
     let topCategoriesTableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.cornerRadius = 10
+        tableView.clipsToBounds = true
+        
+//        tableView.layer.cornerRadius = 8
+//        tableView.layer.shadowColor = UIColor.black.cgColor
+//        tableView.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        tableView.layer.shadowRadius = 3
+//        tableView.layer.shadowOpacity = 0.3
+//        tableView.layer.shadowPath = UIBezierPath(roundedRect: tableView.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+//        tableView.layer.shouldRasterize = true
+//        tableView.layer.rasterizationScale = UIScreen.main.scale
+        
         return tableView
     }()
     
     func showTopCategories() {
         if let view = UIApplication.shared.keyWindow {
-            view.addSubview(topCategoriesView)
-            
-//            topCategoriesView.frame = CGRect(x: 50, y: 525, width: view.frame.width/2-80, height: 470)
-            topCategoriesView.addSubview(topCategoriesTableView)
-//            topCategoriesTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width/2-80, height: 470)
+            view.addSubview(topCategoriesTableView)
             
             topCategoriesTableView.translatesAutoresizingMaskIntoConstraints = false
-            topCategoriesView.translatesAutoresizingMaskIntoConstraints = false
-            
-            topCategoriesTableView.centerXAnchor.constraint(equalTo: topCategoriesView.centerXAnchor, constant: 0).isActive = true
-            topCategoriesTableView.centerYAnchor.constraint(equalTo: topCategoriesView.centerYAnchor, constant: 0).isActive = true
-            topCategoriesTableView.trailingAnchor.constraint(equalTo: topCategoriesView.trailingAnchor, constant: 0).isActive = true
-            topCategoriesTableView.leadingAnchor.constraint(equalTo: topCategoriesView.leadingAnchor, constant: 0).isActive = true
-            topCategoriesTableView.bottomAnchor.constraint(equalTo: topCategoriesView.bottomAnchor, constant: 0).isActive = true
-            topCategoriesTableView.topAnchor.constraint(equalTo: topCategoriesView.topAnchor, constant: 0).isActive = true
-            
-            topCategoriesView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 30).isActive = true
-            topCategoriesView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 - 15).isActive = true
-            topCategoriesView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.width / 30).isActive = true
-            topCategoriesView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.width / 2.5).isActive = true
-//            topCategoriesView.widthAnchor.constraint(equalToConstant: 560).isActive = true
-//            topCategoriesView.heightAnchor.constraint(equalToConstant: 470).isActive = true
+            topCategoriesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 30).isActive = true
+            topCategoriesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 - 15).isActive = true
+            topCategoriesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.width / 30).isActive = true
+            topCategoriesTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.width / 2.5).isActive = true
         }
     }
-    
     
     override init() {
         super.init()
@@ -69,8 +51,34 @@ class TopCategoriesTableView: NSObject {
     
     func add(items: [String]) {
         itemsTopCategories.append(contentsOf: items)
+        let withoutDuplicates = itemsTopCategories.removeDuplicates()
+        itemsTopCategories = withoutDuplicates
+        chosenCategories = withoutDuplicates
+        topCategoriesDictionary = withoutDuplicates.reduce(into: [:]) { $0[$1] = 0 }
+        topCategoriesQuantityRandoms = topCategoriesQuantity.shuffled()
+        topCategoriesQuantityReserve = topCategoriesQuantityRandoms.reversed()
     }
     
+    @objc func didTapBottom() {
+        let sortedItemsTopCategories : [String] = itemsTopCategories.reversed()
+        itemsTopCategories = sortedItemsTopCategories
+        
+        let sortedTopCategoriesQuantity : [Float] = topCategoriesQuantity.reversed()
+        topCategoriesQuantity = sortedTopCategoriesQuantity
+    
+        if topCategoriesHeaderLabel == "Bottom categories" {
+            topCategoriesHeaderLabel = "Top categories"
+        } else {
+            topCategoriesHeaderLabel = "Bottom categories"
+        }
+        
+        if topCategoriesButtonLabel == "Top" {
+            topCategoriesButtonLabel = "Bottom"
+        } else {
+            topCategoriesButtonLabel = "Top"
+        }
+        topCategoriesTableView.reloadData()
+    }
 }
 
 extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
@@ -83,36 +91,46 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         let cell = topCategoriesTableView.dequeueReusableCell(withIdentifier: "TopCategoriesCell", for: indexPath) as! TopCategoriesTableViewCell
         let currentItem = itemsTopCategories[indexPath.row]
         cell.itemNameLabelTopCategories.text = currentItem
+        cell.itemQuantityTopCategories.text = String(Int(topCategoriesQuantity[indexPath.row]))
         cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
+        cell.selectionStyle = .none
+        let topCategoriesQuantityRandom = (topCategoriesQuantity[indexPath.row]*100)/topCategoriesQuantity.reduce(0, +)
+        cell.progressBarTopCategories.setProgress(topCategoriesQuantityRandom/100, animated: true)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return topCategoriesView.frame.width / 6
+        return topCategoriesTableView.frame.width / 9.8
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return topCategoriesTableView.frame.width / 12
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: topCategoriesView.frame.width, height: topCategoriesView.frame.width / 9))
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: topCategoriesTableView.frame.width, height: topCategoriesTableView.frame.width / 9))
         
         headerView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
         
         let headerLabel = UILabel(frame: CGRect(x: headerView.frame.width / 40, y: 0, width:
             headerView.frame.width / 2, height: headerView.frame.height))
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 30)
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.textColor = UIColor.black
-        headerLabel.text = "Top categories"
+        headerLabel.text = topCategoriesHeaderLabel
         headerLabel.textAlignment = .left
         
         let seeAllButton: UIButton = UIButton(frame: CGRect(x:  (headerView.frame.width - headerView.frame.width / 2) - headerView.frame.width / 40, y: 0, width: headerView.frame.width * 0.45, height: headerView.frame.height))
-        seeAllButton.setTitle("Bottom", for: .normal)
+        seeAllButton.setTitle(topCategoriesButtonLabel, for: .normal)
         seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
         seeAllButton.contentHorizontalAlignment = .right
         seeAllButton.setTitleColor(.darkGray, for: .normal)
+        seeAllButton.addTarget(self, action:  #selector(didTapBottom), for: .touchUpInside)
         
-        let headerSeparator = UILabel(frame: CGRect(x: 0, y: headerView.frame.height, width: headerView.frame.width, height: 0.5))
+        let headerSeparator = UILabel(frame: CGRect(x: 0, y: topCategoriesTableView.frame.width / 12 - 0.5, width: headerView.frame.width, height: 0.5))
         headerSeparator.backgroundColor = .lightGray
         
         headerView.addSubview(headerLabel)
@@ -125,7 +143,6 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
         headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 0).isActive = true
         headerLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0).isActive = true
-//        headerLabel.trailingAnchor.constraint(equalTo: seeAllButton.leadingAnchor, constant: 10).isActive = true
     
         seeAllButton.leadingAnchor.constraint(equalTo: headerLabel.trailingAnchor, constant: 80).isActive = true
         seeAllButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10).isActive = true
@@ -133,10 +150,6 @@ extension TopCategoriesTableView: UITableViewDelegate, UITableViewDataSource {
         seeAllButton.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0).isActive = true
         
         return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return topCategoriesView.frame.width / 9
     }
 }
 
@@ -149,5 +162,19 @@ extension UITableView {
             layer.cornerRadius = newValue
             layer.masksToBounds = true
         }
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+        
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+        
+        return result
     }
 }

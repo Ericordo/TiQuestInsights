@@ -146,7 +146,6 @@ class DashboardViewController: UIViewController {
         //         MARK: Configuration of the TableViews
         
         
-//        topCategoriesView.showTopCategories()
         let topCategoriesTableView = topCategoriesView.topCategoriesTableView
         let topSellersTableView = topSellersView.topSellersTableView
 

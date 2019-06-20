@@ -13,31 +13,22 @@ class TopSellersTableView: NSObject {
     
     var itemsTopSellers : [String] = []
     
-    let topSellersView : UIView = {
-        let topView = UIView()
-        
-        topView.layer.shadowColor = UIColor.gray.cgColor
-        topView.layer.shadowOpacity = 0.3
-        topView.layer.shadowOffset = .zero
-        topView.layer.shadowRadius = 10
-        topView.layer.shouldRasterize = true
-        topView.layer.rasterizationScale = UIScreen.main.scale
-        
-        return topView
-    }()
-    
     let topSellersTableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.cornerRadius = 10
+        tableView.clipsToBounds = true
         return tableView
     }()
     
     func showTopSellers() {
         if let view = UIApplication.shared.keyWindow {
-            view.addSubview(topSellersView)
-            topSellersView.frame = CGRect(x: (view.frame.width-(view.frame.width/2-80))-50, y: 525, width: view.frame.width/2-80, height: 470)
-            topSellersView.addSubview(topSellersTableView)
-            topSellersTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width/2-80, height: 470)
+            view.addSubview(topSellersTableView)
+            
+            topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
+            topSellersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 30).isActive = true
+            topSellersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 - 15).isActive = true
+            topSellersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.width / 30).isActive = true
+            topSellersTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.width / 2.5).isActive = true
         }
     }
     
@@ -52,6 +43,26 @@ class TopSellersTableView: NSObject {
         itemsTopSellers.append(contentsOf: items)
     }
     
+    @objc func didTapWorst() {
+        let sortedItemsTopSellers : [String] = itemsTopSellers.reversed()
+        itemsTopSellers = sortedItemsTopSellers
+        
+        let sortedTopSellersQuantity : [Int] = topSellersQuantity.reversed()
+        topSellersQuantity = sortedTopSellersQuantity
+        
+        if topSellersHeaderLabel == "Worst sellers" {
+            topSellersHeaderLabel = "Top sellers"
+        } else {
+            topSellersHeaderLabel = "Worst sellers"
+        }
+        
+        if topSellersButtonLabel == "Top" {
+            topSellersButtonLabel = "Worst"
+        } else {
+            topSellersButtonLabel = "Top"
+        }
+        topSellersTableView.reloadData()
+    }
 }
 
 extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
@@ -64,47 +75,63 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         let cell = topSellersTableView.dequeueReusableCell(withIdentifier: "TopSellersCell", for: indexPath) as! TopSellersTableViewCell
         let currentItem = itemsTopSellers[indexPath.row]
         cell.itemNameLabelTopSellers.text = currentItem
-        cell.backgroundColor = .white
+        cell.itemQuantityTopSellers.text = String(topSellersQuantity[indexPath.row])
+        cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
+        cell.selectionStyle = .none
+        let topSellersQuantityRandom = Float((topSellersQuantity[indexPath.row]*100)/(topSellersQuantity.reduce(0, +)))
+        cell.progressBarTopSellers.setProgress(topSellersQuantityRandom/100, animated: true)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        
-        headerView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
-        
-        let headerLabel = UILabel(frame: CGRect(x: 10, y: headerView.center.y, width:
-            tableView.bounds.size.width, height: 70))
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 40)
-        headerLabel.textColor = UIColor.black
-        headerLabel.text = "Top sellers"
-        headerLabel.textAlignment = .left
-        
-        let headerSeparator = UILabel(frame: CGRect(x: 0, y: 69.5, width: tableView.bounds.size.width, height: 0.5))
-        headerSeparator.backgroundColor = .lightGray
-        
-        headerView.addSubview(headerLabel)
-        headerView.addSubview(headerSeparator)
-        
-        // code for adding SEE ALL BUTTON to right corner of the header
-        
-//        let seeAllButton: UIButton = UIButton(frame: CGRect(x:  tableView.bounds.size.width - 200, y: 17, width: 200, height: 30))
-        let seeAllButton: UIButton = UIButton(frame: CGRect(x: tableView.bounds.size.width - 100, y: headerView.center.y, width: 100, height: 70))
-        seeAllButton.setTitle("Worst", for: .normal)
-        seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        seeAllButton.setTitleColor(.darkGray, for: .normal)
-//        seeAllButton.backgroundColor = .gray
-        headerView.addSubview(seeAllButton)
-        
-        return headerView
+        return topSellersTableView.frame.width / 9.8
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
+        return topSellersTableView.frame.width / 12
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: topSellersTableView.frame.width, height: topSellersTableView.frame.width / 9))
+        
+        headerView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+        
+        let headerLabel = UILabel(frame: CGRect(x: headerView.frame.width / 40, y: 0, width:
+            headerView.frame.width / 2, height: headerView.frame.height))
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        headerLabel.adjustsFontSizeToFitWidth = true
+        headerLabel.textColor = UIColor.black
+        headerLabel.text = topSellersHeaderLabel
+        headerLabel.textAlignment = .left
+        
+        let seeAllButton: UIButton = UIButton(frame: CGRect(x:  (headerView.frame.width - headerView.frame.width / 2) - headerView.frame.width / 40, y: 0, width: headerView.frame.width * 0.45, height: headerView.frame.height))
+        seeAllButton.setTitle(topSellersButtonLabel, for: .normal)
+        seeAllButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        seeAllButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        seeAllButton.contentHorizontalAlignment = .right
+        seeAllButton.setTitleColor(.darkGray, for: .normal)
+        seeAllButton.addTarget(self, action:  #selector(didTapWorst), for: .touchUpInside)
+        
+        let headerSeparator = UILabel(frame: CGRect(x: 0, y: topSellersTableView.frame.width / 12 - 0.5, width: headerView.frame.width, height: 0.5))
+        headerSeparator.backgroundColor = .lightGray
+        
+        headerView.addSubview(headerLabel)
+        headerView.addSubview(seeAllButton)
+        headerView.addSubview(headerSeparator)
+        
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        seeAllButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
+        headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 0).isActive = true
+        headerLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0).isActive = true
+        
+        seeAllButton.leadingAnchor.constraint(equalTo: headerLabel.trailingAnchor, constant: 80).isActive = true
+        seeAllButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10).isActive = true
+        seeAllButton.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 0).isActive = true
+        seeAllButton.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0).isActive = true
+        
+        return headerView
     }
 }
