@@ -20,7 +20,7 @@ class CalendarView: NSObject {
     var dataUpdateDelegate : DataUpdateDelegate!
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    let daysOfMonth = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    let daysOfMonth = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var currentMonth = String()
     
@@ -29,19 +29,18 @@ class CalendarView: NSObject {
     let calendarHeight : CGFloat = 50
     var cellWidth : CGFloat = 150
     
+    var daysOfSelectedWeek = [Int]()
+    var daysOfCurrentWeek = [Int]()
+    
     let calendarCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsHorizontalScrollIndicator = false
+        cv.isScrollEnabled = false
         cv.decelerationRate = .fast
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
-
-        
-        
-        
-        
         return cv
     }()
     
@@ -70,6 +69,7 @@ class CalendarView: NSObject {
         print(day)
         print(weekday)
         print("\(daysOfMonth[weekday-1]) "+"\(day)")
+        getCurrentWeek()
    
     
         
@@ -110,7 +110,9 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 
 //        return dates.count
 //        return daysOfMonth.count
-        return datesbis.count
+//        return datesbis.count
+        return 7
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,7 +121,55 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 //        cell.dateLabel.text = datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number)
 //        let stringForCell = NSAttributedString(string: datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number))
 //        cell.dateLabel.attributedText = stringForCell
-        cell.dateLabel.text = "\(daysOfMonth[weekday-1]) "+"\(day)"
+//        cell.dateLabel.text = "\(daysOfMonth[weekday-1]) "+"\(day)"
+        
+        
+        switch indexPath.row {
+        case 0:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Monday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+            cell.dateLabel.text = "Monday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        case 1:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Tuesday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+                cell.dateLabel.text = "Tuesday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        case 2:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Wednesday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+                cell.dateLabel.text = "Wednesday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        case 3:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Thursday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+                cell.dateLabel.text = "Thursday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        case 4:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Friday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+                cell.dateLabel.text = "Friday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        case 5:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Saturday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+                cell.dateLabel.text = "Saturday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        case 6:
+            if daysOfSelectedWeek.isEmpty {
+                cell.dateLabel.text = "Sunday "+"\(daysOfCurrentWeek[indexPath.row])"
+            } else {
+                cell.dateLabel.text = "Sunday "+"\(daysOfSelectedWeek[indexPath.row])"
+            }
+        default:
+            break
+        }
 
         return cell
     }
@@ -137,6 +187,27 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
     
         dataUpdateDelegate.updateChartBar()
  
+    }
+    
+    func getCurrentWeek() {
+        let components = DateComponents(year: year, month: month, day: day)
+        guard let currentDate = calendar.date(from: components) else { return }
+        let currentWeekNumber = calendar.component(.weekOfYear, from: currentDate)
+        let startComponents = DateComponents(weekOfYear: currentWeekNumber, yearForWeekOfYear: year)
+        let startDate = calendar.date(from: startComponents)!
+        let endComponents = DateComponents(day:6, second: -1)
+        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
+        let actualStartDate = calendar.date(byAdding: .day, value: 2, to: startDate)!
+        let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
+        let actualRangeBeginning = (calendar.component(.day, from: startDate)+1)
+        let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
+        daysOfCurrentWeek.append(calendar.component(.day, from: startDate) - 2)
+        var nextDate = actualStartDate
+        while daysOfCurrentWeek.count < 7 {
+            nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+            daysOfCurrentWeek.append(calendar.component(.day, from: nextDate) - 4)
+        }
+        print(daysOfCurrentWeek)
     }
     
 
@@ -157,3 +228,73 @@ extension CalendarView : UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
+extension CalendarView : CalendarUpdateDelegate {
+    func updateSelectedWeek(day: Int, month: Int, year: Int) {
+        let components = DateComponents(year: year, month: month, day: day)
+        guard let selectedDate = calendar.date(from: components) else { return }
+        let selectedWeekNumber = calendar.component(.weekOfYear, from: selectedDate)
+        let selectedWeekDay = calendar.component(.weekday, from: selectedDate)
+        let selectedDay = day + 1
+        print("selectedWeekDay \(selectedWeekDay)")
+        print("selected day \(selectedDay)")
+        
+    
+        let startComponents = DateComponents(weekOfYear: selectedWeekNumber, yearForWeekOfYear: year)
+        let startDate = calendar.date(from: startComponents)!
+        let endComponents = DateComponents(day:6, second: -1)
+        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
+        print(startDate...endDate)
+        let actualStartDate = calendar.date(byAdding: .day, value: 2, to: startDate)!
+        let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
+        print(actualStartDate...actualEndDate)
+//        let actualRange = (calendar.component(.day, from: startDate)+1)...(calendar.component(.day, from: endDate)+1)
+        let actualRangeBeginning = (calendar.component(.day, from: startDate)+1)
+        let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
+        print(actualRangeBeginning)
+        print(actualRangeEnd)
+        daysOfSelectedWeek.removeAll()
+        daysOfSelectedWeek.append(calendar.component(.day, from: actualStartDate) - 1)
+        var nextDate = actualStartDate
+        
+        while daysOfSelectedWeek.count < 7 {
+            nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+            daysOfSelectedWeek.append(calendar.component(.day, from: nextDate) - 1)
+        }
+        print(daysOfSelectedWeek)
+        print(date)
+        print(weekNumber)
+        calendarCollectionView.reloadData()
+
+  
+        
+        
+//        func dayRangeOf(weekOfYear: Int, for date: Date)
+//        {
+//            let startComponents = DateComponents(weekOfYear: selectedWeekNumber, yearForWeekOfYear: year)
+//            let startDate = calendar.date(from: startComponents)!
+//            let endComponents = DateComponents(day:7, second: -1)
+//            let endDate = calendar.date(byAdding: endComponents, to: startDate)!
+//            print(startDate...endDate)
+////
+//        }
+//
+//        dayRangeOf(weekOfYear: 12, for: Date())
+    
+    }
+    
+    
+        
+        
+    
+        
+    }
+
+
+    
+ 
+    
+
+    
+    
+

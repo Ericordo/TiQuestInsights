@@ -19,44 +19,70 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     
     
-     let salesOfOneDay = [
-        Sales(hour: "0 AM", sales: 453),
-        Sales(hour: "1 AM", sales: 453),
-        Sales(hour: "2 AM", sales: 453),
-        Sales(hour: "3 AM", sales: 453),
-        Sales(hour: "4 AM", sales: 453),
-        Sales(hour: "5 AM", sales: 453),
-        Sales(hour: "6 AM", sales: 453),
-        Sales(hour: "7 AM", sales: 453),
+//    let salesOfOneDay = [
+//        Sales(hour: "0 AM", sales: 453),
+//        Sales(hour: "1 AM", sales: 453),
+//        Sales(hour: "2 AM", sales: 453),
+//        Sales(hour: "3 AM", sales: 453),
+//        Sales(hour: "4 AM", sales: 453),
+//        Sales(hour: "5 AM", sales: 453),
+//        Sales(hour: "6 AM", sales: 453),
+//        Sales(hour: "7 AM", sales: 453),
+//        Sales(hour: "8 AM", sales: 453),
+//        Sales(hour: "9 AM", sales: 453),
+//        Sales(hour: "10 AM", sales: 453),
+//        Sales(hour: "11 AM", sales: 453),
+//        Sales(hour: "12 AM", sales: 792),
+//        Sales(hour: "1 PM", sales: 928),
+//        Sales(hour: "2 PM", sales: 832),
+//        Sales(hour: "3 PM", sales: 543),
+//        Sales(hour: "4 PM", sales: 356),
+//        Sales(hour: "5 PM", sales: 328),
+//        Sales(hour: "6 PM", sales: 423),
+//        Sales(hour: "7 PM", sales: 892),
+//        Sales(hour: "8 PM", sales: 958),
+//        Sales(hour: "9 PM", sales: 728),
+//        Sales(hour: "10 PM", sales: 728),
+//        Sales(hour: "11 PM", sales: 728)
+//    ]
+    
+    let salesOfOneDay = [
         Sales(hour: "8 AM", sales: 453),
         Sales(hour: "9 AM", sales: 453),
         Sales(hour: "10 AM", sales: 453),
         Sales(hour: "11 AM", sales: 453),
-                                Sales(hour: "12 AM", sales: 792),
-                                Sales(hour: "1 PM", sales: 928),
-                                Sales(hour: "2 PM", sales: 832),
-                                Sales(hour: "3 PM", sales: 543),
-                                Sales(hour: "4 PM", sales: 356),
-                                Sales(hour: "5 PM", sales: 328),
-                                Sales(hour: "6 PM", sales: 423),
-                                Sales(hour: "7 PM", sales: 892),
-                                Sales(hour: "8 PM", sales: 958),
-                                Sales(hour: "9 PM", sales: 728),
-                                Sales(hour: "10 PM", sales: 728),
+        Sales(hour: "12 AM", sales: 792),
+        Sales(hour: "1 PM", sales: 928),
+        Sales(hour: "2 PM", sales: 832),
+        Sales(hour: "3 PM", sales: 543),
+        Sales(hour: "4 PM", sales: 356),
+        Sales(hour: "5 PM", sales: 328),
+        Sales(hour: "6 PM", sales: 423),
+        Sales(hour: "7 PM", sales: 892),
+        Sales(hour: "8 PM", sales: 958),
+        Sales(hour: "9 PM", sales: 728),
+        Sales(hour: "10 PM", sales: 728),
         Sales(hour: "11 PM", sales: 728)
     ]
     
-    let salesOfDayTwo = [Sales(hour: "11 AM", sales: 353),
-                         Sales(hour: "12 AM", sales: 492),
-                         Sales(hour: "1 PM", sales: 948),
-                         Sales(hour: "2 PM", sales: 432),
-                         Sales(hour: "3 PM", sales: 1207),
-                         Sales(hour: "4 PM", sales: 334),
-                         Sales(hour: "5 PM", sales: 455),
-                         Sales(hour: "6 PM", sales: 223),
-                         Sales(hour: "7 PM", sales: 992),
-                         Sales(hour: "8 PM", sales: 758),
-                         Sales(hour: "9 PM", sales: 528)]
+    let salesOfDayTwo = [
+        Sales(hour: "8 AM", sales: 400),
+        Sales(hour: "9 AM", sales: 400),
+        Sales(hour: "10 AM", sales: 400),
+        Sales(hour: "11 AM", sales: 453),
+        Sales(hour: "12 AM", sales: 792),
+        Sales(hour: "1 PM", sales: 928),
+        Sales(hour: "2 PM", sales: 832),
+        Sales(hour: "3 PM", sales: 500),
+        Sales(hour: "4 PM", sales: 500),
+        Sales(hour: "5 PM", sales: 328),
+        Sales(hour: "6 PM", sales: 423),
+        Sales(hour: "7 PM", sales: 892),
+        Sales(hour: "8 PM", sales: 958),
+        Sales(hour: "9 PM", sales: 728),
+        Sales(hour: "10 PM", sales: 728),
+        Sales(hour: "11 PM", sales: 728)
+    ]
     
     
     
@@ -67,11 +93,15 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     var openingTimeBusiness = 11
     var closingTimeBusiness = 22
     var openingHours = [Int]()
-    let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+//    let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    let defaultsOpeningHours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    
+    var hours : [String]!
+    weak var axisFormatDelegate: IAxisValueFormatter?
     
     
 
-    
+    var forDemo = true
     
     
     
@@ -81,12 +111,13 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.delegate = self
+        axisFormatDelegate = self
+        hours = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
         updateOpeningHours()
-       
-        
-        setBarData()
+        setBarData(xValues: defaultsOpeningHours, yValues: salesOfOneDay)
         customizeBarChart()
         print("chart reloaded")
+        forDemo = false
         
       
        
@@ -98,24 +129,25 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setBarData() {
+    func setBarData(xValues: [Int], yValues: [Sales]) {
 //        1 - Creating an Array of data entries
-       
+    
             var data : [BarChartDataEntry] = []
          if !openingHours.isEmpty {
             for i in 0..<salesOfOneDay.count {
                 if openingHours.count >= salesOfOneDay.count {
-                let dataEntry = BarChartDataEntry(x: Double(openingHours[i]), y: Double(salesOfOneDay[i].sales))
-                
+//                let dataEntry = BarChartDataEntry(x: Double(openingHours[i]), y: Double(salesOfOneDay[i].sales))
+                let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
+
                 data.append(dataEntry)
                 } else {
-                    let dataEntry = BarChartDataEntry(x: Double(defaultsOpeningHours[i]), y: Double(salesOfOneDay[i].sales))
+                    let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
                     data.append(dataEntry)
                 }
             }
          } else {
-            for i in 0..<salesOfOneDay.count {
-                let dataEntry = BarChartDataEntry(x: Double(defaultsOpeningHours[i]), y: Double(salesOfOneDay[i].sales))
+            for i in 0..<yValues.count {
+                let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
                 
                 data.append(dataEntry)
             }
@@ -126,7 +158,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 //        2 - Creating a data set with the array
         chartDataSet = BarChartDataSet(entries: data, label: "Sales")
         chartDataSet.setColor(UIColor(red: 229/255, green: 228/255, blue: 233/255, alpha: 1.0))
-        chartDataSet.highlightColor = UIColor(red: 84/255, green: 156/255, blue: 248/255, alpha: 0.9)
+        chartDataSet.highlightColor = UIColor(red: 51/255, green: 153/255, blue: 248/255, alpha: 1.0)
         chartDataSet.valueTextColor = .black
         chartDataSet.valueFont = UIFont.systemFont(ofSize: 15, weight: .bold)
         
@@ -143,14 +175,18 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         
         
         
+        self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
+        self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
         
-        if openingHours.isEmpty {
-            self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
-            self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
-        } else {
-            self.xAxis.axisMinimum = Double(openingHours[0]) - 0.5
-            self.xAxis.axisMaximum = Double(openingHours[openingHours.count-1]) + 0.5
-        }
+        xAxis.valueFormatter = axisFormatDelegate
+        
+//        if openingHours.isEmpty {
+//            self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
+//            self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
+//        } else {
+//            self.xAxis.axisMinimum = Double(openingHours[0]) - 0.5
+//            self.xAxis.axisMaximum = Double(openingHours[openingHours.count-1]) + 0.5
+//        }
        
         
         
@@ -158,6 +194,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 //        4 - Set our Bar Chart Data
 //        If self.date is empty it will display "No data available"
         self.data = chartData
+        self.notifyDataSetChanged()
         
     }
     
@@ -261,7 +298,18 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 
 extension TodaySalesChart: DataUpdateDelegate {
     func updateChartBar() {
+        
+        if forDemo == false {
+            self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfOneDay)
+            self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+            forDemo = true
+        }
+        
+        if forDemo == true {
+        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
         self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+        forDemo = false
+        }
   
     }
 }
@@ -271,6 +319,8 @@ extension TodaySalesChart: OpeningTimeUpdateDelegate {
         openingTimeBusiness = defaults.integer(forKey: "openingTimeBusiness")
         print("delegate open \(openingTimeBusiness)")
         updateOpeningHours()
+       
+        
         self.notifyDataSetChanged()
         chartDataSet.notifyDataSetChanged()
         chartData.notifyDataChanged()
@@ -285,13 +335,22 @@ extension TodaySalesChart: ClosingTimeUpdateDelegate {
         closingTimeBusiness = defaults.integer(forKey: "closingTimeBusiness")
         print("delegate closing \(closingTimeBusiness)")
         updateOpeningHours()
+       
         self.notifyDataSetChanged()
         chartDataSet.notifyDataSetChanged()
         chartData.notifyDataChanged()
         print(openingHours)
+        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
      
     }
     
     
+}
+
+extension TodaySalesChart: IAxisValueFormatter {
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return hours[Int(value)]
+    }
 }
 

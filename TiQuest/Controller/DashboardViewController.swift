@@ -22,10 +22,14 @@ class DashboardViewController: UIViewController {
     var todaySalesChart = TodaySalesChart()
     let topCategoriesView = TopCategoriesTableView()
     let topSellersView = TopSellersTableView()
+    let calendarLauncher = CalendarLauncher()
+    var weekNumberLabel = WeekNumberLabel()
+    var monthLabel = MonthLabel()
     
     
     
     var exportButton : UIBarButtonItem?
+    var selectButton : UIBarButtonItem?
 
     
     override func viewDidLoad() {
@@ -36,12 +40,12 @@ class DashboardViewController: UIViewController {
         
         //        MARK: Configuration of the Navigation Bar
         self.navigationItem.title = "Name of your Store"
-        let selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
+        selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
         let todayButton = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
         exportButton = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(didTapExport))
         let settingsButton = UIBarButtonItem.init(title: "Settings", style: .plain, target: self, action: #selector(didTapSettings))
         self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!]
-        self.navigationItem.leftBarButtonItems = [selectButton, todayButton]
+        self.navigationItem.leftBarButtonItems = [selectButton!, todayButton]
         
         //         MARK: Configuration of the Calendar
         calendarView.calendarCollectionView.frame = CGRect(x: 100, y: 71, width: 1024, height: calendarView.calendarHeight)
@@ -50,8 +54,8 @@ class DashboardViewController: UIViewController {
         calendarView.calendarCollectionView.translatesAutoresizingMaskIntoConstraints = false
         calendarView.calendarCollectionView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         calendarView.calendarCollectionView.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
-        calendarView.calendarCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100).isActive = true
-        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
+        calendarView.calendarCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -150).isActive = true
         
         
         
@@ -67,25 +71,43 @@ class DashboardViewController: UIViewController {
 //        TodaySales.playAnimations()
         
         // MARK: Configuration of the WeekNumberLabel
-        let weekNumberLabel = WeekNumberLabel(frame: CGRect(x: 0, y: 71, width: 100, height: 50))
+//        let weekNumberLabel = WeekNumberLabel(frame: CGRect(x: 0, y: 71, width: 50, height: 50))
+        weekNumberLabel.frame = CGRect(x: 0, y: 71, width: 50, height: 50)
         view.addSubview(weekNumberLabel)
+        let bottomLineSeparator : CALayer = {
+            let bottomLineSeparator = CALayer()
+            bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+            return bottomLineSeparator
+        }()
+            bottomLineSeparator.frame = CGRect(x: 0, y: weekNumberLabel.frame.height-0.5, width: weekNumberLabel.frame.width, height: 0.5)
+            weekNumberLabel.layer.addSublayer(bottomLineSeparator)
         weekNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         weekNumberLabel.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         weekNumberLabel.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
         weekNumberLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         weekNumberLabel.trailingAnchor.constraint(equalTo: calendarView.calendarCollectionView.leadingAnchor).isActive = true
+        calendarLauncher.weekNumberUpdateDelegate = weekNumberLabel
         
         // MARK: Configuration of the Total Sales Label
 //        todaySalesLabel.showTodaySalesLabel()
         
         // MARK: Configuration of the MonthLabel
-        let monthLabel = MonthLabel(frame: CGRect(x: 0, y: 71, width: 100, height: 50))
+//        let monthLabel = MonthLabel(frame: CGRect(x: 0, y: 71, width: 150, height: 50))
+        monthLabel.frame = CGRect(x: 0, y: 71, width: 150, height: 50)
         view.addSubview(monthLabel)
+        let bottomLineSeparatorMonthLabel : CALayer = {
+            let bottomLineSeparator = CALayer()
+            bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+            return bottomLineSeparator
+        }()
+            bottomLineSeparatorMonthLabel.frame = CGRect(x: 0, y: monthLabel.frame.height-0.5, width: monthLabel.frame.width, height: 0.5)
+            monthLabel.layer.addSublayer(bottomLineSeparatorMonthLabel)
         monthLabel.translatesAutoresizingMaskIntoConstraints = false
         monthLabel.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         monthLabel.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
         monthLabel.leadingAnchor.constraint(equalTo: calendarView.calendarCollectionView.trailingAnchor, constant: 0).isActive = true
         monthLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        calendarLauncher.monthLabelUpdateDelegate = monthLabel
         
         
                 // MARK: Configuration of the Today Sales Chart using Charts Framework
@@ -154,22 +176,31 @@ class DashboardViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+        
+        didTapToday()
     }
     
 
-    override func viewDidLayoutSubviews() {
-        let lastCellIndexPath = IndexPath.init(row: datesbis.count-1, section: 0)
-        calendarView.calendarCollectionView.scrollToItem(at: lastCellIndexPath, at: .right, animated: false)
-        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
-    }
     
  
     
     
 
     @objc func didTapToday() {
-        let lastCellIndexPath = IndexPath.init(row: datesbis.count-1, section: 0)
-        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
+      
+//        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
+        calendarView.daysOfCurrentWeek.removeAll()
+        calendarView.daysOfSelectedWeek.removeAll()
+        calendarView.getCurrentWeek()
+        calendarView.calendarCollectionView.reloadData()
+        print(calendarView.daysOfCurrentWeek[weekday-1])
+        let todayCellIndexPath = IndexPath.init(row: weekday-1, section: 0)
+        calendarView.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
+        calendarLauncher.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
+        weekNumberLabel.text = "W\(weekNumber)"
+        let currentMonth = months[calendar.component(.month, from: date) - 1]
+        monthLabel.text = "\(currentMonth) " + "\(year)"
+
 //        TodaySales.playAnimations()
         todaySalesChart.updateChartBar()
     }
@@ -177,33 +208,17 @@ class DashboardViewController: UIViewController {
     @objc func didTapSelect() {
         //
         //        //        TODO: Make a PopOverPresentationController showing the calendar
-        //        let ac = UIAlertController(title: "Hello!", message: "This is a test.", preferredStyle: .actionSheet)
-        //        let popover = ac.popoverPresentationController
-        //        popover?.sourceRect = CGRect(x: 0, y: 0, width: 100, height: 500)
-        //        present(ac, animated: true)
-//        todaySalesChart.removeFromSuperview()
-//        todaySalesChart = TodaySalesChart(frame: CGRect(x: 20, y: calendarView.calendarHeight+71, width: view.frame.width - 20, height: 250))
-//        todaySalesChart.contentMode = .scaleAspectFit
-//        view.addSubview(todaySalesChart)
-//        todaySalesChart.translatesAutoresizingMaskIntoConstraints = false
-//        todaySalesChart.topAnchor.constraint(equalTo: calendarView.calendarCollectionView.bottomAnchor, constant: 20).isActive = true
-//        todaySalesChart.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-//        todaySalesChart.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-//        todaySalesChart.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2.5).isActive = true
-        todaySalesChart.centerViewToAnimated(xValue: 12, yValue: 12, axis: .left, duration: 2, easingOption: .easeInBack)
+//                let ac = UIAlertController(title: "Hello!", message: "This is a test.", preferredStyle: .actionSheet)
+//                let popover = ac.popoverPresentationController
+////                popover?.sourceView = self.view
+//
+//            popover?.sourceRect = CGRect(x: 10, y: 10, width: 200, height: 200)
+//                popover?.barButtonItem = selectButton
+//                present(ac, animated: true)
+
+     calendarLauncher.showCalendar()
+    calendarLauncher.calendarUpdateDelegate = calendarView
         
-        todaySalesChart.setNeedsLayout()
-        todaySalesView.layoutIfNeeded()
-        
-        
-        todaySalesChart.notifyDataSetChanged()
-        todaySalesChart.chartData.notifyDataChanged()
-        todaySalesChart.chartDataSet.notifyDataSetChanged()
-        todaySalesChart.data?.notifyDataChanged()
-        todaySalesChart.reloadInputViews()
-        
-        todaySalesChart.animate(xAxisDuration: 2, yAxisDuration: 2, easingOption: .easeInOutQuart)
-     
     }
     
     @objc func didTapExport() {

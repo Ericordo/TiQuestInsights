@@ -46,6 +46,8 @@ class SettingsView : NSObject {
     
     @objc func didTapLogOut() {
         print("Log out")
+        defaults.set(false, forKey: "LOGGED_IN")
+        AppDelegate.shared.rootViewController.switchToLogout()
     }
 
 

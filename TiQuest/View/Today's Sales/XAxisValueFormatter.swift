@@ -6,6 +6,9 @@
 //  Copyright © 2019 Eric Ordonneau. All rights reserved.
 //
 
+// This file is currently not in use - File from iOS Charts Demo Project
+
+
 import Foundation
 import Charts
 

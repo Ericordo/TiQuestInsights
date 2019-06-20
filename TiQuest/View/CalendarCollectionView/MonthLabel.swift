@@ -26,21 +26,34 @@ class MonthLabel: UILabel {
     }
     
     
-    let bottomLineSeparator : CALayer = {
-        let bottomLineSeparator = CALayer()
-        bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
-        return bottomLineSeparator
-    }()
+//    let bottomLineSeparator : CALayer = {
+//        let bottomLineSeparator = CALayer()
+//        bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+//        return bottomLineSeparator
+//    }()
     
     func setUpLabel() {
-        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
-        self.layer.addSublayer(bottomLineSeparator)
-        currentMonth = months[month-1]
-        
+//        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
+//        self.layer.addSublayer(bottomLineSeparator)
+        self.adjustsFontSizeToFitWidth = true
+        currentMonth = months[month]
         self.text = "\(currentMonth) " + "\(year)"
         self.textColor = .lightGray
+        self.sizeToFit()
         self.textAlignment = .center
         
     }
 
 }
+
+extension MonthLabel : MonthLabelUpdateDelegate {
+    func updateSelectedMonth(month: String) {
+        self.text = month
+    }
+    
+   
+    }
+    
+    
+
+

@@ -20,15 +20,15 @@ class WeekNumberLabel: UILabel {
     }
     
   
-    let bottomLineSeparator : CALayer = {
-    let bottomLineSeparator = CALayer()
-    bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
-    return bottomLineSeparator
-    }()
+//    let bottomLineSeparator : CALayer = {
+//    let bottomLineSeparator = CALayer()
+//    bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+//    return bottomLineSeparator
+//    }()
     
     func setUpLabel() {
-        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
-        self.layer.addSublayer(bottomLineSeparator)
+//        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
+//        self.layer.addSublayer(bottomLineSeparator)
         self.text = "W\(weekNumber)"
         self.textColor = .lightGray
         self.textAlignment = .center
@@ -39,4 +39,24 @@ class WeekNumberLabel: UILabel {
 
    
 
+}
+
+extension WeekNumberLabel : WeekNumberUpdateDelegate {
+    func updateWeekNumber(day: Int, month: Int, year: Int) {
+        let components = DateComponents(year: year, month: month, day: day)
+        guard let selectedDate = calendar.date(from: components) else { return }
+        let selectedWeekNumber = calendar.component(.weekOfYear, from: selectedDate)
+        print("newWeekNumber \(selectedWeekNumber)")
+        self.text = "W\(selectedWeekNumber)"
+    }
+    
+//    func updateWeekNumber() {
+//        let components = DateComponents(year: year, month: month, day: day, yearForWeekOfYear: yearForWeekNumber)
+//        guard let selectedDate = calendar.date(from: components) else { return }
+//        let newWeekNumber = calendar.component(.weekOfYear, from: selectedDate)
+//        print(newWeekNumber)
+//
+//    }
+    
+    
 }
