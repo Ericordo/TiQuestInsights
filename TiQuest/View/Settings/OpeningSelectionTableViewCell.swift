@@ -21,30 +21,39 @@ class OpeningSelectionTableViewCell: UITableViewCell {
     
     var openingTimeUpdateDelegate : OpeningTimeUpdateDelegate!
     
+    var hourSelectedOpening = "09:00"
+    var row = defaults.integer(forKey: "openingTimeBusiness") - 1
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         hourPicker.delegate = self
         hourPicker.dataSource = self
+        
         self.addSubview(hourLabel)
         hourLabel.translatesAutoresizingMaskIntoConstraints = false
-//        self.hourLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        self.hourLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        //        self.hourLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        self.hourLabel.widthAnchor.constraint(equalToConstant: 400).isActive = true
         self.hourLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         self.hourLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.hourLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        updateLabel()
+       
         self.addSubview(hourPicker)
         hourPicker.translatesAutoresizingMaskIntoConstraints = false
-//        self.hourPicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        self.hourPicker.leadingAnchor.constraint(equalTo: self.hourLabel.trailingAnchor, constant: 10).isActive = true
+        self.hourPicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+//        self.hourPicker.leadingAnchor.constraint(equalTo: self.hourLabel.trailingAnchor, constant: 10).isActive = true
         self.hourPicker.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.hourPicker.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         self.hourPicker.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        let row = defaults.integer(forKey: "openingTimeBusiness") - 1
+        
+       
+        
+        
+
 //        self.hourPicker.selectRow(row, inComponent: 0, animated: true)
         let todaySalesChart = TodaySalesChart()
         self.openingTimeUpdateDelegate = todaySalesChart
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -103,6 +112,14 @@ class OpeningSelectionTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func updateLabel() {
+        if let hourSelectedOpening = defaults.value(forKey: "hourSelectedOpening") {
+            hourLabel.text = "Opening Time: " + (hourSelectedOpening as! String)
+        } else {
+            hourLabel.text = "Please select an opening hour for your Business"
+        }
+    }
 
 }
 
@@ -125,6 +142,17 @@ extension OpeningSelectionTableViewCell: UIPickerViewDataSource, UIPickerViewDel
         openingTime = openingHours[index].value
         defaults.set(openingTime, forKey: "openingTimeBusiness")
         openingTimeUpdateDelegate.updateOpeningTime()
+        hourSelectedOpening = openingHours[index].time
+        defaults.set(hourSelectedOpening, forKey: "hourSelectedOpening")
+        
+        openingHoursValidation.openingTime = openingTime
+        if openingHoursValidation.validateOpeningHours() {
+            updateLabel()
+        } else {
+            hourLabel.text = "Invalid opening time, please modify"
+        }
+        
+
        
     }
     

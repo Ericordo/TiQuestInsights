@@ -38,13 +38,11 @@ class CalendarLauncher: NSObject {
     var previousNumberOfEmptyBoxes = 0
     var direction = 0
     var positionIndex = 0
-    
-    var leapYearCounter = 1
-    
     var dayCounter = 0
     
-    
-
+    var monthDisplayed = month
+    var weekDayDisplayed = weekday
+    var yearDisplayed = year
     
     let darkView = UIView()
     
@@ -52,7 +50,6 @@ class CalendarLauncher: NSObject {
     let monthLabelHeight : CGFloat = 50
     let weekdayStackViewHeight : CGFloat = 50
     let backgroundViewHeight : CGFloat = 450
-    
     var stackViewBottomConstant : CGFloat = 50
     
     let backgroundView : UIView = {
@@ -61,7 +58,6 @@ class CalendarLauncher: NSObject {
         return bView
     }()
 
-    
     let monthLabel : UILabel = {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
@@ -74,8 +70,6 @@ class CalendarLauncher: NSObject {
         button.setTitle("Previous", for: .normal)
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
-       
-        
         return button
     }()
     
@@ -84,8 +78,6 @@ class CalendarLauncher: NSObject {
         button.setTitle("Next", for: .normal)
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
-        
-        
         return button
     }()
     
@@ -95,11 +87,9 @@ class CalendarLauncher: NSObject {
         stackView.spacing = 0
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        
         return stackView
     }()
-    
-    
+
     let calendarCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -110,6 +100,8 @@ class CalendarLauncher: NSObject {
     func showCalendar() {
         if let view = UIApplication.shared.keyWindow {
             darkView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            
+            print(date)
   
             view.addSubview(darkView)
             view.addSubview(backgroundView)
@@ -146,7 +138,6 @@ class CalendarLauncher: NSObject {
             weekdayStackView.topAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: 0).isActive = true
             weekdayStackView.heightAnchor.constraint(equalToConstant: weekdayStackViewHeight).isActive = true
             
-            
             calendarCollectionView.translatesAutoresizingMaskIntoConstraints = false
             calendarCollectionView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 0).isActive = true
             calendarCollectionView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: 0).isActive = true
@@ -182,82 +173,57 @@ class CalendarLauncher: NSObject {
     @objc func didTapPrevious() {
         switch currentMonth {
         case "January":
-            month = 11
-            year -= 1
+            monthDisplayed = 11
+            yearDisplayed -= 1
             direction = -1
-//            if leapYearCounter > 0 {
-//                leapYearCounter -= 1
-//            }
-//            if leapYearCounter == 0 {
-//                daysInMonths[1] = 29
-//                leapYearCounter = 4
-//            } else {
-//                daysInMonths[1] = 28
-//            }
-            if year%4 == 0 {
+            if yearDisplayed%4 == 0 {
                 daysInMonths[1] = 29
             } else {
                 daysInMonths[1] = 28
             }
             getStartDateDayPosition()
-            currentMonth = months[month]
-            monthLabel.text = "\(currentMonth) " + "\(year)"
+            currentMonth = months[monthDisplayed]
+            monthLabel.text = "\(currentMonth) " + "\(yearDisplayed)"
             calendarCollectionView.reloadData()
         default:
             direction = -1
-            month -= 1
+            monthDisplayed -= 1
             getStartDateDayPosition()
-            
-            currentMonth = months[month]
-            monthLabel.text = "\(currentMonth) " + "\(year)"
+            currentMonth = months[monthDisplayed]
+            monthLabel.text = "\(currentMonth) " + "\(yearDisplayed)"
             calendarCollectionView.reloadData()
-            
         }
-        
     }
     
     @objc func didTapNext() {
         switch currentMonth {
         case "December":
-            month = 0
-            year += 1
+            monthDisplayed = 0
+            yearDisplayed += 1
             direction = 1
-            
-            if year%4 == 0 {
+            if yearDisplayed%4 == 0 {
                 daysInMonths[1] = 29
             } else {
                 daysInMonths[1] = 28
             }
-            
-//            if leapYearCounter < 5 {
-//                leapYearCounter += 1
-//            }
-//            if leapYearCounter == 4 {
-//                daysInMonths[1] = 29
-//            }
-//            if leapYearCounter == 5 {
-//                leapYearCounter = 1
-//                daysInMonths[1] = 28
-//            }
             getStartDateDayPosition()
-            currentMonth = months[month]
-            monthLabel.text = "\(currentMonth) " + "\(year)"
+            currentMonth = months[monthDisplayed]
+            monthLabel.text = "\(currentMonth) " + "\(yearDisplayed)"
             calendarCollectionView.reloadData()
         default:
             direction = 1
             getStartDateDayPosition()
-            month += 1
-            currentMonth = months[month]
-            monthLabel.text = "\(currentMonth) " + "\(year)"
+            monthDisplayed += 1
+            currentMonth = months[monthDisplayed]
+            monthLabel.text = "\(currentMonth) " + "\(yearDisplayed)"
             calendarCollectionView.reloadData()
         }
-        
     }
     
     func getStartDateDayPosition() {
         switch direction {
         case 0:
-            numberOfEmptyBox = weekday
+            numberOfEmptyBox = weekDayDisplayed
             dayCounter = day
             while dayCounter > 0 {
                 numberOfEmptyBox = numberOfEmptyBox - 1
@@ -269,29 +235,21 @@ class CalendarLauncher: NSObject {
             if numberOfEmptyBox == 7 {
                 numberOfEmptyBox = 0
             }
-            
             positionIndex = numberOfEmptyBox
-        case 1...:
-            nextNumberOfEmptyBoxes = (positionIndex + daysInMonths[month])%7
+        case 1:
+            nextNumberOfEmptyBoxes = (positionIndex + daysInMonths[monthDisplayed])%7
             positionIndex = nextNumberOfEmptyBoxes
         case -1:
-            previousNumberOfEmptyBoxes = (7 - (daysInMonths[month] - positionIndex)%7)
+            previousNumberOfEmptyBoxes = (7 - (daysInMonths[monthDisplayed] - positionIndex)%7)
             if previousNumberOfEmptyBoxes == 7 {
-                  previousNumberOfEmptyBoxes = 0
+                previousNumberOfEmptyBoxes = 0
             }
             positionIndex = previousNumberOfEmptyBoxes
         default:
             fatalError()
         }
     }
-    
-    func updateWeekView() {
-        
-    }
-    
-    func updateData() {
-        
-    }
+
 
     
     override init() {
@@ -299,15 +257,15 @@ class CalendarLauncher: NSObject {
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.register(SlideCalendarCollectionViewCell.self, forCellWithReuseIdentifier: "SlideCalendarCell")
-        currentMonth = months[month]
-        monthLabel.text = "\(currentMonth) " + "\(year)"
-        if year%4 == 0 {
+        currentMonth = months[monthDisplayed]
+        monthLabel.text = "\(currentMonth) " + "\(yearDisplayed)"
+        if yearDisplayed%4 == 0 {
             daysInMonths[1] = 29
         } else {
             daysInMonths[1] = 28
         }
-        if weekday == 0 {
-            weekday = 7
+        if weekDayDisplayed == 0 {
+            weekDayDisplayed = 7
         }
         getStartDateDayPosition()
         
@@ -333,11 +291,11 @@ extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch direction {
         case 0:
-            return daysInMonths[month] + numberOfEmptyBox
+            return daysInMonths[monthDisplayed] + numberOfEmptyBox
         case 1...:
-            return daysInMonths[month] + nextNumberOfEmptyBoxes
+            return daysInMonths[monthDisplayed] + nextNumberOfEmptyBoxes
         case -1:
-            return daysInMonths[month] + previousNumberOfEmptyBoxes
+            return daysInMonths[monthDisplayed] + previousNumberOfEmptyBoxes
         default:
             fatalError()
         }
@@ -346,11 +304,9 @@ extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "SlideCalendarCell", for: indexPath) as! SlideCalendarCollectionViewCell
-        
         if cell.isHidden {
             cell.isHidden = false
         }
-        
         switch direction {
         case 0:
             cell.dayNumberLabel.text = "\(indexPath.row + 1 - numberOfEmptyBox)"
@@ -361,46 +317,43 @@ extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate
         default:
             fatalError()
         }
-       
+// Hiding the empty boxes
         if Int(cell.dayNumberLabel.text!)! < 1 {
             cell.isHidden = true
-            
         }
-        
 //        Current date in red
-        if currentMonth == months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && indexPath.row + 1 - numberOfEmptyBox == day {
+        if currentMonth == months[calendar.component(.month, from: date) - 1] && yearDisplayed == calendar.component(.year, from: date) && indexPath.row + 1 - numberOfEmptyBox == day {
             cell.backgroundColor = .red
-            
         }
-        
-      
-        
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         var selectedDay = Int()
         switch direction {
         case 0:
-            selectedDay = indexPath.row + 1 - numberOfEmptyBox - 1
+            selectedDay = indexPath.row + 1 - numberOfEmptyBox
         case 1:
-            selectedDay = indexPath.row + 1 - nextNumberOfEmptyBoxes - 1
+            selectedDay = indexPath.row + 1 - nextNumberOfEmptyBoxes
         case -1:
-            selectedDay = indexPath.row + 1 - previousNumberOfEmptyBoxes - 1
+            selectedDay = indexPath.row + 1 - previousNumberOfEmptyBoxes
         default:
             fatalError()
         }
-        calendarUpdateDelegate.updateSelectedWeek(day: selectedDay, month: month+1, year: year)
-        weekNumberUpdateDelegate.updateWeekNumber(day: selectedDay, month: month+1, year: year)
-        monthLabelUpdateDelegate.updateSelectedMonth(month: monthLabel.text!)
+        
+        
+        calendarUpdateDelegate.updateSelectedWeek(day: selectedDay, month: monthDisplayed+1, year: yearDisplayed)
+        weekNumberUpdateDelegate.updateWeekNumber(day: selectedDay, month: monthDisplayed+1, year: yearDisplayed)
+        monthLabelUpdateDelegate.updateSelectedMonth(month: "\(currentMonth)\n\(yearDisplayed)")
         print("potential day \(selectedDay)")
-        print("potential month \(month+1)")
-        print("potential year \(year)")
+        print("potential month \(monthDisplayed+1)")
+        print("potential year \(yearDisplayed)")
+        print(date)
         
         
-        updateWeekView()
-        updateData()
+
         
     }
     

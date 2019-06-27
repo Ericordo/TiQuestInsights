@@ -13,6 +13,8 @@ import Charts
 
 class DashboardViewController: UIViewController {
     
+    
+    
     var calendarView = CalendarView()
     
     var todaySalesView : TodaySales!
@@ -34,6 +36,10 @@ class DashboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        calendar.firstWeekday = 2
+        calendar.timeZone = .autoupdatingCurrent
+        
         self.view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         let margins = self.view.layoutMarginsGuide
         
@@ -55,7 +61,8 @@ class DashboardViewController: UIViewController {
         calendarView.calendarCollectionView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         calendarView.calendarCollectionView.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
         calendarView.calendarCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
-        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -150).isActive = true
+        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
+
         
         
         
@@ -192,13 +199,13 @@ class DashboardViewController: UIViewController {
         calendarView.daysOfSelectedWeek.removeAll()
         calendarView.getCurrentWeek()
         calendarView.calendarCollectionView.reloadData()
-        print(calendarView.daysOfCurrentWeek[weekday-1])
+        print("calendarview days of current wk \(calendarView.daysOfCurrentWeek[weekday-1])")
         let todayCellIndexPath = IndexPath.init(row: weekday-1, section: 0)
         calendarView.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
         calendarLauncher.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
         weekNumberLabel.text = "W\(weekNumber)"
         let currentMonth = months[calendar.component(.month, from: date) - 1]
-        monthLabel.text = "\(currentMonth) " + "\(year)"
+        monthLabel.text = "\(currentMonth)\n\(year)"
 
 //        TodaySales.playAnimations()
         todaySalesChart.updateChartBar()
@@ -215,7 +222,7 @@ class DashboardViewController: UIViewController {
 //                popover?.barButtonItem = selectButton
 //                present(ac, animated: true)
 
-     calendarLauncher.showCalendar()
+    calendarLauncher.showCalendar()
     calendarLauncher.calendarUpdateDelegate = calendarView
         
     }

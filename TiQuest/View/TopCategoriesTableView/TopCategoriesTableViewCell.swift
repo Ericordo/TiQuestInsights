@@ -46,8 +46,8 @@ class TopCategoriesTableViewCell: UITableViewCell {
     
     let progressBarTopCategories : UIProgressView = {
         let prgsBar = UIProgressView()
-        prgsBar.tintColor = .lightGray
-        prgsBar.trackTintColor = .clear
+        prgsBar.tintColor = .gray
+//        prgsBar.trackTintColor = .clear
         prgsBar.progressViewStyle = .default
         return prgsBar
     }()

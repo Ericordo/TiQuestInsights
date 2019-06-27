@@ -10,7 +10,7 @@ import Foundation
 
 var topCategoriesHeaderLabel = "Top categories"
 var topCategoriesButtonLabel = "Bottom"
-var topCategoriesQuantity : [Float] = [23.0, 45.0, 76.0, 89.0, 57.0]
+var topCategoriesQuantity : [Float] = [89.0, 76.0, 57.0, 45.0, 23.0]
 //var topCategoriesQuantityRandom : Float = 0.0
 var topCategoriesQuantityProgress : Float = 0.0
 var topCategoriesDictionary : [String : Int] = [:]
@@ -22,7 +22,7 @@ var topCategoriesQuantityReserve : [Float] = []
 
 var topSellersHeaderLabel = "Top sellers"
 var topSellersButtonLabel = "Worst"
-var topSellersQuantity = [12, 8, 9, 2, 3, 7, 5, 10, 4, 15, 1, 11, 13]
+var topSellersQuantity = [15, 13, 12, 11, 10, 9, 8, 7, 5, 4, 3, 2, 1]
 //var topSellersQuantityRandom = 0.0
 
 

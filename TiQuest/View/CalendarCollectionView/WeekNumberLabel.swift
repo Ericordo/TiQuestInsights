@@ -18,7 +18,6 @@ class WeekNumberLabel: UILabel {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
   
 //    let bottomLineSeparator : CALayer = {
 //    let bottomLineSeparator = CALayer()
@@ -32,13 +31,7 @@ class WeekNumberLabel: UILabel {
         self.text = "W\(weekNumber)"
         self.textColor = .lightGray
         self.textAlignment = .center
-        
     }
-    
-    
-
-   
-
 }
 
 extension WeekNumberLabel : WeekNumberUpdateDelegate {

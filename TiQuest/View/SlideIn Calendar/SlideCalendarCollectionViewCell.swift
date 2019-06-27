@@ -32,10 +32,7 @@ class SlideCalendarCollectionViewCell: UICollectionViewCell {
     
     let dayNumberLabel : UILabel = {
         let label = UILabel()
-        label.text = "17"
         label.textAlignment = .center
-        
-        
         return label
     }()
     
@@ -44,9 +41,6 @@ class SlideCalendarCollectionViewCell: UICollectionViewCell {
         dayNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         dayNumberLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         dayNumberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
-        
-       
-        
     }
     
 }

@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+class OpeningHours {
+    var openingTime = 1
+    var closingTime = 11
+}
+
 class SettingsView : NSObject {
     
    

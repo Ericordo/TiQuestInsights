@@ -15,7 +15,11 @@ protocol ClosingTimeUpdateDelegate {
 
 class ClosingSelectionTableViewCell: UITableViewCell {
     
+    
     var closingTimeUpdateDelegate : ClosingTimeUpdateDelegate!
+    
+    var row = defaults.integer(forKey: "closingTimeBusiness") - 1
+    var hourSelectedClosing = "00:00"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,19 +28,21 @@ class ClosingSelectionTableViewCell: UITableViewCell {
         hourPicker.dataSource = self
         self.addSubview(hourLabel)
         hourLabel.translatesAutoresizingMaskIntoConstraints = false
-        //        self.hourLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        self.hourLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+//                self.hourLabel.trailingAnchor.constraint(equalTo: hourPicker.leadingAnchor, constant: 0).isActive = true
+        self.hourLabel.widthAnchor.constraint(equalToConstant: 400).isActive = true
         self.hourLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         self.hourLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.hourLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+//        hourLabel.text = "Closing Time: " + hourSelectedClosing
+        updateLabel()
         self.addSubview(hourPicker)
         hourPicker.translatesAutoresizingMaskIntoConstraints = false
-        //        self.hourPicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-        self.hourPicker.leadingAnchor.constraint(equalTo: self.hourLabel.trailingAnchor, constant: 10).isActive = true
+                self.hourPicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+//        self.hourPicker.leadingAnchor.constraint(equalTo: self.hourLabel.trailingAnchor, constant: 10).isActive = true
         self.hourPicker.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.hourPicker.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         self.hourPicker.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        let row = defaults.integer(forKey: "closingTimeBusiness") - 1
+        
 //        self.hourPicker.selectRow(row, inComponent: 0, animated: true)
         let todaySalesChart = TodaySalesChart()
         self.closingTimeUpdateDelegate = todaySalesChart
@@ -84,6 +90,7 @@ class ClosingSelectionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "Closing Time: "
         
+        
         return label
     }()
     
@@ -99,6 +106,14 @@ class ClosingSelectionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func updateLabel() {
+        if let hourSelectedClosing = defaults.value(forKey: "hourSelectedClosing") {
+            hourLabel.text = "Closing Time: " + (hourSelectedClosing as! String)
+        } else {
+            hourLabel.text = "Please select a closing hour for your Business"
+        }
     }
     
 }
@@ -122,6 +137,15 @@ extension ClosingSelectionTableViewCell: UIPickerViewDataSource, UIPickerViewDel
         closingTime = openingHours[index].value
         defaults.set(closingTime, forKey: "closingTimeBusiness")
         closingTimeUpdateDelegate.updateClosingTime()
+        hourSelectedClosing = openingHours[index].time
+        defaults.set(hourSelectedClosing, forKey: "hourSelectedClosing")
+        openingHoursValidation.closingTime = closingTime
+        if openingHoursValidation.validateOpeningHours() {
+            updateLabel()
+        } else {
+            hourLabel.text = "Invalid closing time, please modify"
+        }
+
     }
     
 }

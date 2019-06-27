@@ -18,13 +18,11 @@ class MonthLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpLabel()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 //    let bottomLineSeparator : CALayer = {
 //        let bottomLineSeparator = CALayer()
@@ -37,13 +35,13 @@ class MonthLabel: UILabel {
 //        self.layer.addSublayer(bottomLineSeparator)
         self.adjustsFontSizeToFitWidth = true
         currentMonth = months[month]
-        self.text = "\(currentMonth) " + "\(year)"
+//        self.text = "\(currentMonth)" + "\n" + "\(year)"
+        self.text = "\(currentMonth)\n\(year)"
         self.textColor = .lightGray
+        self.numberOfLines = 0
         self.sizeToFit()
         self.textAlignment = .center
-        
     }
-
 }
 
 extension MonthLabel : MonthLabelUpdateDelegate {

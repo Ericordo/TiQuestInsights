@@ -14,7 +14,6 @@ protocol DataUpdateDelegate {
     func updateChartBar()
 }
 
-
 class CalendarView: NSObject {
     
     var dataUpdateDelegate : DataUpdateDelegate!
@@ -44,35 +43,24 @@ class CalendarView: NSObject {
         return cv
     }()
     
-    
-    
-    func showCalendar() {
-        if let view = UIApplication.shared.keyWindow {
-            view.addSubview(calendarCollectionView)
-            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
-
-            print(view.frame.width)
-
-        }
-    }
+//    func showCalendar() {
+//        if let view = UIApplication.shared.keyWindow {
+//            view.addSubview(calendarCollectionView)
+//            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
+//            print(view.frame.width)
+//        }
+//    }
     
     override init() {
         super.init()
         
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
-        
         calendarCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: "CalendarCell")
-        currentMonth = months[month]
-        print("HELLO HELLO HELLO \(currentMonth)")
-        print(month)
-        print(day)
-        print(weekday)
-        print("\(daysOfMonth[weekday-1]) "+"\(day)")
-        getCurrentWeek()
-   
-    
         
+        currentMonth = months[month]
+       
+        getCurrentWeek()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -102,17 +90,8 @@ class CalendarView: NSObject {
 
 extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
     
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        <#code#>
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-//        return dates.count
-//        return daysOfMonth.count
-//        return datesbis.count
         return 7
-
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -122,14 +101,12 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 //        let stringForCell = NSAttributedString(string: datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number))
 //        cell.dateLabel.attributedText = stringForCell
 //        cell.dateLabel.text = "\(daysOfMonth[weekday-1]) "+"\(day)"
-        
-        
         switch indexPath.row {
         case 0:
             if daysOfSelectedWeek.isEmpty {
                 cell.dateLabel.text = "Monday "+"\(daysOfCurrentWeek[indexPath.row])"
             } else {
-            cell.dateLabel.text = "Monday "+"\(daysOfSelectedWeek[indexPath.row])"
+                cell.dateLabel.text = "Monday "+"\(daysOfSelectedWeek[indexPath.row])"
             }
         case 1:
             if daysOfSelectedWeek.isEmpty {
@@ -170,50 +147,65 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
         default:
             break
         }
-
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCollectionViewCell
-        let selectionImage = circleAroundDigit(datesbis[indexPath.item].number, circleColor: .blue,
-                                   digitColor: .white, diameter: 30, font:UIFont(name: "GillSans", size: 20)!)
-        let selectedString = NSMutableAttributedString(string: datesbis[indexPath.item].day)
-        let selectedStringAttachment = NSTextAttachment()
-        selectedStringAttachment.image = selectionImage
-        let selectedImageString = NSAttributedString(attachment: selectedStringAttachment)
-        selectedString.append(selectedImageString)
-        cell.dateLabel.attributedText = selectedString
-    
+//        let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCollectionViewCell
+//        let selectionImage = circleAroundDigit(datesbis[indexPath.item].number, circleColor: .blue,
+//                                   digitColor: .white, diameter: 30, font:UIFont(name: "GillSans", size: 20)!)
+//        let selectedString = NSMutableAttributedString(string: datesbis[indexPath.item].day)
+//        let selectedStringAttachment = NSTextAttachment()
+//        selectedStringAttachment.image = selectionImage
+//        let selectedImageString = NSAttributedString(attachment: selectedStringAttachment)
+//        selectedString.append(selectedImageString)
+//        cell.dateLabel.attributedText = selectedString
         dataUpdateDelegate.updateChartBar()
  
     }
     
     func getCurrentWeek() {
-        let currentMonth = calendar.component(.month, from: date) - 1
-        let components = DateComponents(year: year, month: currentMonth, day: day)
-        guard let currentDate = calendar.date(from: components) else { return }
-        let currentWeekNumber = calendar.component(.weekOfYear, from: currentDate)
+//        let currentMonth = calendar.component(.month, from: date) - 1
+//        let components = DateComponents(year: year, month: currentMonth, day: day)
+//        guard let currentDate = calendar.date(from: components) else { return }
+//        let currentWeekNumber = calendar.component(.weekOfYear, from: currentDate)
+        
+//        let currentMonth = month
+//        let components = DateComponents(year: year, month: currentMonth, day: day)
+//        let currentDate = date
+        let currentWeekNumber = weekNumber
+        
         let startComponents = DateComponents(weekOfYear: currentWeekNumber, yearForWeekOfYear: year)
         let startDate = calendar.date(from: startComponents)!
-        let endComponents = DateComponents(day:6, second: -1)
-        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
-        let actualStartDate = calendar.date(byAdding: .day, value: 2, to: startDate)!
-        let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
-        let actualRangeBeginning = (calendar.component(.day, from: startDate)+1)
-        let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
-        daysOfCurrentWeek.append(calendar.component(.day, from: startDate) - 2)
+        let actualStartDate = calendar.date(byAdding: .day, value: 0, to: startDate)!
+        
+//        let endComponents = DateComponents(day:6, second: -1)
+//        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
+        
+        
+//        let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
+//        let actualRangeBeginning = (calendar.component(.day, from: startDate)+1)
+//        let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
+        
+        daysOfCurrentWeek.append(calendar.component(.day, from: actualStartDate))
+        
         var nextDate = actualStartDate
-        print(startDate)
-        print("actualStartDate \(actualStartDate)")
-       print(calendar.component(.day, from: startDate))
-        print(calendar.component(.day, from: startDate) - 2)
-        print(calendar.component(.day, from: actualStartDate) - 2)
+        
+//        print(startDate)
+//        print("actualStartDate \(actualStartDate)")
+//        print(currentDate)
+//        print(currentWeekNumber)
+//        print(calendar.component(.day, from: startDate))
+//        print(calendar.component(.day, from: startDate) - 2)
+//        print(calendar.component(.day, from: actualStartDate) - 2)
+        
         while daysOfCurrentWeek.count < 7 {
             nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
-            daysOfCurrentWeek.append(calendar.component(.day, from: nextDate) - 4)
+            daysOfCurrentWeek.append(calendar.component(.day, from: nextDate))
         }
-        print(daysOfCurrentWeek)
+        
+//        print(daysOfCurrentWeek)
+        
     }
     
 
@@ -224,7 +216,7 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 extension CalendarView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let view = UIApplication.shared.keyWindow {
-            cellWidth = ((view.frame.width - 200) / 7)
+            cellWidth = ((view.frame.width - 150) / 7)
 //            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
         }
         return CGSize(width: cellWidth, height: calendarHeight)
@@ -240,40 +232,56 @@ extension CalendarView : CalendarUpdateDelegate {
         let components = DateComponents(year: year, month: month, day: day)
         guard let selectedDate = calendar.date(from: components) else { return }
         let selectedWeekNumber = calendar.component(.weekOfYear, from: selectedDate)
-        let selectedWeekDay = calendar.component(.weekday, from: selectedDate)
-        let selectedDay = day + 1
-        print("selectedWeekDay \(selectedWeekDay)")
-        print("selected day \(selectedDay)")
+        let selectedWeekDay = calendar.component(.weekday, from: selectedDate) - 1
         
-    
+//        let actualSelectedDate = calendar.date(byAdding: .day, value: 1, to: selectedDate)
+        print(selectedDate)
+        print("selectedWeekNumber \(selectedWeekNumber)")
+        print("selectedWeekDay \(selectedWeekDay)")
+//        print(actualSelectedDate)
+        
+        
         let startComponents = DateComponents(weekOfYear: selectedWeekNumber, yearForWeekOfYear: year)
         let startDate = calendar.date(from: startComponents)!
-        let endComponents = DateComponents(day:6, second: -1)
-        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
-        print(startDate...endDate)
-        let actualStartDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
-        let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
-        print(actualStartDate...actualEndDate)
+        
+//        let endComponents = DateComponents(day:6, second: -1)
+//        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
+//
+//        print(startDate...endDate)
+        
+        let actualStartDate = calendar.date(byAdding: .day, value: 0, to: startDate)!
+//        let actualEndDate = calendar.date(byAdding: .day, value: 2, to: endDate)!
+        
+//        print(actualStartDate...actualEndDate)
 //        let actualRange = (calendar.component(.day, from: startDate)+1)...(calendar.component(.day, from: endDate)+1)
-        let actualRangeBeginning = (calendar.component(.day, from: startDate)+1)
-        let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
-        print(actualRangeBeginning)
-        print(actualRangeEnd)
+//        let actualRangeBeginning = (calendar.component(.day, from: startDate)+1)
+//        let actualRangeEnd = (calendar.component(.day, from: endDate)+1)
+        
+//        print(actualRangeBeginning)
+//        print(actualRangeEnd)
+        
         daysOfSelectedWeek.removeAll()
         daysOfSelectedWeek.append(calendar.component(.day, from: actualStartDate))
+        
         var nextDate = actualStartDate
         
         while daysOfSelectedWeek.count < 7 {
             nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
             daysOfSelectedWeek.append(calendar.component(.day, from: nextDate))
         }
+        
         print(daysOfSelectedWeek)
         print(date)
         print(weekNumber)
+        
         calendarCollectionView.reloadData()
         
         let selectedCellIndexPath = IndexPath.init(row: selectedWeekDay-1, section: 0)
+        if selectedWeekDay-1 < 0 {
+            calendarCollectionView.selectItem(at: IndexPath.init(row: 6, section: 0), animated: true, scrollPosition: .right)
+        } else {
         calendarCollectionView.selectItem(at: selectedCellIndexPath, animated: true, scrollPosition: .right)
+        }
         dataUpdateDelegate.updateChartBar()
 
   
