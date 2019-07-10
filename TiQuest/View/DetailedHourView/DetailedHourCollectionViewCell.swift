@@ -19,6 +19,7 @@ class DetailedHourCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     let infoLabel : UILabel = {
         let label = UILabel()
 //        label.textColor = .black

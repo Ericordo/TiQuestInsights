@@ -199,6 +199,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     }
     
     func customizeBarChart() {
+        
         self.noDataText = "No data available"
 //        self.chartDescription?.text = "Sales"
         self.xAxis.labelPosition = .top
@@ -225,6 +226,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.drawValueAboveBarEnabled = true
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         self.xAxis.labelTextColor = UIColor.black
+        
         
         
         

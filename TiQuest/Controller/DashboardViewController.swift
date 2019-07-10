@@ -40,6 +40,8 @@ class DashboardViewController: UIViewController {
         calendar.firstWeekday = 2
         calendar.timeZone = .autoupdatingCurrent
         
+       
+        
         self.view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         let margins = self.view.layoutMarginsGuide
         
@@ -136,7 +138,7 @@ class DashboardViewController: UIViewController {
         let detailedView = detailedHourView.detailedHourCollectionView
         detailedView.frame = CGRect(x: 0, y: 371 + detailedHourView.detailedViewHeight, width: view.frame.width, height: detailedHourView.detailedViewHeight)
         detailedHourView.cellWidth = (view.frame.width - 80) / 6
-        detailedView.sizeThatFits(CGSize(width: detailedHourView.cellWidth, height: 60))
+//        detailedView.sizeThatFits(CGSize(width: detailedHourView.cellWidth, height: 60))
         self.view.addSubview(detailedView)
         detailedView.translatesAutoresizingMaskIntoConstraints = false
         detailedView.topAnchor.constraint(equalTo: todaySalesChart.bottomAnchor, constant: 10).isActive = true

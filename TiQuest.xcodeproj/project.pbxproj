@@ -33,6 +33,7 @@
 		888C6015228EE4650047A736 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6014228EE4650047A736 /* Item.swift */; };
 		888C6017228EE91D0047A736 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6016228EE91D0047A736 /* DummyData.swift */; };
 		888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6018228EFE540047A736 /* DashboardViewController.swift */; };
+		889ABAD722D4F920006FBF7C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889ABAD622D4F920006FBF7C /* Credentials.swift */; };
 		88B7C75222C22DFB0021FF6F /* OpeningHoursValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75122C22DFB0021FF6F /* OpeningHoursValidation.swift */; };
 		88B7C75422C235410021FF6F /* BusinessDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75322C235410021FF6F /* BusinessDataModel.swift */; };
 		88B7C75622C235860021FF6F /* BusinessDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75522C235860021FF6F /* BusinessDataStructs.swift */; };
@@ -83,6 +84,7 @@
 		888C6014228EE4650047A736 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		888C6016228EE91D0047A736 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		888C6018228EFE540047A736 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		889ABAD622D4F920006FBF7C /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		88B7C75122C22DFB0021FF6F /* OpeningHoursValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHoursValidation.swift; sourceTree = "<group>"; };
 		88B7C75322C235410021FF6F /* BusinessDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDataModel.swift; sourceTree = "<group>"; };
 		88B7C75522C235860021FF6F /* BusinessDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDataStructs.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				88B7C75322C235410021FF6F /* BusinessDataModel.swift */,
 				88B7C75522C235860021FF6F /* BusinessDataStructs.swift */,
 				88B7C75922C389C40021FF6F /* DemoData.swift */,
+				889ABAD622D4F920006FBF7C /* Credentials.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				885D59AF22B7BF05006B8F50 /* CalendarLauncher.swift in Sources */,
 				88B7C75422C235410021FF6F /* BusinessDataModel.swift in Sources */,
+				889ABAD722D4F920006FBF7C /* Credentials.swift in Sources */,
 				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
 				885D59A922B56F15006B8F50 /* UserDefaults.swift in Sources */,
 				3E3A433022A00E7F00FE660F /* TopSellersTableViewCell.swift in Sources */,

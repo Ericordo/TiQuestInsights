@@ -61,7 +61,8 @@ class DetailedHourView: NSObject {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.estimatedItemSize = CGSize(width: 100, height: 60)
+//        layout.estimatedItemSize = CGSize(width: 100, height: 60)
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         cv.isScrollEnabled = false
@@ -92,11 +93,12 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = detailedHourCollectionView.dequeueReusableCell(withReuseIdentifier: "DetailCell", for: indexPath) as! DetailedHourCollectionViewCell
+       
         cell.clipsToBounds = true
         cell.infoLabel.adjustsFontSizeToFitWidth = true
-
         cell.infoLabel.sizeToFit()
         cell.autoresizesSubviews = true
+        cell.sizeThatFits(UICollectionViewFlowLayout.automaticSize)
 //        cell.sizeThatFits(CGSize(width: cellWidth, height: detailedViewHeight))
    
 
@@ -150,9 +152,15 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension DetailedHourView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        if indexPath.row == 0 {
+//            return CGSize(width: 100, height: detailedViewHeight)
+//        } else {
+//             return CGSize(width: cellWidth, height: detailedViewHeight)
+//        }
 
         return CGSize(width: cellWidth, height: detailedViewHeight)
-        
+
+
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

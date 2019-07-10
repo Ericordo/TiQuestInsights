@@ -22,6 +22,9 @@ class LoginViewController: UIViewController {
         
         signInButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         
+        usernameField.delegate = self
+        passwordField.delegate = self
+        
     }
     
     
@@ -32,49 +35,107 @@ class LoginViewController: UIViewController {
         return image
     }()
     
-    let signInButton : UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .black
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle("Sign In", for: .normal)
-        
-        
-        return button
+    let stackView : UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.alignment = .fill
+        sv.distribution = .fillProportionally
+        sv.spacing = 0
+        return sv
     }()
+    
+    let tiquestLabel : UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.text = "TiQuest"
+        label.font = UIFont(name: "Helvetica", size: 200.0)
+        
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
+        label.minimumScaleFactor = 0.5
+        return label
+    }()
+    
+    let tiquestSubtitleLabel : UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.text = "Insights"
+        label.font = UIFont(name: "Helvetica", size: 60.0)
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
+        label.minimumScaleFactor = 0.5
+        
+        return label
+    }()
+    
+    let loginStackView : UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.alignment = .fill
+        sv.distribution = .fillEqually
+        sv.spacing = 10
+        return sv
+    }()
+    
+    
+    
+    
     
     let usernameField : UITextField = {
         let textField = UITextField()
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
         textField.placeholder = "Username"
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .clear
+        textField.layer.cornerRadius = 15
+        textField.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 0.3)
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
-
         return textField
     }()
     
     let passwordField : UITextField = {
         let textField = UITextField()
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
         textField.placeholder = "Password"
-        textField.layer.cornerRadius = 10
-        textField.backgroundColor = .lightGray
+        textField.layer.cornerRadius = 15
+        textField.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 0.3)
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
         return textField
     }()
     
-    let confirmButton : UIButton = {
+    let signInButton : UIButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 15
+        button.backgroundColor = .black
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Log In", for: .normal)
+        
         
         return button
     }()
+    
+    
+
     
     let requestAccountButton : UIButton = {
         let button = UIButton()
         
         return button
     }()
+    
+    
+    
+
     
     
     func setUpUI() {
@@ -85,35 +146,90 @@ class LoginViewController: UIViewController {
         backgroundImage.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         backgroundImage.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         
-        view.addSubview(signInButton)
-        signInButton.translatesAutoresizingMaskIntoConstraints = false
-        signInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        signInButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
-        signInButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        signInButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500).isActive = true
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(tiquestLabel)
+        stackView.addArrangedSubview(tiquestSubtitleLabel)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+//        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -800).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 200).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -200).isActive = true
         
-        view.addSubview(usernameField)
+        view.addSubview(loginStackView)
+        loginStackView.addArrangedSubview(usernameField)
+        loginStackView.addArrangedSubview(passwordField)
+        loginStackView.addArrangedSubview(signInButton)
         usernameField.translatesAutoresizingMaskIntoConstraints = false
-        usernameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        usernameField.widthAnchor.constraint(equalToConstant: 240).isActive = true
-        usernameField.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        usernameField.topAnchor.constraint(equalTo: self.signInButton.bottomAnchor, constant: 20).isActive = true
+        usernameField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        loginStackView.translatesAutoresizingMaskIntoConstraints = false
+        loginStackView.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 100).isActive = true
+//        loginStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -200).isActive = true
+        loginStackView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        loginStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        loginStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 550).isActive = true
+//        loginStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -550).isActive = true
         
-        view.addSubview(passwordField)
-        passwordField.translatesAutoresizingMaskIntoConstraints = false
-        passwordField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        passwordField.widthAnchor.constraint(equalToConstant: 240).isActive = true
-        passwordField.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        passwordField.topAnchor.constraint(equalTo: self.usernameField.bottomAnchor, constant: 20).isActive = true
+//        view.addSubview(signInButton)
+//        signInButton.translatesAutoresizingMaskIntoConstraints = false
+//        signInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+////        signInButton.widthAnchor.constraint(equalToConstant: 240).isActive = true
+//        signInButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        signInButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500).isActive = true
+////
+//        view.addSubview(usernameField)
+//        usernameField.translatesAutoresizingMaskIntoConstraints = false
+//        usernameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        usernameField.widthAnchor.constraint(equalToConstant: 240).isActive = true
+//        usernameField.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        usernameField.topAnchor.constraint(equalTo: self.signInButton.bottomAnchor, constant: 20).isActive = true
+//
+//        view.addSubview(passwordField)
+//        passwordField.translatesAutoresizingMaskIntoConstraints = false
+//        passwordField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        passwordField.widthAnchor.constraint(equalToConstant: 240).isActive = true
+//        passwordField.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        passwordField.topAnchor.constraint(equalTo: self.usernameField.bottomAnchor, constant: 20).isActive = true
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     
     @objc private func login() {
+        self.view.endEditing(true)
         // store the user session (example only, not for the production)
         defaults.set(true, forKey: "LOGGED_IN")
         // navigate to the Main Screen
         AppDelegate.shared.rootViewController.switchToMainScreen()
+    }
+    
+    @objc func didTapOutside() {
+        view.self.endEditing(true)
+        
+    }
+    
+    func checkUsername(usernanme: String) -> Bool {
+        
+        
+        return true
+        
+    }
+    
+    func checkPassword(password: String) -> Bool {
+        
+        return true
+        
+    }
+    
+    
+}
+
+
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
