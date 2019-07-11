@@ -8,7 +8,7 @@
 
 import Foundation
 
-let credentials : [String : String] = [:]
+let credentials : [String : String] = ["admin" : "password", "tacos" : "tacos", "cavolinostri" : "cavolinostri"]
 
 
 

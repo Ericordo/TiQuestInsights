@@ -19,34 +19,15 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     
     
-//    let salesOfOneDay = [
-//        Sales(hour: "0 AM", sales: 453),
-//        Sales(hour: "1 AM", sales: 453),
-//        Sales(hour: "2 AM", sales: 453),
-//        Sales(hour: "3 AM", sales: 453),
-//        Sales(hour: "4 AM", sales: 453),
-//        Sales(hour: "5 AM", sales: 453),
-//        Sales(hour: "6 AM", sales: 453),
-//        Sales(hour: "7 AM", sales: 453),
-//        Sales(hour: "8 AM", sales: 453),
-//        Sales(hour: "9 AM", sales: 453),
-//        Sales(hour: "10 AM", sales: 453),
-//        Sales(hour: "11 AM", sales: 453),
-//        Sales(hour: "12 AM", sales: 792),
-//        Sales(hour: "1 PM", sales: 928),
-//        Sales(hour: "2 PM", sales: 832),
-//        Sales(hour: "3 PM", sales: 543),
-//        Sales(hour: "4 PM", sales: 356),
-//        Sales(hour: "5 PM", sales: 328),
-//        Sales(hour: "6 PM", sales: 423),
-//        Sales(hour: "7 PM", sales: 892),
-//        Sales(hour: "8 PM", sales: 958),
-//        Sales(hour: "9 PM", sales: 728),
-//        Sales(hour: "10 PM", sales: 728),
-//        Sales(hour: "11 PM", sales: 728)
-//    ]
-    
     let salesOfOneDay = [
+        Sales(hour: "0 AM", sales: 453),
+        Sales(hour: "1 AM", sales: 453),
+        Sales(hour: "2 AM", sales: 453),
+        Sales(hour: "3 AM", sales: 453),
+        Sales(hour: "4 AM", sales: 453),
+        Sales(hour: "5 AM", sales: 453),
+        Sales(hour: "6 AM", sales: 453),
+        Sales(hour: "7 AM", sales: 453),
         Sales(hour: "8 AM", sales: 453),
         Sales(hour: "9 AM", sales: 453),
         Sales(hour: "10 AM", sales: 453),
@@ -65,16 +46,43 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         Sales(hour: "11 PM", sales: 728)
     ]
     
+//    let salesOfOneDay = [
+//        Sales(hour: "8 AM", sales: 453),
+//        Sales(hour: "9 AM", sales: 453),
+//        Sales(hour: "10 AM", sales: 453),
+//        Sales(hour: "11 AM", sales: 453),
+//        Sales(hour: "12 AM", sales: 792),
+//        Sales(hour: "1 PM", sales: 928),
+//        Sales(hour: "2 PM", sales: 832),
+//        Sales(hour: "3 PM", sales: 543),
+//        Sales(hour: "4 PM", sales: 356),
+//        Sales(hour: "5 PM", sales: 328),
+//        Sales(hour: "6 PM", sales: 423),
+//        Sales(hour: "7 PM", sales: 892),
+//        Sales(hour: "8 PM", sales: 958),
+//        Sales(hour: "9 PM", sales: 728),
+//        Sales(hour: "10 PM", sales: 728),
+//        Sales(hour: "11 PM", sales: 728)
+//    ]
+    
     let salesOfDayTwo = [
-        Sales(hour: "8 AM", sales: 400),
-        Sales(hour: "9 AM", sales: 400),
-        Sales(hour: "10 AM", sales: 400),
+        Sales(hour: "0 AM", sales: 453),
+        Sales(hour: "1 AM", sales: 453),
+        Sales(hour: "2 AM", sales: 453),
+        Sales(hour: "3 AM", sales: 453),
+        Sales(hour: "4 AM", sales: 453),
+        Sales(hour: "5 AM", sales: 453),
+        Sales(hour: "6 AM", sales: 453),
+        Sales(hour: "7 AM", sales: 453),
+        Sales(hour: "8 AM", sales: 453),
+        Sales(hour: "9 AM", sales: 453),
+        Sales(hour: "10 AM", sales: 453),
         Sales(hour: "11 AM", sales: 453),
         Sales(hour: "12 AM", sales: 792),
         Sales(hour: "1 PM", sales: 928),
         Sales(hour: "2 PM", sales: 832),
-        Sales(hour: "3 PM", sales: 500),
-        Sales(hour: "4 PM", sales: 500),
+        Sales(hour: "3 PM", sales: 543),
+        Sales(hour: "4 PM", sales: 356),
         Sales(hour: "5 PM", sales: 328),
         Sales(hour: "6 PM", sales: 423),
         Sales(hour: "7 PM", sales: 892),
@@ -93,14 +101,14 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     var openingTimeBusiness = 11
     var closingTimeBusiness = 22
     var openingHours = [Int]()
-//    let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-    let defaultsOpeningHours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+//    let defaultsOpeningHours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     
     var hours : [String]!
     weak var axisFormatDelegate: IAxisValueFormatter?
     
     
-
+// If a real business uses the app, set to false, if we are showing a Demo, set to true
     var forDemo = true
     
     
@@ -138,7 +146,6 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
                 if openingHours.count >= salesOfOneDay.count {
 //                let dataEntry = BarChartDataEntry(x: Double(openingHours[i]), y: Double(salesOfOneDay[i].sales))
                 let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
-
                 data.append(dataEntry)
                 } else {
                     let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))

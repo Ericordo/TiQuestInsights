@@ -8,12 +8,44 @@
 
 import Foundation
 
-/*
- Struct for Bar Chart - All Day Data
- Struct for DetailedView - All Day Data
- Struct for DetailedView - Specific Hour Data
- Struct for Top/Worst Items - All Day Data
- Struct for Top/Worst Items - Specific Hour Data
- Struct for Top/Worst Categories - All Day Data
- Struct for Top/Worst Categories - Specific Hour Data
- */
+public struct BusinessCategory : Codable {
+    var id: Int?
+    var title: String?
+    var iconUrl: String?
+}
+
+public struct BusinessProductModel : Codable {
+    var id: Int?
+    var title: String?
+    var category: BusinessCategory?
+    var iconUrl: String?
+}
+
+public struct BusinessProductInfo : Codable {
+    var product: BusinessProductModel?
+    var counter: Int?
+}
+
+//public struct BusinessWeather : Codable {
+//    var datetime: Double?
+//    var temperature: Double?
+//    var condition: Double?
+//}
+
+public struct BusinessHourData : Codable {
+    var datetime: Double?
+    var totalEarnings: Double?
+    var totalOrders: Double?
+    var averageOrderValue: Double?
+    var soldProducts: [BusinessProductInfo]?
+//    var weather: BusinessWeather?
+}
+
+public struct BusinessDayData : Codable {
+    var dayData: [BusinessHourData]
+}
+
+
+
+
+

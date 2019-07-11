@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Macaw
 import Charts
 
 
@@ -16,8 +15,6 @@ class DashboardViewController: UIViewController {
     
     
     var calendarView = CalendarView()
-    
-    var todaySalesView : TodaySales!
     var todaySalesLabel = TodaySalesLabel()
     let weatherView = WeatherCollectionView()
     let detailedHourView = DetailedHourView()
@@ -37,10 +34,11 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
+        
         calendar.firstWeekday = 2
         calendar.timeZone = .autoupdatingCurrent
-        
-       
         
         self.view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         let margins = self.view.layoutMarginsGuide
@@ -65,19 +63,6 @@ class DashboardViewController: UIViewController {
         calendarView.calendarCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
         calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
 
-        
-        
-        
-        //         MARK: Configuration of the Today Sales Chart using Macaw Framework
-        todaySalesView = TodaySales(frame: CGRect(x: 20, y: calendarView.calendarHeight+71, width: view.frame.width - 20, height: 250))
-//        view.addSubview(todaySalesView)
-//        todaySalesView.translatesAutoresizingMaskIntoConstraints = false
-//        todaySalesView.topAnchor.constraint(equalTo: calendarView.calendarCollectionView.bottomAnchor, constant: 20).isActive = true
-//        todaySalesView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-//        todaySalesView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-//        todaySalesView.heightAnchor.constraint(equalToConstant: 250).isActive = true
-//        todaySalesView.contentMode = .scaleAspectFit
-//        TodaySales.playAnimations()
         
         // MARK: Configuration of the WeekNumberLabel
 //        let weekNumberLabel = WeekNumberLabel(frame: CGRect(x: 0, y: 71, width: 50, height: 50))
@@ -150,7 +135,7 @@ class DashboardViewController: UIViewController {
 //        infoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
 //        infoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         
-        
+      
         
         //         MARK: Configuration of the TableViews
         
@@ -186,17 +171,19 @@ class DashboardViewController: UIViewController {
         }
         
         didTapToday()
+        getBusinessData(businessId: 3, timestamp: 1561107160, completion: { _ in Void()})
     }
     
 
     
- 
-    
-    
-
     @objc func didTapToday() {
       
 //        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
+        
+         let currenTimestamp = Int(date.timeIntervalSince1970)
+        
+        
+        
         calendarView.daysOfCurrentWeek.removeAll()
         calendarView.daysOfSelectedWeek.removeAll()
         calendarView.getCurrentWeek()
@@ -214,19 +201,8 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func didTapSelect() {
-        //
-        //        //        TODO: Make a PopOverPresentationController showing the calendar
-//                let ac = UIAlertController(title: "Hello!", message: "This is a test.", preferredStyle: .actionSheet)
-//                let popover = ac.popoverPresentationController
-////                popover?.sourceView = self.view
-//
-//            popover?.sourceRect = CGRect(x: 10, y: 10, width: 200, height: 200)
-//                popover?.barButtonItem = selectButton
-//                present(ac, animated: true)
-
     calendarLauncher.showCalendar()
     calendarLauncher.calendarUpdateDelegate = calendarView
-        
     }
     
     @objc func didTapExport() {
@@ -254,6 +230,86 @@ class DashboardViewController: UIViewController {
         UIGraphicsEndImageContext()
         return screenshotImage
     }
+    
+    
+    func convertDateToTimestamp() {
+        
+    }
+    
+    func convertTimestampToDate() {
+        
+    }
+    
+    func getBusinessData(businessId : Int, timestamp: Int, completion: @escaping (_ dataArray: [BusinessDataModel]) -> Void) {
+        var dataArray : [BusinessDataModel] = []
+        let id = String(businessId)
+        let time = String(timestamp)
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: OperationQueue.main)
+        
+        let endpoint = "https://v1.api.tiquest.eu/shop/statistic?shopId=\(id)&period=day&timestamp=\(time)"
+        let safeURLString =
+            endpoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        guard let endpointURL = URL(string: safeURLString!) else {
+            print("The URL is invalid")
+            return
+        }
+        
+        var request = URLRequest(url: endpointURL)
+        request.httpMethod = "GET"
+        
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            guard let jsonData = data else {
+                print("The payload is invalid")
+                return
+            }
+        let decoder = JSONDecoder()
+            do {
+                // With line below JSON parsing was failing (Error: Expected to decode Dictionary<String, Any> but found an array instead)
+//                let businessInfo = try decoder.decode(BusinessDayData.self, from: jsonData)
+                let businessInfo = try decoder.decode([BusinessHourData].self, from: jsonData)
+                print("Business JSON decoded")
+                
+// With line below JSON parsing was failing (Error: Expected to decode Dictionary<String, Any> but found an array instead)
+//                for businessHourData in businessInfo.dayData {
+                    for businessHourData in businessInfo {
+                    let businessDataModel = BusinessDataModel()
+                    
+                    businessDataModel.datetime = businessHourData.datetime ?? 0
+                    businessDataModel.totalEarnings = businessHourData.totalEarnings ?? 0
+                    businessDataModel.totalOrders = businessHourData.totalOrders ?? 0
+                    businessDataModel.soldProducts = businessHourData.soldProducts ?? []
+
+
+//                    businessDataModel.weather = businessHourData.weather
+                    
+                    dataArray.append(businessDataModel)
+                    print(dataArray)
+                    print(dataArray[0].averageOrderValue)
+                    print(dataArray[0].totalEarnings)
+                    print(dataArray[0].soldProducts[0].counter)
+                        
+                    print(dataArray[0].soldProducts.count)
+                    print(dataArray[0].soldProducts)
+                    
+                }
+                DispatchQueue.main.async {
+                    completion(dataArray)
+                }
+                
+            } catch let error {
+                print("JSON decoding failed")
+                print(error)
+            }
+        }
+        dataTask.resume()
+        
+    }
+    
+    
+    
+    
+    
+    
     
     
     

@@ -13,7 +13,6 @@
 		3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E657B1622A56F9A0017A4A2 /* DummyJson.swift */; };
 		880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */; };
 		880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */; };
-		880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */; };
 		88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */; };
 		88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88557EDB2292ECDC007DBE21 /* LoginViewController.swift */; };
 		885D599722B2FBFD006B8F50 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599622B2FBFD006B8F50 /* MonthLabel.swift */; };
@@ -29,10 +28,17 @@
 		885D59AF22B7BF05006B8F50 /* CalendarLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59AE22B7BF05006B8F50 /* CalendarLauncher.swift */; };
 		885D59B222B7CD67006B8F50 /* SlideCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D59B122B7CD67006B8F50 /* SlideCalendarCollectionViewCell.swift */; };
 		8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8874614E229EDA2000D65346 /* WeekNumberLabel.swift */; };
-		888C6013228EE4490047A736 /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6012228EE4490047A736 /* Receipt.swift */; };
-		888C6015228EE4650047A736 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6014228EE4650047A736 /* Item.swift */; };
 		888C6017228EE91D0047A736 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6016228EE91D0047A736 /* DummyData.swift */; };
 		888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888C6018228EFE540047A736 /* DashboardViewController.swift */; };
+		8899884B22D6428C00012C18 /* NativeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899884A22D6428C00012C18 /* NativeBarChart.swift */; };
+		8899885122D649E900012C18 /* DataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885022D649E900012C18 /* DataEntry.swift */; };
+		8899885322D649FF00012C18 /* CustomSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885222D649FF00012C18 /* CustomSegments.swift */; };
+		8899885522D64A1700012C18 /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885422D64A1700012C18 /* UIBezierPathExtension.swift */; };
+		8899885722D64A3900012C18 /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885622D64A3900012C18 /* CALayerExtension.swift */; };
+		8899885922D64A5400012C18 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885822D64A5400012C18 /* ArrayExtension.swift */; };
+		8899885C22D64C7700012C18 /* BasicBarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885B22D64C7700012C18 /* BasicBarEntry.swift */; };
+		8899885E22D64D1E00012C18 /* BasicBarChartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885D22D64D1E00012C18 /* BasicBarChartPresenter.swift */; };
+		8899886022D77BA300012C18 /* BusinessList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899885F22D77BA300012C18 /* BusinessList.swift */; };
 		889ABAD722D4F920006FBF7C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889ABAD622D4F920006FBF7C /* Credentials.swift */; };
 		88B7C75222C22DFB0021FF6F /* OpeningHoursValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75122C22DFB0021FF6F /* OpeningHoursValidation.swift */; };
 		88B7C75422C235410021FF6F /* BusinessDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75322C235410021FF6F /* BusinessDataModel.swift */; };
@@ -64,7 +70,6 @@
 		74ADADF95A9C723D4614757E /* Pods-TiQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiQuest.release.xcconfig"; path = "Target Support Files/Pods-TiQuest/Pods-TiQuest.release.xcconfig"; sourceTree = "<group>"; };
 		880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCalendarData.swift; sourceTree = "<group>"; };
-		880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesView.swift; sourceTree = "<group>"; };
 		88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesViewCharts.swift; sourceTree = "<group>"; };
 		88557EDB2292ECDC007DBE21 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		885D599622B2FBFD006B8F50 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
@@ -80,10 +85,17 @@
 		885D59AE22B7BF05006B8F50 /* CalendarLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarLauncher.swift; sourceTree = "<group>"; };
 		885D59B122B7CD67006B8F50 /* SlideCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		8874614E229EDA2000D65346 /* WeekNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekNumberLabel.swift; sourceTree = "<group>"; };
-		888C6012228EE4490047A736 /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
-		888C6014228EE4650047A736 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		888C6016228EE91D0047A736 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		888C6018228EFE540047A736 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		8899884A22D6428C00012C18 /* NativeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeBarChart.swift; sourceTree = "<group>"; };
+		8899885022D649E900012C18 /* DataEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEntry.swift; sourceTree = "<group>"; };
+		8899885222D649FF00012C18 /* CustomSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegments.swift; sourceTree = "<group>"; };
+		8899885422D64A1700012C18 /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
+		8899885622D64A3900012C18 /* CALayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
+		8899885822D64A5400012C18 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		8899885B22D64C7700012C18 /* BasicBarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarEntry.swift; sourceTree = "<group>"; };
+		8899885D22D64D1E00012C18 /* BasicBarChartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBarChartPresenter.swift; sourceTree = "<group>"; };
+		8899885F22D77BA300012C18 /* BusinessList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessList.swift; sourceTree = "<group>"; };
 		889ABAD622D4F920006FBF7C /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		88B7C75122C22DFB0021FF6F /* OpeningHoursValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHoursValidation.swift; sourceTree = "<group>"; };
 		88B7C75322C235410021FF6F /* BusinessDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDataModel.swift; sourceTree = "<group>"; };
@@ -190,8 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				3E441B0C22B7E0B7007C3A39 /* Global.swift */,
-				888C6012228EE4490047A736 /* Receipt.swift */,
-				888C6014228EE4650047A736 /* Item.swift */,
 				888C6016228EE91D0047A736 /* DummyData.swift */,
 				880DFD4A2292FEF40054F2C8 /* DummyCalendarData.swift */,
 				3E657B1622A56F9A0017A4A2 /* DummyJson.swift */,
@@ -202,6 +212,7 @@
 				88B7C75522C235860021FF6F /* BusinessDataStructs.swift */,
 				88B7C75922C389C40021FF6F /* DemoData.swift */,
 				889ABAD622D4F920006FBF7C /* Credentials.swift */,
+				8899885F22D77BA300012C18 /* BusinessList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,6 +249,28 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		8899884F22D649B300012C18 /* NativeBarChartHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				8899885022D649E900012C18 /* DataEntry.swift */,
+				8899885222D649FF00012C18 /* CustomSegments.swift */,
+				8899885422D64A1700012C18 /* UIBezierPathExtension.swift */,
+				8899885622D64A3900012C18 /* CALayerExtension.swift */,
+				8899885822D64A5400012C18 /* ArrayExtension.swift */,
+			);
+			path = NativeBarChartHelpers;
+			sourceTree = "<group>";
+		};
+		8899885A22D64AC000012C18 /* NativeBarChart */ = {
+			isa = PBXGroup;
+			children = (
+				8899884A22D6428C00012C18 /* NativeBarChart.swift */,
+				8899885B22D64C7700012C18 /* BasicBarEntry.swift */,
+				8899885D22D64D1E00012C18 /* BasicBarChartPresenter.swift */,
+			);
+			path = NativeBarChart;
+			sourceTree = "<group>";
+		};
 		88BA1C882295A7D500F96603 /* TopCategoriesTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +283,7 @@
 		88BA1C8B2296C52D00F96603 /* Today's Sales */ = {
 			isa = PBXGroup;
 			children = (
-				880DFD4C229307AD0054F2C8 /* TodaySalesView.swift */,
+				8899885A22D64AC000012C18 /* NativeBarChart */,
 				88BA1C8C2296CC8600F96603 /* TodaySalesLabel.swift */,
 				88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */,
 				885D59A422B41311006B8F50 /* XAxisValueFormatter.swift */,
@@ -304,6 +337,7 @@
 		88E3FF32228D9C08002871BB /* TiQuest */ = {
 			isa = PBXGroup;
 			children = (
+				8899884F22D649B300012C18 /* NativeBarChartHelpers */,
 				888C600F228EE1890047A736 /* Model */,
 				888C6011228EE1A80047A736 /* Controller */,
 				888C6010228EE19C0047A736 /* View */,
@@ -432,43 +466,49 @@
 			files = (
 				88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */,
 				88BA1C97229834CB00F96603 /* WeatherCollectionViewCell.swift in Sources */,
-				888C6015228EE4650047A736 /* Item.swift in Sources */,
 				885D59A522B41311006B8F50 /* XAxisValueFormatter.swift in Sources */,
 				885D59AB22B6F89F006B8F50 /* SplashScreenViewController.swift in Sources */,
+				8899885522D64A1700012C18 /* UIBezierPathExtension.swift in Sources */,
 				885D59A122B3E908006B8F50 /* OpeningSelectionTableViewCell.swift in Sources */,
 				88BA1C992298354D00F96603 /* WeatherCollectionView.swift in Sources */,
 				885D59A722B5601C006B8F50 /* ClosingSelectionTableViewCell.swift in Sources */,
 				888C601A228EFE540047A736 /* DashboardViewController.swift in Sources */,
-				888C6013228EE4490047A736 /* Receipt.swift in Sources */,
 				885D59B222B7CD67006B8F50 /* SlideCalendarCollectionViewCell.swift in Sources */,
 				3E3A432E22A00E2400FE660F /* TopSellersTableView.swift in Sources */,
 				88E3FF36228D9C08002871BB /* ViewController.swift in Sources */,
 				88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */,
+				8899885722D64A3900012C18 /* CALayerExtension.swift in Sources */,
 				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				885D59AF22B7BF05006B8F50 /* CalendarLauncher.swift in Sources */,
+				8899885922D64A5400012C18 /* ArrayExtension.swift in Sources */,
 				88B7C75422C235410021FF6F /* BusinessDataModel.swift in Sources */,
 				889ABAD722D4F920006FBF7C /* Credentials.swift in Sources */,
-				880DFD4D229307AD0054F2C8 /* TodaySalesView.swift in Sources */,
 				885D59A922B56F15006B8F50 /* UserDefaults.swift in Sources */,
 				3E3A433022A00E7F00FE660F /* TopSellersTableViewCell.swift in Sources */,
 				88B7C75222C22DFB0021FF6F /* OpeningHoursValidation.swift in Sources */,
 				8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */,
 				880DFD4B2292FEF40054F2C8 /* DummyCalendarData.swift in Sources */,
 				885D59A322B3E919006B8F50 /* LogOutTableViewCell.swift in Sources */,
+				8899884B22D6428C00012C18 /* NativeBarChart.swift in Sources */,
 				88BA1C812294116D00F96603 /* Calendar.swift in Sources */,
+				8899886022D77BA300012C18 /* BusinessList.swift in Sources */,
 				885D599922B3B3ED006B8F50 /* CalendarData.swift in Sources */,
 				88B7C75622C235860021FF6F /* BusinessDataStructs.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
 				88BA1C8D2296CC8600F96603 /* TodaySalesLabel.swift in Sources */,
 				885D599722B2FBFD006B8F50 /* MonthLabel.swift in Sources */,
+				8899885E22D64D1E00012C18 /* BasicBarChartPresenter.swift in Sources */,
 				88B7C75A22C389C40021FF6F /* DemoData.swift in Sources */,
 				88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */,
 				3E441B0D22B7E0B7007C3A39 /* Global.swift in Sources */,
 				888C6017228EE91D0047A736 /* DummyData.swift in Sources */,
+				8899885122D649E900012C18 /* DataEntry.swift in Sources */,
 				885D599E22B3DEBB006B8F50 /* SettingsView.swift in Sources */,
 				88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */,
 				88BA1C9E229C1DA800F96603 /* DetailedHourCollectionView.swift in Sources */,
+				8899885322D649FF00012C18 /* CustomSegments.swift in Sources */,
 				88BA1CA0229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift in Sources */,
+				8899885C22D64C7700012C18 /* BasicBarEntry.swift in Sources */,
 				88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */,
 				3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */,
 				88B7C75822C389B80021FF6F /* DemoViewController.swift in Sources */,
