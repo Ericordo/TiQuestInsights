@@ -171,6 +171,7 @@ class DashboardViewController: UIViewController {
         }
         
         didTapToday()
+        //        Just to test:
         getBusinessData(businessId: 3, timestamp: 1561107160, completion: { _ in Void()})
     }
     
@@ -178,9 +179,35 @@ class DashboardViewController: UIViewController {
     
     @objc func didTapToday() {
       
-//        calendarView.calendarCollectionView.selectItem(at: lastCellIndexPath, animated: true, scrollPosition: .right)
+
         
-         let currenTimestamp = Int(date.timeIntervalSince1970)
+        let currentTimestamp = Int(date.timeIntervalSince1970)
+        print(currentTimestamp)
+        var todayData : [BusinessDataModel] = []
+//        Change timestamp below with currentTimestamp
+       getBusinessData(businessId: 3, timestamp: 1561107160, completion: { dataArray in
+            todayData = dataArray
+        var timestampArray : [Double] = []
+        for data in todayData {
+            timestampArray.append(data.datetime)
+        }
+        print("timestampArray \(timestampArray)")
+        var hourArray : [Int] = []
+        for timestamp in timestampArray {
+          
+            let date = Date(timeIntervalSince1970: timestamp/1000)
+            let hour = calendar.component(.hour, from: calendar.date(byAdding: .hour, value: -2, to: date)!)
+            hourArray.append(hour)
+        }
+        print("hourArray \(hourArray)")
+        
+//        Make a 24 objects array, find out what are the hours with no data, and assign 0, otherwise assign the data
+        
+       })
+        
+        
+
+        
         
         
         
@@ -283,13 +310,12 @@ class DashboardViewController: UIViewController {
 //                    businessDataModel.weather = businessHourData.weather
                     
                     dataArray.append(businessDataModel)
-                    print(dataArray)
-                    print(dataArray[0].averageOrderValue)
-                    print(dataArray[0].totalEarnings)
-                    print(dataArray[0].soldProducts[0].counter)
-                        
-                    print(dataArray[0].soldProducts.count)
-                    print(dataArray[0].soldProducts)
+//                    print(dataArray)
+//                    print(dataArray[0].averageOrderValue)
+//                    print(dataArray[0].totalEarnings)
+//                    print(dataArray[0].soldProducts[0].counter)
+//                    print(dataArray[0].soldProducts.count)
+//                    print(dataArray[0].soldProducts)
                     
                 }
                 DispatchQueue.main.async {
