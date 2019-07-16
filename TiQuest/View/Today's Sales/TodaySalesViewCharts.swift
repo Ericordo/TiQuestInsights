@@ -102,6 +102,8 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     var closingTimeBusiness = 22
     var openingHours = [Int]()
     let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    
+    let defaultsSales : [Double] = [123, 243, 345, 456, 356, 464, 465, 466, 757, 657, 757, 454, 354, 433, 433, 656, 643, 643, 634, 363, 639, 363, 363, 643]
 //    let defaultsOpeningHours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     
     var hours : [String]!
@@ -109,9 +111,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     
 // If a real business uses the app, set to false, if we are showing a Demo, set to true
-    var forDemo = true
-    
-    
+//    var forDemo = true
     
     
     
@@ -122,10 +122,10 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         axisFormatDelegate = self
         hours = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
         updateOpeningHours()
-        setBarData(xValues: defaultsOpeningHours, yValues: salesOfOneDay)
+        setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
         customizeBarChart()
         print("chart reloaded")
-        forDemo = false
+//        forDemo = false
         
       
        
@@ -137,30 +137,34 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setBarData(xValues: [Int], yValues: [Sales]) {
+    func setBarData(xValues: [Int], yValues: [Double]) {
 //        1 - Creating an Array of data entries
     
             var data : [BarChartDataEntry] = []
-         if !openingHours.isEmpty {
-            for i in 0..<salesOfOneDay.count {
-                if openingHours.count >= salesOfOneDay.count {
-//                let dataEntry = BarChartDataEntry(x: Double(openingHours[i]), y: Double(salesOfOneDay[i].sales))
-                let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
-                data.append(dataEntry)
-                } else {
-                    let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
-                    data.append(dataEntry)
-                }
-            }
-         } else {
-            for i in 0..<yValues.count {
-                let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
-                
-                data.append(dataEntry)
-            }
-            
-        }
+//         if !openingHours.isEmpty {
+//            for i in 0..<salesOfOneDay.count {
+//                if openingHours.count >= salesOfOneDay.count {
+////                let dataEntry = BarChartDataEntry(x: Double(openingHours[i]), y: Double(salesOfOneDay[i].sales))
+//                let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
+//                data.append(dataEntry)
+//                } else {
+//                    let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
+//                    data.append(dataEntry)
+//                }
+//            }
+//         } else {
+//            for i in 0..<yValues.count {
+//                let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i].sales))
+//
+//                data.append(dataEntry)
+//            }
+//
+//        }
         
+        for i in 0..<yValues.count {
+            let dataEntry = BarChartDataEntry(x: Double(xValues[i]), y: Double(yValues[i]))
+            data.append(dataEntry)
+        }
         
 //        2 - Creating a data set with the array
         chartDataSet = BarChartDataSet(entries: data, label: "Sales")
@@ -169,22 +173,13 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         chartDataSet.valueTextColor = .black
         chartDataSet.valueFont = UIFont.systemFont(ofSize: 15, weight: .bold)
         
-        
-        
-      
-        
-        
-        
 //        3 - Create Bar Chart Data with our data set
         
         chartData = BarChartData(dataSet: chartDataSet)
         chartData.barWidth = 0.6
         
-        
-        
         self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
         self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
-        
         xAxis.valueFormatter = axisFormatDelegate
         
 //        if openingHours.isEmpty {
@@ -194,19 +189,20 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 //            self.xAxis.axisMinimum = Double(openingHours[0]) - 0.5
 //            self.xAxis.axisMaximum = Double(openingHours[openingHours.count-1]) + 0.5
 //        }
-       
-        
-        
-        
+
 //        4 - Set our Bar Chart Data
 //        If self.date is empty it will display "No data available"
-        self.data = chartData
-        self.notifyDataSetChanged()
+        if yValues.reduce(0, +) == 0 {
+            self.data = nil
+        } else {
+           self.data = chartData
+        }
         
+       
+        self.notifyDataSetChanged()
     }
     
     func customizeBarChart() {
-        
         self.noDataText = "No data available"
 //        self.chartDescription?.text = "Sales"
         self.xAxis.labelPosition = .top
@@ -233,23 +229,11 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.drawValueAboveBarEnabled = true
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         self.xAxis.labelTextColor = UIColor.black
-        
-        
-        
-        
-        
 //        self.xAxis.centerAxisLabelsEnabled = true
 //        self.xAxis.spaceMin = 0.5
 //        self.xAxis.spaceMax = 0.5
 //        self.xAxis.granularityEnabled = true
 //        self.xAxis.granularity = 1
-        
-        
-        
-        
-        
-  
-        
     }
     
 //    let blockWidth = self.frame.width / 11
@@ -257,10 +241,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 //    let spaceWidthInPx = 0.40 * blockWidth
     
     @objc func chartValueSelected(_ chartView: Charts.ChartViewBase, entry: Charts.ChartDataEntry, highlight: Charts.Highlight) {
-        print("HELLO")
         detailedViewUpdateDelegate.updateDetailedView(key: Int(highlight.x))
-
-        
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
@@ -278,9 +259,6 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
             }
             openingHours.removeLast()
             defaults.setValue(openingHours, forKey: "openingHours")
-            
-        
-
             
         }
             
@@ -306,20 +284,11 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 }
 
 extension TodaySalesChart: DataUpdateDelegate {
-    func updateChartBar() {
-        
-        if forDemo == false {
-            self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfOneDay)
-            self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
-            forDemo = true
-        }
-        
-        if forDemo == true {
-        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
+    func updateChartBar(xValues: [Int], yValues: [Double]) {
+        self.setBarData(xValues: xValues, yValues: yValues)
+        self.chartData.notifyDataChanged()
+        self.notifyDataSetChanged()
         self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
-        forDemo = false
-        }
-  
     }
 }
 
@@ -349,7 +318,7 @@ extension TodaySalesChart: ClosingTimeUpdateDelegate {
         chartDataSet.notifyDataSetChanged()
         chartData.notifyDataChanged()
         print(openingHours)
-        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
+//        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
      
     }
     

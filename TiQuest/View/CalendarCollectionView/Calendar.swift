@@ -11,7 +11,7 @@ import UIKit
 import Charts
 
 protocol DataUpdateDelegate {
-    func updateChartBar()
+    func updateChartBar(xValues: [Int], yValues: [Double])
 }
 
 class CalendarView: NSObject {
@@ -30,6 +30,10 @@ class CalendarView: NSObject {
     
     var daysOfSelectedWeek = [Int]()
     var daysOfCurrentWeek = [Int]()
+    
+    var selectedDay : Int = 0
+    var selectedMonth : Int = 0
+    var selectedYear : Int = 0
     
     let calendarCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -61,6 +65,7 @@ class CalendarView: NSObject {
         currentMonth = months[month]
        
         getCurrentWeek()
+     
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -160,7 +165,65 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 //        let selectedImageString = NSAttributedString(attachment: selectedStringAttachment)
 //        selectedString.append(selectedImageString)
 //        cell.dateLabel.attributedText = selectedString
-        dataUpdateDelegate.updateChartBar()
+        
+//        dataUpdateDelegate.updateChartBar()
+        
+        if daysOfSelectedWeek.isEmpty {
+            selectedDay = daysOfCurrentWeek[indexPath.row]
+        } else {
+            selectedDay = daysOfSelectedWeek[indexPath.row]
+        }
+        var selectedDayData : [BusinessDataModel] = []
+        DashboardViewController.getBusinessData(businessId: 3, timestamp: DashboardViewController.convertDateToTimestamp(day: selectedDay, month: selectedMonth, year: selectedYear), completion: { dataArray in
+            selectedDayData = dataArray
+            var timestampArray : [Double] = []
+            for data in selectedDayData {
+                timestampArray.append(data.datetime)
+            }
+            print("timestampArray \(timestampArray)")
+            var hourArray : [Int] = []
+            for timestamp in timestampArray {
+                
+                let date = Date(timeIntervalSince1970: timestamp/1000)
+                let hour = calendar.component(.hour, from: calendar.date(byAdding: .hour, value: -2, to: date)!)
+                hourArray.append(hour)
+            }
+            print("hourArray \(hourArray)")
+            
+            let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+            var revenuePerHour : [Double] = []
+            var index = 0
+            for defaultHour in defaultsOpeningHours {
+                if hourArray.contains(defaultHour) {
+                    revenuePerHour.append(selectedDayData[index].totalEarnings)
+                    index += 1
+                } else {
+                    revenuePerHour.append(0)
+                }
+            }
+            
+            
+            //        If we want to make a sales array
+            var salesOfSelectedDay : [Sales] = []
+            for hour in defaultsOpeningHours {
+                let sale = Sales(hour: String(hour), sales: revenuePerHour[hour])
+                salesOfSelectedDay.append(sale)
+            }
+            
+            
+            //        Reloading of the chart with new data
+            //
+            //        self.todaySalesChart.setBarData(xValues: defaultsOpeningHours, yValues: testData)
+            //        self.todaySalesChart.chartData.notifyDataChanged()
+            //        self.todaySalesChart.notifyDataSetChanged()
+            //        self.todaySalesChart.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
+            //        self.todaySalesChart.updateChartBar()
+            self.dataUpdateDelegate.updateChartBar(xValues: defaultsOpeningHours, yValues: revenuePerHour)
+            
+            print(salesOfSelectedDay)
+            print("revenueArray \(revenuePerHour)")
+        })
+        
  
     }
     
@@ -229,6 +292,11 @@ extension CalendarView : UICollectionViewDelegateFlowLayout {
 
 extension CalendarView : CalendarUpdateDelegate {
     func updateSelectedWeek(day: Int, month: Int, year: Int) {
+        
+        selectedDay = day
+        selectedMonth = month
+        selectedYear = year
+        
         let components = DateComponents(year: year, month: month, day: day)
         guard let selectedDate = calendar.date(from: components) else { return }
         let selectedWeekNumber = calendar.component(.weekOfYear, from: selectedDate)
@@ -282,7 +350,65 @@ extension CalendarView : CalendarUpdateDelegate {
         } else {
         calendarCollectionView.selectItem(at: selectedCellIndexPath, animated: true, scrollPosition: .right)
         }
-        dataUpdateDelegate.updateChartBar()
+        
+        print("selected timestamp \(DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year))")
+//        Write to code to get the data for the selected date
+        var selectedDayData : [BusinessDataModel] = []
+        DashboardViewController.getBusinessData(businessId: 3, timestamp: DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year), completion: { dataArray in
+            selectedDayData = dataArray
+            var timestampArray : [Double] = []
+            for data in selectedDayData {
+                timestampArray.append(data.datetime)
+            }
+            print("timestampArray \(timestampArray)")
+            var hourArray : [Int] = []
+            for timestamp in timestampArray {
+                
+                let date = Date(timeIntervalSince1970: timestamp/1000)
+                let hour = calendar.component(.hour, from: calendar.date(byAdding: .hour, value: -2, to: date)!)
+                hourArray.append(hour)
+            }
+            print("hourArray \(hourArray)")
+            
+            let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+            var revenuePerHour : [Double] = []
+            var index = 0
+            for defaultHour in defaultsOpeningHours {
+                if hourArray.contains(defaultHour) {
+                    revenuePerHour.append(selectedDayData[index].totalEarnings)
+                    index += 1
+                } else {
+                    revenuePerHour.append(0)
+                }
+            }
+            
+            
+            //        If we want to make a sales array
+            var salesOfSelectedDay : [Sales] = []
+            for hour in defaultsOpeningHours {
+                let sale = Sales(hour: String(hour), sales: revenuePerHour[hour])
+                salesOfSelectedDay.append(sale)
+            }
+            
+            
+            //        Reloading of the chart with new data
+            //
+            //        self.todaySalesChart.setBarData(xValues: defaultsOpeningHours, yValues: testData)
+            //        self.todaySalesChart.chartData.notifyDataChanged()
+            //        self.todaySalesChart.notifyDataSetChanged()
+            //        self.todaySalesChart.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
+            //        self.todaySalesChart.updateChartBar()
+            self.dataUpdateDelegate.updateChartBar(xValues: defaultsOpeningHours, yValues: revenuePerHour)
+           
+            print(salesOfSelectedDay)
+            print("revenueArray \(revenuePerHour)")
+        })
+        
+        
+        
+        
+//        dataUpdateDelegate.updateChartBar(xValues: [1, 2, 3, 4, 5], yValues: [100, 200, 300, 400, 500])
+//        
 
   
         

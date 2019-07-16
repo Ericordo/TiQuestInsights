@@ -278,13 +278,7 @@ class CalendarLauncher: NSObject {
         }
  
     }
-
-    
-    
-    
-    
-    
-    
+ 
 }
 
 extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -323,7 +317,11 @@ extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate
         }
 //        Current date in red
         if currentMonth == months[calendar.component(.month, from: date) - 1] && yearDisplayed == calendar.component(.year, from: date) && indexPath.row + 1 - numberOfEmptyBox == day {
-            cell.backgroundColor = .red
+
+//            cell.backgroundColor = .red
+            cell.dayNumberLabel.layer.borderColor = UIColor.red.cgColor
+        } else {
+            cell.dayNumberLabel.layer.borderColor = UIColor.black.cgColor
         }
 
         return cell
@@ -347,6 +345,8 @@ extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate
         calendarUpdateDelegate.updateSelectedWeek(day: selectedDay, month: monthDisplayed+1, year: yearDisplayed)
         weekNumberUpdateDelegate.updateWeekNumber(day: selectedDay, month: monthDisplayed+1, year: yearDisplayed)
         monthLabelUpdateDelegate.updateSelectedMonth(month: "\(currentMonth)\n\(yearDisplayed)")
+        
+        
         print("potential day \(selectedDay)")
         print("potential month \(monthDisplayed+1)")
         print("potential year \(yearDisplayed)")
@@ -378,3 +378,5 @@ extension CalendarLauncher: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+

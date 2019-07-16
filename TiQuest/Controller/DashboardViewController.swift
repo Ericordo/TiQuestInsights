@@ -171,21 +171,18 @@ class DashboardViewController: UIViewController {
         }
         
         didTapToday()
-        //        Just to test:
-        getBusinessData(businessId: 3, timestamp: 1561107160, completion: { _ in Void()})
+
+        
     }
     
 
     
     @objc func didTapToday() {
       
-
-        
         let currentTimestamp = Int(date.timeIntervalSince1970)
         print(currentTimestamp)
         var todayData : [BusinessDataModel] = []
-//        Change timestamp below with currentTimestamp
-       getBusinessData(businessId: 3, timestamp: 1561107160, completion: { dataArray in
+       DashboardViewController.getBusinessData(businessId: 3, timestamp: currentTimestamp, completion: { dataArray in
             todayData = dataArray
         var timestampArray : [Double] = []
         for data in todayData {
@@ -201,30 +198,46 @@ class DashboardViewController: UIViewController {
         }
         print("hourArray \(hourArray)")
         
-//        Make a 24 objects array, find out what are the hours with no data, and assign 0, otherwise assign the data
+        let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+        var revenuePerHour : [Double] = []
+        var index = 0
+        for defaultHour in defaultsOpeningHours {
+            if hourArray.contains(defaultHour) {
+                revenuePerHour.append(todayData[index].totalEarnings)
+                index += 1
+            } else {
+                revenuePerHour.append(0)
+            }
+            }
+        testData = revenuePerHour
         
+//        If we want to make a sales array
+        var salesOfToday : [Sales] = []
+        for hour in defaultsOpeningHours {
+            let sale = Sales(hour: String(hour), sales: testData[hour])
+            salesOfToday.append(sale)
+        }
+        
+        
+//        Reloading of the chart with new data
+        self.todaySalesChart.updateChartBar(xValues: defaultsOpeningHours, yValues: testData)
+        print(salesOfToday)
+        print("revenueArray \(revenuePerHour)")
        })
-        
-        
-
-        
-        
         
         
         calendarView.daysOfCurrentWeek.removeAll()
         calendarView.daysOfSelectedWeek.removeAll()
         calendarView.getCurrentWeek()
         calendarView.calendarCollectionView.reloadData()
-        print("calendarview days of current wk \(calendarView.daysOfCurrentWeek[weekday-1])")
+//        print("calendarview days of current wk \(calendarView.daysOfCurrentWeek[weekday-1])")
         let todayCellIndexPath = IndexPath.init(row: weekday-1, section: 0)
         calendarView.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
-        calendarLauncher.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
+//        calendarLauncher.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
         weekNumberLabel.text = "W\(weekNumber)"
         let currentMonth = months[calendar.component(.month, from: date) - 1]
         monthLabel.text = "\(currentMonth)\n\(year)"
 
-//        TodaySales.playAnimations()
-        todaySalesChart.updateChartBar()
     }
     
     @objc func didTapSelect() {
@@ -259,15 +272,18 @@ class DashboardViewController: UIViewController {
     }
     
     
-    func convertDateToTimestamp() {
-        
+    static func convertDateToTimestamp(day: Int, month: Int, year: Int) -> Int {
+        let components = DateComponents(calendar: calendar, year: year, month: month, day: day)
+        let date = calendar.date(from: components)
+        let timestamp = Int((date!.timeIntervalSince1970))
+        return timestamp
     }
     
-    func convertTimestampToDate() {
-        
+    static func convertTimestampToDate(timestamp: Double) -> Date {
+        return Date(timeIntervalSince1970: timestamp/1000)
     }
     
-    func getBusinessData(businessId : Int, timestamp: Int, completion: @escaping (_ dataArray: [BusinessDataModel]) -> Void) {
+    static func getBusinessData(businessId : Int, timestamp: Int, completion: @escaping (_ dataArray: [BusinessDataModel]) -> Void) {
         var dataArray : [BusinessDataModel] = []
         let id = String(businessId)
         let time = String(timestamp)
