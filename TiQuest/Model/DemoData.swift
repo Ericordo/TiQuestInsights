@@ -10,5 +10,5 @@ import Foundation
 
 // Put Fake Data for Demo Version
 
-var testData : [Double] = []
+
 

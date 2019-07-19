@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 struct DetailedData {
-    var date : String
     var time : Int?
     var formattedTime : String
     var sales : String
@@ -20,9 +19,9 @@ struct DetailedData {
     var averageTicket : String
 }
 
-let dataTuesday11 = DetailedData(date: "Tuesday 28", time: 11, formattedTime: "11:00", sales: "599,23€", topSeller: "Caesar Salad", worstSeller: "Fondue", totalReceipts: "49", averageTicket: "45,23€")
-let dataTuesday12 = DetailedData(date: "Tuesday 28", time: 12, formattedTime: "12:00", sales: "428,23€", topSeller: "Brocoli", worstSeller: "Burger", totalReceipts: "19", averageTicket: "32,23€")
-let dataTuesdayAll = DetailedData(date: "Tuesday 18", time: nil, formattedTime: "All Day", sales: "4234,56€", topSeller: "Banana Split", worstSeller: "Cordon bleu", totalReceipts: "234", averageTicket: "32,45€")
+let dataTuesday11 = DetailedData(time: 11, formattedTime: "11:00", sales: "599,23€", topSeller: "Caesar Salad", worstSeller: "Fondue", totalReceipts: "49", averageTicket: "45,23€")
+let dataTuesday12 = DetailedData(time: 12, formattedTime: "12:00", sales: "428,23€", topSeller: "Brocoli", worstSeller: "Burger", totalReceipts: "19", averageTicket: "32,23€")
+let dataTuesdayAll = DetailedData(time: nil, formattedTime: "All Day", sales: "4234,56€", topSeller: "Banana Split", worstSeller: "Cordon bleu", totalReceipts: "234", averageTicket: "32,45€")
 
 let detailedData : [ Int : DetailedData] = [ 11 : dataTuesday11, 12 : dataTuesday12, 24 : dataTuesdayAll]
 
@@ -37,12 +36,23 @@ class DetailedHourView: NSObject {
     let detailedViewHeight : CGFloat = 60
     var cellWidth : CGFloat = 100
     
-    var formattedTime = detailedData[24]?.formattedTime
-    var sales = detailedData[24]?.sales
-    var topSeller = detailedData[24]?.topSeller
-    var worstSeller = detailedData[24]?.worstSeller
-    var totalReceipts = detailedData[24]?.totalReceipts
-    var averageTicket = detailedData[24]?.averageTicket
+    let formattedTimes = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
+    
+//    var formattedTime = detailedData[24]?.formattedTime
+//    var sales = detailedData[24]?.sales
+//    var topSeller = detailedData[24]?.topSeller
+//    var worstSeller = detailedData[24]?.worstSeller
+//    var totalReceipts = detailedData[24]?.totalReceipts
+//    var averageTicket = detailedData[24]?.averageTicket
+    
+    var formattedTime = ""
+    var sales = ""
+    var topSeller = ""
+    var worstSeller = ""
+    var totalReceipts = ""
+    var averageTicket = ""
+    
+    var selectedDayData : [BusinessDataModel] = []
 
     
 
@@ -52,8 +62,6 @@ class DetailedHourView: NSObject {
                 cellWidth = view.frame.width/6
                 view.addSubview(detailedHourCollectionView)
                 detailedHourCollectionView.frame = CGRect(x: 0, y: 371 + detailedViewHeight, width: view.frame.width, height: detailedViewHeight)
-                
-                
         }
     }
     
@@ -67,10 +75,6 @@ class DetailedHourView: NSObject {
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         cv.isScrollEnabled = false
         cv.sizeThatFits(layout.estimatedItemSize)
-        
-        
-
-        
         return cv
     }()
     
@@ -80,9 +84,6 @@ class DetailedHourView: NSObject {
         attr.append(NSAttributedString(string: downString, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.black.cgColor]))
         return attr
     }
-
-    
-    
     
 }
 
@@ -104,41 +105,40 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
 
         switch indexPath.item {
         case 0:
-            guard let formattedTime = formattedTime else {
-                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: "")
-                return cell
-            }
+//            guard let formattedTime = formattedTime else {
+//                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: "")
+//                return cell
+//            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: formattedTime)
-            print(cell.infoLabel.frame.width)
         case 1:
-            guard let sales = sales else {
-                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "")
-                return cell
-            }
+//            guard let sales = sales else {
+//                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "")
+//                return cell
+//            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: sales)
         case 2:
-            guard let topSeller = topSeller else {
-                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "")
-                return cell
-            }
+//            guard let topSeller = topSeller else {
+//                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "")
+//                return cell
+//            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: topSeller)
         case 3:
-            guard let worstSeller = worstSeller else {
-                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: "")
-                return cell
-            }
+//            guard let worstSeller = worstSeller else {
+//                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: "")
+//                return cell
+//            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: worstSeller)
         case 4:
-            guard let totalReceipts = totalReceipts else {
-                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "")
-                return cell
-            }
+//            guard let totalReceipts = totalReceipts else {
+//                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "")
+//                return cell
+//            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: totalReceipts)
         case 5:
-            guard let averageTicket = averageTicket else {
-                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: "")
-                return cell
-            }
+//            guard let averageTicket = averageTicket else {
+//                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: "")
+//                return cell
+//            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: averageTicket)
         default:
             break
@@ -157,7 +157,6 @@ extension DetailedHourView : UICollectionViewDelegateFlowLayout {
 //        } else {
 //             return CGSize(width: cellWidth, height: detailedViewHeight)
 //        }
-
         return CGSize(width: cellWidth, height: detailedViewHeight)
 
 
@@ -170,14 +169,112 @@ extension DetailedHourView : UICollectionViewDelegateFlowLayout {
 
 extension DetailedHourView : DetailedViewUpdateDelegate {
     
-    func updateDetailedView(key: Int) {
-        formattedTime = detailedData[key]?.formattedTime
-        sales = detailedData[key]?.sales
-        topSeller = detailedData[key]?.topSeller
-        worstSeller = detailedData[key]?.worstSeller
-        totalReceipts = detailedData[key]?.totalReceipts
-        averageTicket = detailedData[key]?.averageTicket
-        detailedHourCollectionView.reloadData()
+    #warning("When several products are sold with the same quantity, what do we do? When one product is not sold at all, what do we do?")
+   
+    func updateDetailedView(key: Int, data: [BusinessDataModel]) {
+        print(data)
+        
+        var detailedDataAllDay : DetailedData!
+        var detailedData : [ Int : DetailedData] = [:]
+
+        
+        func prepareAllDayData() {
+            var salesAllDay : Double = 0
+            var receiptsAllDay : Double = 0
+            var productsSold : [BusinessProductInfo] = []
+            
+            data.forEach { data in
+                salesAllDay += data.totalEarnings
+                receiptsAllDay += data.totalOrders
+                productsSold += data.soldProducts
+            }
+            
+            
+            productsSold = productsSold.filter({$0.product?.title != "Coperto" })
+            let productsSoldSorted = productsSold.sorted(by: { $0.counter! < $1.counter! })
+            var averageTicketAllDay : Double = 0
+            if receiptsAllDay != 0 {
+                averageTicketAllDay = salesAllDay / receiptsAllDay
+            }
+            
+            
+            let time : Int? = nil
+            let formattedTime = "All Day"
+            let sales = "\(Int(salesAllDay)) €"
+            let topSeller = productsSoldSorted.last?.product?.title
+            let worstSeller = productsSoldSorted.first?.product?.title
+            let receipts = String(Int(receiptsAllDay))
+            let average = "\(Int(averageTicketAllDay)) €"
+            
+            detailedDataAllDay = DetailedData(time: time, formattedTime: formattedTime, sales: sales, topSeller: topSeller ?? "", worstSeller: worstSeller ?? "", totalReceipts: receipts, averageTicket: average)
+        }
+        
+        func prepareSpecificHourData() {
+            
+                var key = 0
+            
+            data.forEach { data in
+                
+                let formattedTime = formattedTimes[key]
+                let sales = "\(Int(data.totalEarnings)) €"
+                let productsSold = data.soldProducts.filter({$0.product?.title != "Coperto" })
+                let productsSoldSorted = productsSold.sorted(by: { $0.counter! < $1.counter! })
+                let topSeller = productsSoldSorted.last?.product?.title
+                let worstSeller = productsSoldSorted.first?.product?.title
+                let receipts = String(Int(data.totalOrders))
+                let average = "\(Int(data.averageOrderValue)) €"
+                
+                
+                
+                let detailedDataSpecificHour = DetailedData(time: key, formattedTime: formattedTime, sales: sales, topSeller: topSeller ?? "", worstSeller: worstSeller ?? "", totalReceipts: receipts, averageTicket: average)
+                
+                detailedData[key] = detailedDataSpecificHour
+                
+                key += 1
+                
+            }
+            print(detailedData)
+            
+        }
+        
+        switch key {
+        case 24:
+            prepareAllDayData()
+            formattedTime = detailedDataAllDay.formattedTime
+            sales = detailedDataAllDay.sales
+            topSeller = detailedDataAllDay.topSeller
+            worstSeller = detailedDataAllDay.worstSeller
+            totalReceipts = detailedDataAllDay.totalReceipts
+            averageTicket = detailedDataAllDay.averageTicket
+            detailedHourCollectionView.reloadData()
+        default:
+            prepareSpecificHourData()
+//            formattedTime = detailedDataSpecificHour.formattedTime
+//            sales = detailedDataSpecificHour.sales
+//            topSeller = detailedDataSpecificHour.topSeller
+//            worstSeller = detailedDataSpecificHour.worstSeller
+//            totalReceipts = detailedDataSpecificHour.totalReceipts
+//            averageTicket = detailedDataSpecificHour.averageTicket
+            formattedTime = detailedData[key]!.formattedTime
+            sales = detailedData[key]!.sales
+            topSeller = detailedData[key]!.topSeller
+            worstSeller = detailedData[key]!.worstSeller
+            totalReceipts = detailedData[key]!.totalReceipts
+            averageTicket = detailedData[key]!.averageTicket
+            detailedHourCollectionView.reloadData()
+        }
+        
+     
+        
+        
+        
+//        formattedTime = detailedData[key]?.formattedTime
+//        sales = detailedData[key]?.sales
+//        topSeller = detailedData[key]?.topSeller
+//        worstSeller = detailedData[key]?.worstSeller
+//        totalReceipts = detailedData[key]?.totalReceipts
+//        averageTicket = detailedData[key]?.averageTicket
+//        detailedHourCollectionView.reloadData()
     }
     
     

@@ -10,7 +10,7 @@ import UIKit
 import Charts
 
 protocol DetailedViewUpdateDelegate {
-    func updateDetailedView(key: Int)
+    func updateDetailedView(key: Int, data: [BusinessDataModel])
 }
 
 class TodaySalesChart : BarChartView, ChartViewDelegate {
@@ -97,6 +97,8 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     var chartDataSet = BarChartDataSet()
     var chartData = BarChartData()
+    
+    var selectedDayData : [BusinessDataModel] = []
     
     var openingTimeBusiness = 11
     var closingTimeBusiness = 22
@@ -241,11 +243,12 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
 //    let spaceWidthInPx = 0.40 * blockWidth
     
     @objc func chartValueSelected(_ chartView: Charts.ChartViewBase, entry: Charts.ChartDataEntry, highlight: Charts.Highlight) {
-        detailedViewUpdateDelegate.updateDetailedView(key: Int(highlight.x))
+        print("key \(Int(highlight.x))")
+        detailedViewUpdateDelegate.updateDetailedView(key: Int(highlight.x), data: selectedDayData)
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        detailedViewUpdateDelegate.updateDetailedView(key: 24)
+        detailedViewUpdateDelegate.updateDetailedView(key: 24, data: selectedDayData)
     }
     
     func updateOpeningHours() {
@@ -289,7 +292,18 @@ extension TodaySalesChart: DataUpdateDelegate {
         self.chartData.notifyDataChanged()
         self.notifyDataSetChanged()
         self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+        
+        self.highlightValue(nil)
+        
+        
     }
+    
+    func sendSelectedDayData(data: [BusinessDataModel]) {
+        selectedDayData = data
+        detailedViewUpdateDelegate.updateDetailedView(key: 24, data: selectedDayData)
+    }
+    
+    
 }
 
 extension TodaySalesChart: OpeningTimeUpdateDelegate {
@@ -298,10 +312,9 @@ extension TodaySalesChart: OpeningTimeUpdateDelegate {
         print("delegate open \(openingTimeBusiness)")
         updateOpeningHours()
        
-        
+        self.chartData.notifyDataChanged()
         self.notifyDataSetChanged()
-        chartDataSet.notifyDataSetChanged()
-        chartData.notifyDataChanged()
+        self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
         print(openingHours)
     }
     
@@ -314,9 +327,9 @@ extension TodaySalesChart: ClosingTimeUpdateDelegate {
         print("delegate closing \(closingTimeBusiness)")
         updateOpeningHours()
        
+        self.chartData.notifyDataChanged()
         self.notifyDataSetChanged()
-        chartDataSet.notifyDataSetChanged()
-        chartData.notifyDataChanged()
+        self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
         print(openingHours)
 //        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
      

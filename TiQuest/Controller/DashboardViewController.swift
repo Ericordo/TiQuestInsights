@@ -209,20 +209,20 @@ class DashboardViewController: UIViewController {
                 revenuePerHour.append(0)
             }
             }
-        testData = revenuePerHour
+
         
 //        If we want to make a sales array
         var salesOfToday : [Sales] = []
         for hour in defaultsOpeningHours {
-            let sale = Sales(hour: String(hour), sales: testData[hour])
+            let sale = Sales(hour: String(hour), sales: revenuePerHour[hour])
             salesOfToday.append(sale)
         }
         
         
 //        Reloading of the chart with new data
-        self.todaySalesChart.updateChartBar(xValues: defaultsOpeningHours, yValues: testData)
-        print(salesOfToday)
-        print("revenueArray \(revenuePerHour)")
+        self.todaySalesChart.updateChartBar(xValues: defaultsOpeningHours, yValues:revenuePerHour)
+        self.detailedHourView.updateDetailedView(key: 24, data: todayData)
+
        })
         
         
@@ -320,6 +320,7 @@ class DashboardViewController: UIViewController {
                     businessDataModel.datetime = businessHourData.datetime ?? 0
                     businessDataModel.totalEarnings = businessHourData.totalEarnings ?? 0
                     businessDataModel.totalOrders = businessHourData.totalOrders ?? 0
+                    businessDataModel.averageOrderValue = businessHourData.averageOrderValue ?? 0
                     businessDataModel.soldProducts = businessHourData.soldProducts ?? []
 
 

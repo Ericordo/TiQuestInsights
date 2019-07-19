@@ -12,6 +12,7 @@ import Charts
 
 protocol DataUpdateDelegate {
     func updateChartBar(xValues: [Int], yValues: [Double])
+    func sendSelectedDayData(data: [BusinessDataModel])
 }
 
 class CalendarView: NSObject {
@@ -34,6 +35,8 @@ class CalendarView: NSObject {
     var selectedDay : Int = 0
     var selectedMonth : Int = 0
     var selectedYear : Int = 0
+    
+    
     
     let calendarCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -173,9 +176,9 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
         } else {
             selectedDay = daysOfSelectedWeek[indexPath.row]
         }
-        var selectedDayData : [BusinessDataModel] = []
+        
         DashboardViewController.getBusinessData(businessId: 3, timestamp: DashboardViewController.convertDateToTimestamp(day: selectedDay, month: selectedMonth, year: selectedYear), completion: { dataArray in
-            selectedDayData = dataArray
+            var selectedDayData = dataArray
             var timestampArray : [Double] = []
             for data in selectedDayData {
                 timestampArray.append(data.datetime)
@@ -191,12 +194,28 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
             print("hourArray \(hourArray)")
             
             let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-            var revenuePerHour : [Double] = []
-            var index = 0
+            
+            
+//            Make an array with all data per hour according to opening hours
+            var indexData = 0
+            var dataPerHour : [BusinessDataModel] = []
             for defaultHour in defaultsOpeningHours {
                 if hourArray.contains(defaultHour) {
-                    revenuePerHour.append(selectedDayData[index].totalEarnings)
-                    index += 1
+                    dataPerHour.append(selectedDayData[indexData])
+                    indexData += 1
+                } else {
+                    let emptyData = BusinessDataModel()
+                    dataPerHour.append(emptyData)
+                }
+                }
+            print("data per hour \(dataPerHour)")
+//            Make an array with only the revenue according to opening hours
+            var indexRevenue = 0
+            var revenuePerHour : [Double] = []
+            for defaultHour in defaultsOpeningHours {
+                if hourArray.contains(defaultHour) {
+                    revenuePerHour.append(selectedDayData[indexRevenue].totalEarnings)
+                    indexRevenue += 1
                 } else {
                     revenuePerHour.append(0)
                 }
@@ -210,15 +229,8 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
                 salesOfSelectedDay.append(sale)
             }
             
-            
-            //        Reloading of the chart with new data
-            //
-            //        self.todaySalesChart.setBarData(xValues: defaultsOpeningHours, yValues: testData)
-            //        self.todaySalesChart.chartData.notifyDataChanged()
-            //        self.todaySalesChart.notifyDataSetChanged()
-            //        self.todaySalesChart.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
-            //        self.todaySalesChart.updateChartBar()
             self.dataUpdateDelegate.updateChartBar(xValues: defaultsOpeningHours, yValues: revenuePerHour)
+            self.dataUpdateDelegate.sendSelectedDayData(data: dataPerHour)
             
             print(salesOfSelectedDay)
             print("revenueArray \(revenuePerHour)")
@@ -356,6 +368,7 @@ extension CalendarView : CalendarUpdateDelegate {
         var selectedDayData : [BusinessDataModel] = []
         DashboardViewController.getBusinessData(businessId: 3, timestamp: DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year), completion: { dataArray in
             selectedDayData = dataArray
+            print(selectedDayData)
             var timestampArray : [Double] = []
             for data in selectedDayData {
                 timestampArray.append(data.datetime)
@@ -371,12 +384,27 @@ extension CalendarView : CalendarUpdateDelegate {
             print("hourArray \(hourArray)")
             
             let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-            var revenuePerHour : [Double] = []
-            var index = 0
+            
+            //            Make an array with all data per hour according to opening hours
+            var indexData = 0
+            var dataPerHour : [BusinessDataModel] = []
             for defaultHour in defaultsOpeningHours {
                 if hourArray.contains(defaultHour) {
-                    revenuePerHour.append(selectedDayData[index].totalEarnings)
-                    index += 1
+                    dataPerHour.append(selectedDayData[indexData])
+                    indexData += 1
+                } else {
+                    let emptyData = BusinessDataModel()
+                    dataPerHour.append(emptyData)
+                }
+            }
+            print("data per hour \(dataPerHour)")
+            
+            var revenuePerHour : [Double] = []
+            var indexRevenue = 0
+            for defaultHour in defaultsOpeningHours {
+                if hourArray.contains(defaultHour) {
+                    revenuePerHour.append(selectedDayData[indexRevenue].totalEarnings)
+                    indexRevenue += 1
                 } else {
                     revenuePerHour.append(0)
                 }
@@ -392,23 +420,13 @@ extension CalendarView : CalendarUpdateDelegate {
             
             
             //        Reloading of the chart with new data
-            //
-            //        self.todaySalesChart.setBarData(xValues: defaultsOpeningHours, yValues: testData)
-            //        self.todaySalesChart.chartData.notifyDataChanged()
-            //        self.todaySalesChart.notifyDataSetChanged()
-            //        self.todaySalesChart.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
-            //        self.todaySalesChart.updateChartBar()
             self.dataUpdateDelegate.updateChartBar(xValues: defaultsOpeningHours, yValues: revenuePerHour)
+            self.dataUpdateDelegate.sendSelectedDayData(data: dataPerHour)
            
             print(salesOfSelectedDay)
             print("revenueArray \(revenuePerHour)")
         })
         
-        
-        
-        
-//        dataUpdateDelegate.updateChartBar(xValues: [1, 2, 3, 4, 5], yValues: [100, 200, 300, 400, 500])
-//        
 
   
         
