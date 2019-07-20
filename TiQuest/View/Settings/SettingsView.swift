@@ -100,7 +100,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Opening Hours"
+            return "Opening Hours (Select a day in the Dashboard to refresh)"
         } else {
             return "Account"
         }

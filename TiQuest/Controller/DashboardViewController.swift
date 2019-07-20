@@ -29,20 +29,18 @@ class DashboardViewController: UIViewController {
     
     var exportButton : UIBarButtonItem?
     var selectButton : UIBarButtonItem?
+    var adminButton : UIBarButtonItem?
+//    var refreshButton : UIBarButtonItem?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
-        
-        
+  
         calendar.firstWeekday = 2
         calendar.timeZone = .autoupdatingCurrent
         
         self.view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         let margins = self.view.layoutMarginsGuide
-        
         
         //        MARK: Configuration of the Navigation Bar
         self.navigationItem.title = "Name of your Store"
@@ -50,7 +48,9 @@ class DashboardViewController: UIViewController {
         let todayButton = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
         exportButton = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(didTapExport))
         let settingsButton = UIBarButtonItem.init(title: "Settings", style: .plain, target: self, action: #selector(didTapSettings))
-        self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!]
+//        refreshButton = UIBarButtonItem.init(title: "Refresh", style: .plain, target: self, action: #selector(didTapRefresh))
+        adminButton = UIBarButtonItem.init(title: "Admin", style: .plain, target: self, action: #selector(didTapAdmin))
+        self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!, adminButton!]
         self.navigationItem.leftBarButtonItems = [selectButton!, todayButton]
         
         //         MARK: Configuration of the Calendar
@@ -175,7 +175,38 @@ class DashboardViewController: UIViewController {
         
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("viewWillAppear")
+//        let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+//
+//
+//        let defaultsSales : [Double] = [123, 243, 345, 456, 356, 464, 465, 466, 757, 657, 757, 454, 354, 433, 433, 656, 643, 643, 634, 363, 639, 363, 363, 643]
+//        todaySalesChart.setNeedsLayout()
+////        todaySalesChart.setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
+//        todaySalesChart.chartData.notifyDataChanged()
+//        todaySalesChart.notifyDataSetChanged()
+//        todaySalesChart.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+//        todaySalesChart.highlightValue(nil)
+//    }
+    
+//    @objc func didTapRefresh() {
+//        let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+//
+//
+//        let defaultsSales : [Double] = [123, 243, 345, 456, 356, 464, 465, 466, 757, 657, 757, 454, 354, 433, 433, 656, 643, 643, 634, 363, 639, 363, 363, 643]
+////                todaySalesChart.setNeedsLayout()
+//
+//        todaySalesChart.setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
+//        todaySalesChart.chartData.notifyDataChanged()
+//        todaySalesChart.notifyDataSetChanged()
+//        todaySalesChart.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+//        todaySalesChart.highlightValue(nil)
+//        self.view.layoutIfNeeded()
+//    }
 
+    @objc func didTapAdmin() {
+        
+    }
     
     @objc func didTapToday() {
       

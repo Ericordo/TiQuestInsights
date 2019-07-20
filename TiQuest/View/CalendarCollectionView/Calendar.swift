@@ -183,7 +183,7 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
             for data in selectedDayData {
                 timestampArray.append(data.datetime)
             }
-            print("timestampArray \(timestampArray)")
+//            print("timestampArray \(timestampArray)")
             var hourArray : [Int] = []
             for timestamp in timestampArray {
                 
@@ -191,7 +191,7 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
                 let hour = calendar.component(.hour, from: calendar.date(byAdding: .hour, value: -2, to: date)!)
                 hourArray.append(hour)
             }
-            print("hourArray \(hourArray)")
+//            print("hourArray \(hourArray)")
             
             let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
             
@@ -232,8 +232,8 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
             self.dataUpdateDelegate.updateChartBar(xValues: defaultsOpeningHours, yValues: revenuePerHour)
             self.dataUpdateDelegate.sendSelectedDayData(data: dataPerHour)
             
-            print(salesOfSelectedDay)
-            print("revenueArray \(revenuePerHour)")
+//            print(salesOfSelectedDay)
+//            print("revenueArray \(revenuePerHour)")
         })
         
  
@@ -315,9 +315,9 @@ extension CalendarView : CalendarUpdateDelegate {
         let selectedWeekDay = calendar.component(.weekday, from: selectedDate) - 1
         
 //        let actualSelectedDate = calendar.date(byAdding: .day, value: 1, to: selectedDate)
-        print(selectedDate)
-        print("selectedWeekNumber \(selectedWeekNumber)")
-        print("selectedWeekDay \(selectedWeekDay)")
+//        print(selectedDate)
+//        print("selectedWeekNumber \(selectedWeekNumber)")
+//        print("selectedWeekDay \(selectedWeekDay)")
 //        print(actualSelectedDate)
         
         
@@ -350,9 +350,9 @@ extension CalendarView : CalendarUpdateDelegate {
             daysOfSelectedWeek.append(calendar.component(.day, from: nextDate))
         }
         
-        print(daysOfSelectedWeek)
-        print(date)
-        print(weekNumber)
+//        print(daysOfSelectedWeek)
+//        print(date)
+//        print(weekNumber)
         
         calendarCollectionView.reloadData()
         
@@ -381,7 +381,7 @@ extension CalendarView : CalendarUpdateDelegate {
                 let hour = calendar.component(.hour, from: calendar.date(byAdding: .hour, value: -2, to: date)!)
                 hourArray.append(hour)
             }
-            print("hourArray \(hourArray)")
+//            print("hourArray \(hourArray)")
             
             let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
             
@@ -397,7 +397,7 @@ extension CalendarView : CalendarUpdateDelegate {
                     dataPerHour.append(emptyData)
                 }
             }
-            print("data per hour \(dataPerHour)")
+//            print("data per hour \(dataPerHour)")
             
             var revenuePerHour : [Double] = []
             var indexRevenue = 0
@@ -423,8 +423,8 @@ extension CalendarView : CalendarUpdateDelegate {
             self.dataUpdateDelegate.updateChartBar(xValues: defaultsOpeningHours, yValues: revenuePerHour)
             self.dataUpdateDelegate.sendSelectedDayData(data: dataPerHour)
            
-            print(salesOfSelectedDay)
-            print("revenueArray \(revenuePerHour)")
+//            print(salesOfSelectedDay)
+//            print("revenueArray \(revenuePerHour)")
         })
         
 

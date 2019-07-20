@@ -17,84 +17,6 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     var detailedViewUpdateDelegate : DetailedViewUpdateDelegate!
     
-    
-    
-    let salesOfOneDay = [
-        Sales(hour: "0 AM", sales: 453),
-        Sales(hour: "1 AM", sales: 453),
-        Sales(hour: "2 AM", sales: 453),
-        Sales(hour: "3 AM", sales: 453),
-        Sales(hour: "4 AM", sales: 453),
-        Sales(hour: "5 AM", sales: 453),
-        Sales(hour: "6 AM", sales: 453),
-        Sales(hour: "7 AM", sales: 453),
-        Sales(hour: "8 AM", sales: 453),
-        Sales(hour: "9 AM", sales: 453),
-        Sales(hour: "10 AM", sales: 453),
-        Sales(hour: "11 AM", sales: 453),
-        Sales(hour: "12 AM", sales: 792),
-        Sales(hour: "1 PM", sales: 928),
-        Sales(hour: "2 PM", sales: 832),
-        Sales(hour: "3 PM", sales: 543),
-        Sales(hour: "4 PM", sales: 356),
-        Sales(hour: "5 PM", sales: 328),
-        Sales(hour: "6 PM", sales: 423),
-        Sales(hour: "7 PM", sales: 892),
-        Sales(hour: "8 PM", sales: 958),
-        Sales(hour: "9 PM", sales: 728),
-        Sales(hour: "10 PM", sales: 728),
-        Sales(hour: "11 PM", sales: 728)
-    ]
-    
-//    let salesOfOneDay = [
-//        Sales(hour: "8 AM", sales: 453),
-//        Sales(hour: "9 AM", sales: 453),
-//        Sales(hour: "10 AM", sales: 453),
-//        Sales(hour: "11 AM", sales: 453),
-//        Sales(hour: "12 AM", sales: 792),
-//        Sales(hour: "1 PM", sales: 928),
-//        Sales(hour: "2 PM", sales: 832),
-//        Sales(hour: "3 PM", sales: 543),
-//        Sales(hour: "4 PM", sales: 356),
-//        Sales(hour: "5 PM", sales: 328),
-//        Sales(hour: "6 PM", sales: 423),
-//        Sales(hour: "7 PM", sales: 892),
-//        Sales(hour: "8 PM", sales: 958),
-//        Sales(hour: "9 PM", sales: 728),
-//        Sales(hour: "10 PM", sales: 728),
-//        Sales(hour: "11 PM", sales: 728)
-//    ]
-    
-    let salesOfDayTwo = [
-        Sales(hour: "0 AM", sales: 453),
-        Sales(hour: "1 AM", sales: 453),
-        Sales(hour: "2 AM", sales: 453),
-        Sales(hour: "3 AM", sales: 453),
-        Sales(hour: "4 AM", sales: 453),
-        Sales(hour: "5 AM", sales: 453),
-        Sales(hour: "6 AM", sales: 453),
-        Sales(hour: "7 AM", sales: 453),
-        Sales(hour: "8 AM", sales: 453),
-        Sales(hour: "9 AM", sales: 453),
-        Sales(hour: "10 AM", sales: 453),
-        Sales(hour: "11 AM", sales: 453),
-        Sales(hour: "12 AM", sales: 792),
-        Sales(hour: "1 PM", sales: 928),
-        Sales(hour: "2 PM", sales: 832),
-        Sales(hour: "3 PM", sales: 543),
-        Sales(hour: "4 PM", sales: 356),
-        Sales(hour: "5 PM", sales: 328),
-        Sales(hour: "6 PM", sales: 423),
-        Sales(hour: "7 PM", sales: 892),
-        Sales(hour: "8 PM", sales: 958),
-        Sales(hour: "9 PM", sales: 728),
-        Sales(hour: "10 PM", sales: 728),
-        Sales(hour: "11 PM", sales: 728)
-    ]
-    
-    
-    
-    
     var chartDataSet = BarChartDataSet()
     var chartData = BarChartData()
     
@@ -102,9 +24,12 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
     
     var openingTimeBusiness = 11
     var closingTimeBusiness = 22
+    
     var openingHours = [Int]()
+    
     let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     
+    let testOpeningHours = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     let defaultsSales : [Double] = [123, 243, 345, 456, 356, 464, 465, 466, 757, 657, 757, 454, 354, 433, 433, 656, 643, 643, 634, 363, 639, 363, 363, 643]
 //    let defaultsOpeningHours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     
@@ -123,20 +48,63 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.delegate = self
         axisFormatDelegate = self
         hours = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
-        updateOpeningHours()
-        setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
-        customizeBarChart()
-        print("chart reloaded")
+//        hours = ["", "", "", "", "", "", "", "", "", "", "", "", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", ""]
+
+//        updateOpeningHours()
+//        setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
+//        customizeBarChart()
+
 //        forDemo = false
         
-      
-       
-        
-        
+    
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func customizeBarChart() {
+        self.noDataText = "No data available"
+        //        self.chartDescription?.text = "Sales"
+        self.xAxis.labelPosition = .top
+        //        self.chartDescription?.textColor = UIColor.black
+        self.gridBackgroundColor = UIColor.white
+        self.drawGridBackgroundEnabled = false
+        self.leftAxis.enabled = true
+        self.xAxis.labelPosition = .bottom
+        self.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
+        self.xAxis.gridColor = .clear
+        self.rightAxis.gridColor = .clear
+        self.leftAxis.gridColor = UIColor(white: 0, alpha: 0.1)
+        
+        if openingHours.isEmpty {
+            self.xAxis.labelCount = defaultsOpeningHours.count
+        } else {
+            self.xAxis.labelCount = openingHours.count
+        }
+        print("opening hours test test customize \(openingHours)")
+        
+        //        self.xAxis.labelCount = testOpeningHours.count
+        
+        
+        self.fitBars = true
+        self.legend.enabled = false
+        self.leftAxis.drawLabelsEnabled = false
+        self.leftAxis.drawAxisLineEnabled = false
+        self.rightAxis.drawLabelsEnabled = false
+        self.rightAxis.drawAxisLineEnabled = false
+        self.doubleTapToZoomEnabled = false
+        self.pinchZoomEnabled = false
+        self.setScaleEnabled(false)
+        self.dragEnabled = false
+        self.drawValueAboveBarEnabled = true
+        self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
+        self.xAxis.labelTextColor = UIColor.black
+        //        self.xAxis.centerAxisLabelsEnabled = true
+        //        self.xAxis.spaceMin = 0.5
+        //        self.xAxis.spaceMax = 0.5
+        //        self.xAxis.granularityEnabled = true
+        //        self.xAxis.granularity = 1
     }
     
     func setBarData(xValues: [Int], yValues: [Double]) {
@@ -180,17 +148,21 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         chartData = BarChartData(dataSet: chartDataSet)
         chartData.barWidth = 0.6
         
-        self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
-        self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
-        xAxis.valueFormatter = axisFormatDelegate
+
         
-//        if openingHours.isEmpty {
-//            self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
-//            self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
-//        } else {
-//            self.xAxis.axisMinimum = Double(openingHours[0]) - 0.5
-//            self.xAxis.axisMaximum = Double(openingHours[openingHours.count-1]) + 0.5
-//        }
+//        self.xAxis.axisMinimum = Double(testOpeningHours[0]) - 0.5
+//        self.xAxis.axisMaximum = Double(testOpeningHours[testOpeningHours.count-1]) + 0.5
+
+        updateOpeningHours()
+        if openingHours.isEmpty {
+            self.xAxis.axisMinimum = Double(defaultsOpeningHours[0]) - 0.5
+            self.xAxis.axisMaximum = Double(defaultsOpeningHours[defaultsOpeningHours.count-1]) + 0.5
+        } else {
+            self.xAxis.axisMinimum = Double(openingHours[0]) - 0.5
+            self.xAxis.axisMaximum = Double(openingHours[openingHours.count-1]) + 0.5
+        }
+        xAxis.valueFormatter = axisFormatDelegate
+        print("opening hours test test setbardata \(openingHours)")
 
 //        4 - Set our Bar Chart Data
 //        If self.date is empty it will display "No data available"
@@ -202,41 +174,53 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         
        
         self.notifyDataSetChanged()
+        self.customizeBarChart()
     }
     
-    func customizeBarChart() {
-        self.noDataText = "No data available"
-//        self.chartDescription?.text = "Sales"
-        self.xAxis.labelPosition = .top
-//        self.chartDescription?.textColor = UIColor.black
-        self.gridBackgroundColor = UIColor.white
-        self.drawGridBackgroundEnabled = false
-        self.leftAxis.enabled = true
-        self.xAxis.labelPosition = .bottom
-        self.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
-        self.xAxis.gridColor = .clear
-        self.rightAxis.gridColor = .clear
-        self.leftAxis.gridColor = UIColor(white: 0, alpha: 0.1)
-        self.xAxis.labelCount = salesOfOneDay.count
-        self.fitBars = true
-        self.legend.enabled = false
-        self.leftAxis.drawLabelsEnabled = false
-        self.leftAxis.drawAxisLineEnabled = false
-        self.rightAxis.drawLabelsEnabled = false
-        self.rightAxis.drawAxisLineEnabled = false
-        self.doubleTapToZoomEnabled = false
-        self.pinchZoomEnabled = false
-        self.setScaleEnabled(false)
-        self.dragEnabled = false
-        self.drawValueAboveBarEnabled = true
-        self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
-        self.xAxis.labelTextColor = UIColor.black
-//        self.xAxis.centerAxisLabelsEnabled = true
-//        self.xAxis.spaceMin = 0.5
-//        self.xAxis.spaceMax = 0.5
-//        self.xAxis.granularityEnabled = true
-//        self.xAxis.granularity = 1
-    }
+//    func customizeBarChart() {
+//        self.noDataText = "No data available"
+////        self.chartDescription?.text = "Sales"
+//        self.xAxis.labelPosition = .top
+////        self.chartDescription?.textColor = UIColor.black
+//        self.gridBackgroundColor = UIColor.white
+//        self.drawGridBackgroundEnabled = false
+//        self.leftAxis.enabled = true
+//        self.xAxis.labelPosition = .bottom
+//        self.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
+//        self.xAxis.gridColor = .clear
+//        self.rightAxis.gridColor = .clear
+//        self.leftAxis.gridColor = UIColor(white: 0, alpha: 0.1)
+//
+//        #warning("Change this when opening hour changes")
+//        if openingHours.isEmpty {
+//            self.xAxis.labelCount = defaultsOpeningHours.count
+//        } else {
+//            self.xAxis.labelCount = openingHours.count
+//        }
+//        print("opening hours test test customize \(openingHours)")
+//
+////        self.xAxis.labelCount = testOpeningHours.count
+//
+//
+//        self.fitBars = true
+//        self.legend.enabled = false
+//        self.leftAxis.drawLabelsEnabled = false
+//        self.leftAxis.drawAxisLineEnabled = false
+//        self.rightAxis.drawLabelsEnabled = false
+//        self.rightAxis.drawAxisLineEnabled = false
+//        self.doubleTapToZoomEnabled = false
+//        self.pinchZoomEnabled = false
+//        self.setScaleEnabled(false)
+//        self.dragEnabled = false
+//        self.drawValueAboveBarEnabled = true
+//        self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
+//        self.xAxis.labelTextColor = UIColor.black
+////        self.xAxis.centerAxisLabelsEnabled = true
+////        self.xAxis.spaceMin = 0.5
+////        self.xAxis.spaceMax = 0.5
+////        self.xAxis.granularityEnabled = true
+////        self.xAxis.granularity = 1
+//    }
     
 //    let blockWidth = self.frame.width / 11
 //    let barWidthInPx = 0.60 * blockWidth
@@ -262,26 +246,12 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
             }
             openingHours.removeLast()
             defaults.setValue(openingHours, forKey: "openingHours")
-            
         }
-            
-            
-       
         
         print(openingHours)
     }
     
-    
-    
-//    func printTest() {
-//        self.animate(yAxisDuration: 2 ,easingOption: .easeInOutQuart)
-////        self.notifyDataSetChanged()
-////        chartDataSet.notifyDataSetChanged()
-////        chartData.notifyDataChanged()
-////        self.animate(yAxisDuration: 1.0)
-//
-//
-//    }
+
     
     
 }
@@ -292,18 +262,12 @@ extension TodaySalesChart: DataUpdateDelegate {
         self.chartData.notifyDataChanged()
         self.notifyDataSetChanged()
         self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
-        
         self.highlightValue(nil)
-        
-        
     }
-    
     func sendSelectedDayData(data: [BusinessDataModel]) {
         selectedDayData = data
         detailedViewUpdateDelegate.updateDetailedView(key: 24, data: selectedDayData)
     }
-    
-    
 }
 
 extension TodaySalesChart: OpeningTimeUpdateDelegate {
@@ -311,10 +275,12 @@ extension TodaySalesChart: OpeningTimeUpdateDelegate {
         openingTimeBusiness = defaults.integer(forKey: "openingTimeBusiness")
         print("delegate open \(openingTimeBusiness)")
         updateOpeningHours()
-       
-        self.chartData.notifyDataChanged()
-        self.notifyDataSetChanged()
-        self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+
+//        self.setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
+//        self.chartData.notifyDataChanged()
+//        self.notifyDataSetChanged()
+//        self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+//        self.highlightValue(nil)
         print(openingHours)
     }
     
@@ -326,13 +292,14 @@ extension TodaySalesChart: ClosingTimeUpdateDelegate {
         closingTimeBusiness = defaults.integer(forKey: "closingTimeBusiness")
         print("delegate closing \(closingTimeBusiness)")
         updateOpeningHours()
-       
-        self.chartData.notifyDataChanged()
-        self.notifyDataSetChanged()
-        self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+
+//        self.setBarData(xValues: defaultsOpeningHours, yValues: defaultsSales)
+//        self.chartData.notifyDataChanged()
+//        self.notifyDataSetChanged()
+//        self.animate(yAxisDuration: 1 ,easingOption: .easeInOutQuart)
+//        self.highlightValue(nil)
         print(openingHours)
-//        self.setBarData(xValues: defaultsOpeningHours, yValues: salesOfDayTwo)
-     
+
     }
     
     

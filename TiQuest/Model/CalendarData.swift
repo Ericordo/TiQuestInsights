@@ -42,4 +42,7 @@ let months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 
 
-
+// MARK: - Possible way to deal with the date:
+//let formatter = DateFormatter()
+//formatter.dateFormat = "yyyy/MM/dd HH:mm"
+//let someDateTime = formatter.date(from: "2016/10/08 22:31")
