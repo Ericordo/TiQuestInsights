@@ -22,7 +22,7 @@ var topCategoriesQuantityReserve : [Float] = []
 
 var topSellersHeaderLabel = "Top sellers"
 var topSellersButtonLabel = "Worst"
-var topSellersQuantity = [15, 13, 12, 11, 10, 9, 8, 7, 5, 4, 3, 2, 1]
+
 //var topSellersQuantityRandom = 0.0
 
 

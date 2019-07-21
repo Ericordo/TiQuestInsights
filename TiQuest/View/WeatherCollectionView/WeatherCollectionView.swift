@@ -66,12 +66,12 @@ extension WeatherCollectionView : UICollectionViewDelegate, UICollectionViewData
 
 extension WeatherCollectionView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let graph = TodaySalesChart()
+//        let graph = TodaySalesChart()
         let blockWidth = CGFloat(944.0 / 11.0)
         print("blockWidth: \(blockWidth)")
         let barWidthInPx = 0.60 * blockWidth
         print(barWidthInPx)
-        let spaceWidthInPx = 0.40 * blockWidth
+//        let spaceWidthInPx = 0.40 * blockWidth
         return CGSize(width: barWidthInPx, height: weatherHeight)
     }
     

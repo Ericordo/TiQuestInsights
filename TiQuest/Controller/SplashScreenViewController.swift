@@ -23,12 +23,12 @@ class SplashScreenViewController: UIViewController {
     
     private func makeServiceCall() {
         activityIndicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(0)) {
             self.activityIndicator.stopAnimating()
             
             if defaults.bool(forKey: "LOGGED_IN") {
                 // navigate to protected page
-                AppDelegate.shared.rootViewController.switchToMainScreen()
+                AppDelegate.shared.rootViewController.switchToMainScreen(id: defaults.value(forKey: "BUSINESSID") as! Int, businessName: defaults.value(forKey: "BUSINESSNAME") as! String)
             } else {
                 // navigate to login screen
                 AppDelegate.shared.rootViewController.switchToLogout()

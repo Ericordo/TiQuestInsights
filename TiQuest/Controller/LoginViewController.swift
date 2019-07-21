@@ -9,6 +9,9 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    var credential : Credentials?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -95,8 +98,10 @@ class LoginViewController: UIViewController {
         textField.placeholder = "Username"
         textField.layer.cornerRadius = 15
         textField.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 0.3)
-        textField.layer.borderWidth = 1
+        textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         return textField
     }()
     
@@ -108,8 +113,11 @@ class LoginViewController: UIViewController {
         textField.placeholder = "Password"
         textField.layer.cornerRadius = 15
         textField.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 0.3)
-        textField.layer.borderWidth = 1
+        textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        
         return textField
     }()
     
@@ -193,15 +201,28 @@ class LoginViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
         
         self.view.addGestureRecognizer(tapGesture)
+        
+        passwordField.isSecureTextEntry = true
     }
     
     
     @objc private func login() {
         self.view.endEditing(true)
-        // store the user session (example only, not for the production)
-        defaults.set(true, forKey: "LOGGED_IN")
-        // navigate to the Main Screen
-        AppDelegate.shared.rootViewController.switchToMainScreen()
+        let username = usernameField.text ?? ""
+        let password = passwordField.text ?? ""
+        print(username)
+    
+        
+        if checkCredentials(username: username, password: password) {
+            // store the user session (example only, not for the production)
+            defaults.set(true, forKey: "LOGGED_IN")
+            defaults.set(credential!.id, forKey: "BUSINESSID")
+            defaults.set(credential!.businessName, forKey: "BUSINESSNAME")
+            // navigate to the Main Screen
+            AppDelegate.shared.rootViewController.switchToMainScreen(id: credential!.id, businessName: credential!.businessName)
+        }
+    
+        
     }
     
     @objc func didTapOutside() {
@@ -209,20 +230,26 @@ class LoginViewController: UIViewController {
         
     }
     
-    func checkUsername(usernanme: String) -> Bool {
-        
-        
-        return true
-        
+    
+    func checkCredentials(username: String, password: String) -> Bool {
+        if credentials.contains(where: {$0.username == username}) {
+            usernameField.layer.borderColor = UIColor.green.cgColor
+            credential = credentials.filter({$0.username == username}).first
+                } else {
+            usernameField.layer.borderColor = UIColor.red.cgColor
+            usernameField.shake()
+            return false
+        }
+        if credential?.password == password {
+            passwordField.layer.borderColor = UIColor.green.cgColor
+            return true
+        } else {
+            passwordField.layer.borderColor = UIColor.red.cgColor
+            passwordField.shake()
+            return false
+        }
     }
-    
-    func checkPassword(password: String) -> Bool {
-        
-        return true
-        
-    }
-    
-    
+
 }
 
 
@@ -232,4 +259,23 @@ extension LoginViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+        textField.layer.borderColor = UIColor.black.cgColor
+    }
+}
+
+extension UITextField {
+
+func shake() {
+    let animation = CABasicAnimation(keyPath: "position")
+    animation.duration = 0.1
+    animation.repeatCount = 4
+    animation.autoreverses = true
+    animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 4, y: self.center.y))
+    animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 4, y: self.center.y))
+    self.layer.add(animation, forKey: "position")
+}
+
 }

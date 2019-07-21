@@ -19,6 +19,10 @@ struct DetailedData {
     var averageTicket : String
 }
 
+protocol TopSellersUpdateDelegate {
+    func updateTopSellers(products: [BusinessProductInfo])
+}
+
 let dataTuesday11 = DetailedData(time: 11, formattedTime: "11:00", sales: "599,23€", topSeller: "Caesar Salad", worstSeller: "Fondue", totalReceipts: "49", averageTicket: "45,23€")
 let dataTuesday12 = DetailedData(time: 12, formattedTime: "12:00", sales: "428,23€", topSeller: "Brocoli", worstSeller: "Burger", totalReceipts: "19", averageTicket: "32,23€")
 let dataTuesdayAll = DetailedData(time: nil, formattedTime: "All Day", sales: "4234,56€", topSeller: "Banana Split", worstSeller: "Cordon bleu", totalReceipts: "234", averageTicket: "32,45€")
@@ -32,6 +36,8 @@ class DetailedHourView: NSObject {
         detailedHourCollectionView.dataSource = self
         detailedHourCollectionView.register(DetailedHourCollectionViewCell.self, forCellWithReuseIdentifier: "DetailCell")
     }
+    
+    var topSellersUpdateDelegate : TopSellersUpdateDelegate!
     
     let detailedViewHeight : CGFloat = 60
     var cellWidth : CGFloat = 100
@@ -177,6 +183,8 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
         var detailedDataAllDay : DetailedData!
         var detailedData : [ Int : DetailedData] = [:]
 
+        var topSellersDataAllDay : [BusinessProductInfo]!
+        var topSellersData : [ Int : [BusinessProductInfo]] = [:]
         
         func prepareAllDayData() {
             var salesAllDay : Double = 0
@@ -189,9 +197,25 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
                 productsSold += data.soldProducts
             }
             
-            
+//            We remove Coperto
             productsSold = productsSold.filter({$0.product?.title != "Coperto" })
-            let productsSoldSorted = productsSold.sorted(by: { $0.counter! < $1.counter! })
+//            We sort by product name
+            productsSold = productsSold.sorted(by: { $0.product!.title! < $1.product!.title! })
+//            We need to find out the duplicated to keep only one product but with the sum of the quantities
+//            We create a new array, then for each product in the original array, if the product is not in the new array, we append it, if it is already in the new array, we find the index of the product in the new array to add the counter of the product in the original array to the product in the new array
+            var productsSoldSorted : [BusinessProductInfo] = []
+            productsSold.forEach { product in
+                if !productsSoldSorted.contains(where: {$0.product?.title! == product.product?.title!}) {
+                    productsSoldSorted.append(product)
+                } else if productsSoldSorted.contains(where: {$0.product?.title! == product.product?.title!}) {
+                    if let index = productsSoldSorted.firstIndex(where: {$0.product?.title! == product.product?.title!}) {
+                    productsSoldSorted[index].counter! += product.counter!
+                    }
+                }
+            }
+            productsSoldSorted = productsSoldSorted.sorted(by: { $0.counter! < $1.counter! })
+            topSellersDataAllDay = productsSoldSorted
+            
             var averageTicketAllDay : Double = 0
             if receiptsAllDay != 0 {
                 averageTicketAllDay = salesAllDay / receiptsAllDay
@@ -219,6 +243,8 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
                 let sales = "\(Int(data.totalEarnings)) €"
                 let productsSold = data.soldProducts.filter({$0.product?.title != "Coperto" })
                 let productsSoldSorted = productsSold.sorted(by: { $0.counter! < $1.counter! })
+                topSellersData[key] = productsSoldSorted
+                
                 let topSeller = productsSoldSorted.last?.product?.title
                 let worstSeller = productsSoldSorted.first?.product?.title
                 let receipts = String(Int(data.totalOrders))
@@ -242,11 +268,13 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
             prepareAllDayData()
             formattedTime = detailedDataAllDay.formattedTime
             sales = detailedDataAllDay.sales
-            topSeller = detailedDataAllDay.topSeller
-            worstSeller = detailedDataAllDay.worstSeller
+            topSeller = detailedDataAllDay.topSeller.lowercased()
+            worstSeller = detailedDataAllDay.worstSeller.lowercased()
             totalReceipts = detailedDataAllDay.totalReceipts
             averageTicket = detailedDataAllDay.averageTicket
             detailedHourCollectionView.reloadData()
+            topSellersUpdateDelegate.updateTopSellers(products: topSellersDataAllDay)
+            
         default:
             prepareSpecificHourData()
 //            formattedTime = detailedDataSpecificHour.formattedTime
@@ -257,11 +285,12 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
 //            averageTicket = detailedDataSpecificHour.averageTicket
             formattedTime = detailedData[key]!.formattedTime
             sales = detailedData[key]!.sales
-            topSeller = detailedData[key]!.topSeller
-            worstSeller = detailedData[key]!.worstSeller
+            topSeller = detailedData[key]!.topSeller.lowercased()
+            worstSeller = detailedData[key]!.worstSeller.lowercased()
             totalReceipts = detailedData[key]!.totalReceipts
             averageTicket = detailedData[key]!.averageTicket
             detailedHourCollectionView.reloadData()
+            topSellersUpdateDelegate.updateTopSellers(products: topSellersData[key]!)
         }
         
      

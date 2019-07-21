@@ -17,7 +17,7 @@ struct Credentials {
     let businessName : String
 }
 
-let credentials : [Credentials] = [Credentials(username: "admin", password: "password", id: 1, businessName: "Demo"), Credentials(username: "tacos", password: "password", id: 2, businessName: "Tacos"), Credentials(username: "cavolinostri", password: "cavolinostri", id: 3, businessName: "Cavoli Nostri")]
+let credentials : [Credentials] = [Credentials(username: "admin", password: "password", id: 1, businessName: "Demo"), Credentials(username: "tacos", password: "tacos", id: 2, businessName: "Taco's"), Credentials(username: "cavolinostri", password: "cavolinostri", id: 3, businessName: "Cavoli Nostri")]
 
 
 

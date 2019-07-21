@@ -12,7 +12,8 @@ import Charts
 
 class DashboardViewController: UIViewController {
     
-    
+    static var businessId: Int = 0
+    static var businessName: String = ""
     
     var calendarView = CalendarView()
     var todaySalesLabel = TodaySalesLabel()
@@ -43,15 +44,23 @@ class DashboardViewController: UIViewController {
         let margins = self.view.layoutMarginsGuide
         
         //        MARK: Configuration of the Navigation Bar
-        self.navigationItem.title = "Name of your Store"
+        self.navigationItem.title = DashboardViewController.businessName
         selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
         let todayButton = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
         exportButton = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(didTapExport))
         let settingsButton = UIBarButtonItem.init(title: "Settings", style: .plain, target: self, action: #selector(didTapSettings))
 //        refreshButton = UIBarButtonItem.init(title: "Refresh", style: .plain, target: self, action: #selector(didTapRefresh))
         adminButton = UIBarButtonItem.init(title: "Admin", style: .plain, target: self, action: #selector(didTapAdmin))
-        self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!, adminButton!]
+        
+        if DashboardViewController.businessId == 1 {
+            self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!, adminButton!]
+        } else {
+            self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!]
+        }
+        
         self.navigationItem.leftBarButtonItems = [selectButton!, todayButton]
+        
+        
         
         //         MARK: Configuration of the Calendar
         calendarView.calendarCollectionView.frame = CGRect(x: 100, y: 71, width: 1024, height: calendarView.calendarHeight)
@@ -130,6 +139,9 @@ class DashboardViewController: UIViewController {
         detailedView.heightAnchor.constraint(equalToConstant: detailedHourView.detailedViewHeight).isActive = true
         detailedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         detailedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:  -40).isActive = true
+        
+        
+        
 
     
 //        infoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
@@ -157,18 +169,20 @@ class DashboardViewController: UIViewController {
         stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
         
-        if let jsonData = jsonString.data(using: .utf8)
-        {
-            let decoder = JSONDecoder()
-            
-            do {
-                let menuItems = try decoder.decode(MenuItems.self, from: jsonData)
-                topCategoriesView.add(items: menuItems.data.map {$0.category})
-                topSellersView.add(items: menuItems.data.map {$0.name})
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+        detailedHourView.topSellersUpdateDelegate = topSellersView
+        
+//        if let jsonData = jsonString.data(using: .utf8)
+//        {
+//            let decoder = JSONDecoder()
+//            
+//            do {
+//                let menuItems = try decoder.decode(MenuItems.self, from: jsonData)
+//                topCategoriesView.add(items: menuItems.data.map {$0.category})
+//                topSellersView.add(items: menuItems.data.map {$0.name})
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
         
         didTapToday()
 
@@ -213,7 +227,7 @@ class DashboardViewController: UIViewController {
         let currentTimestamp = Int(date.timeIntervalSince1970)
         print(currentTimestamp)
         var todayData : [BusinessDataModel] = []
-       DashboardViewController.getBusinessData(businessId: 3, timestamp: currentTimestamp, completion: { dataArray in
+        DashboardViewController.getBusinessData(businessId: DashboardViewController.businessId, timestamp: currentTimestamp, completion: { dataArray in
             todayData = dataArray
         var timestampArray : [Double] = []
         for data in todayData {
@@ -263,7 +277,14 @@ class DashboardViewController: UIViewController {
         calendarView.calendarCollectionView.reloadData()
 //        print("calendarview days of current wk \(calendarView.daysOfCurrentWeek[weekday-1])")
         let todayCellIndexPath = IndexPath.init(row: weekday-1, section: 0)
+        print("WEEKDAY \(weekday-1)")
+        
         calendarView.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
+        
+//        Added this line because when today was Sunday the cell was not selected
+        if weekday == 0 {
+            calendarView.calendarCollectionView.selectItem(at: [0, 6], animated: true, scrollPosition: .right)
+        }
 //        calendarLauncher.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
         weekNumberLabel.text = "W\(weekNumber)"
         let currentMonth = months[calendar.component(.month, from: date) - 1]

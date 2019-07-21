@@ -11,7 +11,10 @@ import Foundation
 
 class TopSellersTableView: NSObject {
     
-    var itemsTopSellers : [String] = []
+    var topSellersProducts : [BusinessProductInfo] = []
+    var quantitiesTopSellers : [Int] = []
+    
+    var topSelected = true
     
     let topSellersTableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -20,17 +23,17 @@ class TopSellersTableView: NSObject {
         return tableView
     }()
     
-    func showTopSellers() {
-        if let view = UIApplication.shared.keyWindow {
-            view.addSubview(topSellersTableView)
-            
-            topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
-            topSellersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 30).isActive = true
-            topSellersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 - 15).isActive = true
-            topSellersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.width / 30).isActive = true
-            topSellersTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.width / 2.5).isActive = true
-        }
-    }
+//    func showTopSellers() {
+//        if let view = UIApplication.shared.keyWindow {
+//            view.addSubview(topSellersTableView)
+//
+//            topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
+//            topSellersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width / 30).isActive = true
+//            topSellersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 2 - 15).isActive = true
+//            topSellersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.width / 30).isActive = true
+//            topSellersTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.width / 2.5).isActive = true
+//        }
+//    }
     
     override init() {
         super.init()
@@ -39,16 +42,13 @@ class TopSellersTableView: NSObject {
         topSellersTableView.register(TopSellersTableViewCell.self, forCellReuseIdentifier: "TopSellersCell")
     }
     
-    func add(items: [String]) {
-        itemsTopSellers.append(contentsOf: items)
-    }
     
     @objc func didTapWorst() {
-        let sortedItemsTopSellers : [String] = itemsTopSellers.reversed()
-        itemsTopSellers = sortedItemsTopSellers
+        topSelected = !topSelected
         
-        let sortedTopSellersQuantity : [Int] = topSellersQuantity.reversed()
-        topSellersQuantity = sortedTopSellersQuantity
+        quantitiesTopSellers = quantitiesTopSellers.reversed()
+        topSellersProducts = topSellersProducts.reversed()
+        
         
         if topSellersHeaderLabel == "Worst sellers" {
             topSellersHeaderLabel = "Top sellers"
@@ -68,19 +68,31 @@ class TopSellersTableView: NSObject {
 extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsTopSellers.count
+        return topSellersProducts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = topSellersTableView.dequeueReusableCell(withIdentifier: "TopSellersCell", for: indexPath) as! TopSellersTableViewCell
-        let currentItem = itemsTopSellers[indexPath.row]
-        cell.itemNameLabelTopSellers.text = currentItem
-        cell.itemQuantityTopSellers.text = String(topSellersQuantity[indexPath.row])
+        
+      
+        
+//        cell.itemNameLabelTopSellers.text = itemsTopSellers[indexPath.row].lowercased()
+//        cell.itemQuantityTopSellers.text = String(quantitiesTopSellers[indexPath.row])
+        
+        cell.itemNameLabelTopSellers.text = topSellersProducts[indexPath.row].product?.title?.lowercased()
+        cell.itemQuantityTopSellers.text = String(topSellersProducts[indexPath.row].counter!)
+        
         cell.backgroundColor = .clear
         cell.separatorInset = UIEdgeInsets(top: 0, left: cell.bounds.size.width, bottom: 0, right: 0)
         cell.selectionStyle = .none
-        let topSellersQuantityRandom = Float((topSellersQuantity[indexPath.row]*100)/(topSellersQuantity.reduce(0, +)))
+        
+        
+        let topSellersQuantityRandom = Float((topSellersProducts[indexPath.row].counter!*100)/(quantitiesTopSellers.reduce(0, +)))
         cell.progressBarTopSellers.setProgress(topSellersQuantityRandom/100, animated: true)
+    
+        
+        
+        
         return cell
     }
     
@@ -98,7 +110,7 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         headerView.backgroundColor = UIColor.white.withAlphaComponent(0.95)
         
         let headerLabel = UILabel(frame: CGRect(x: headerView.frame.width / 40, y: 0, width:
-            headerView.frame.width / 2, height: headerView.frame.height))
+        headerView.frame.width / 2, height: headerView.frame.height))
         headerLabel.font = UIFont.boldSystemFont(ofSize: 30)
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.textColor = UIColor.black
@@ -134,4 +146,21 @@ extension TopSellersTableView: UITableViewDelegate, UITableViewDataSource {
         
         return headerView
     }
+}
+
+extension TopSellersTableView: TopSellersUpdateDelegate {
+    func updateTopSellers(products: [BusinessProductInfo]) {
+        topSellersProducts.removeAll()
+        products.forEach { product in
+            quantitiesTopSellers.append(product.counter ?? 0)
+            topSellersProducts.append(product)
+        }
+        if topSelected {
+        quantitiesTopSellers = quantitiesTopSellers.reversed()
+        topSellersProducts = topSellersProducts.reversed()
+        }
+        topSellersTableView.reloadData()
+    }
+    
+    
 }

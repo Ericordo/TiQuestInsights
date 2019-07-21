@@ -56,7 +56,6 @@
 		88BA1CA0229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C9F229C1DCC00F96603 /* DetailedHourCollectionViewCell.swift */; };
 		88E3FF34228D9C08002871BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF33228D9C08002871BB /* AppDelegate.swift */; };
 		88E3FF36228D9C08002871BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E3FF35228D9C08002871BB /* ViewController.swift */; };
-		88E3FF39228D9C08002871BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF37228D9C08002871BB /* Main.storyboard */; };
 		88E3FF3B228D9C0A002871BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF3A228D9C0A002871BB /* Assets.xcassets */; };
 		88E3FF3E228D9C0A002871BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */; };
 		929049F4711CBB63B2197CF0 /* Pods_TiQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A157028FE12064BFDB472578 /* Pods_TiQuest.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -114,7 +113,6 @@
 		88E3FF30228D9C08002871BB /* TiQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E3FF33228D9C08002871BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88E3FF35228D9C08002871BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		88E3FF38228D9C08002871BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88E3FF3A228D9C0A002871BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88E3FF3D228D9C0A002871BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88E3FF3F228D9C0A002871BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 				3E3A432C22A00DB000FE660F /* TopSellersTableView */,
 				885D59B022B7CD16006B8F50 /* SlideIn Calendar */,
 				880DFD412292F0EA0054F2C8 /* CalendarCollectionView */,
-				88E3FF37228D9C08002871BB /* Main.storyboard */,
 				88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -411,7 +408,6 @@
 			files = (
 				88E3FF3E228D9C0A002871BB /* LaunchScreen.storyboard in Resources */,
 				88E3FF3B228D9C0A002871BB /* Assets.xcassets in Resources */,
-				88E3FF39228D9C08002871BB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,14 +515,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		88E3FF37228D9C08002871BB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				88E3FF38228D9C08002871BB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		88E3FF3C228D9C0A002871BB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -669,7 +657,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.EricOrdonneau.TiQuest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -688,7 +676,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.EricOrdonneau.TiQuest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

@@ -96,7 +96,8 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.doubleTapToZoomEnabled = false
         self.pinchZoomEnabled = false
         self.setScaleEnabled(false)
-        self.dragEnabled = false
+        //        Piano-type bar selection:
+        self.dragEnabled = true
         self.drawValueAboveBarEnabled = true
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         self.xAxis.labelTextColor = UIColor.black

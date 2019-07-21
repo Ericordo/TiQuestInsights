@@ -44,8 +44,10 @@ class RootViewController: UIViewController {
         current = new                                  // 9
     }
     
-    func switchToMainScreen() {
+    func switchToMainScreen(id: Int, businessName: String) {
         let mainViewController = DashboardViewController()
+        DashboardViewController.businessId = id
+        DashboardViewController.businessName = businessName
         let new = UINavigationController(rootViewController: mainViewController)
         
         animateFadeTransition(to: new)
@@ -71,7 +73,7 @@ class RootViewController: UIViewController {
     }
     
     private func animateDismissTransition(to new: UIViewController, completion: (() -> Void)? = nil) {
-        let initialFrame = CGRect(x: -view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
+//        let initialFrame = CGRect(x: -view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
         current.willMove(toParent: nil)
         addChild(new)
         transition(from: current, to: new, duration: 0.3, options: [], animations: {

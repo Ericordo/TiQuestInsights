@@ -177,7 +177,7 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
             selectedDay = daysOfSelectedWeek[indexPath.row]
         }
         
-        DashboardViewController.getBusinessData(businessId: 3, timestamp: DashboardViewController.convertDateToTimestamp(day: selectedDay, month: selectedMonth, year: selectedYear), completion: { dataArray in
+        DashboardViewController.getBusinessData(businessId: DashboardViewController.businessId, timestamp: DashboardViewController.convertDateToTimestamp(day: selectedDay, month: selectedMonth, year: selectedYear), completion: { dataArray in
             var selectedDayData = dataArray
             var timestampArray : [Double] = []
             for data in selectedDayData {
@@ -366,7 +366,7 @@ extension CalendarView : CalendarUpdateDelegate {
         print("selected timestamp \(DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year))")
 //        Write to code to get the data for the selected date
         var selectedDayData : [BusinessDataModel] = []
-        DashboardViewController.getBusinessData(businessId: 3, timestamp: DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year), completion: { dataArray in
+        DashboardViewController.getBusinessData(businessId: DashboardViewController.businessId, timestamp: DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year), completion: { dataArray in
             selectedDayData = dataArray
             print(selectedDayData)
             var timestampArray : [Double] = []
