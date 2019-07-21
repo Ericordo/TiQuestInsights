@@ -248,7 +248,14 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 //        let currentMonth = month
 //        let components = DateComponents(year: year, month: currentMonth, day: day)
 //        let currentDate = date
-        let currentWeekNumber = weekNumber
+        
+//        Origininally currentWeekNumber was weekNumber but when the actual day was a Monday the week calendar was showing the previous week instead of the actual current week 
+        var currentWeekNumber = 0
+        if weekday == 1 {
+            currentWeekNumber = weekNumber + 1
+        } else {
+           currentWeekNumber = weekNumber
+        }
         
         let startComponents = DateComponents(weekOfYear: currentWeekNumber, yearForWeekOfYear: year)
         let startDate = calendar.date(from: startComponents)!
@@ -368,7 +375,12 @@ extension CalendarView : CalendarUpdateDelegate {
         var selectedDayData : [BusinessDataModel] = []
         DashboardViewController.getBusinessData(businessId: DashboardViewController.businessId, timestamp: DashboardViewController.convertDateToTimestamp(day: day, month: month, year: year), completion: { dataArray in
             selectedDayData = dataArray
-            print(selectedDayData)
+         
+            selectedDayData.forEach { data in
+                print(data.datetime)
+                print(data.totalEarnings)
+                
+            }
             var timestampArray : [Double] = []
             for data in selectedDayData {
                 timestampArray.append(data.datetime)

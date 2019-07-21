@@ -178,7 +178,12 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
     #warning("When several products are sold with the same quantity, what do we do? When one product is not sold at all, what do we do?")
    
     func updateDetailedView(key: Int, data: [BusinessDataModel]) {
-        print(data)
+        data.forEach { data in
+            print(data.datetime)
+            print(data.totalEarnings)
+            
+        }
+    
         
         var detailedDataAllDay : DetailedData!
         var detailedData : [ Int : DetailedData] = [:]
@@ -259,7 +264,8 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
                 key += 1
                 
             }
-            print(detailedData)
+            
+            
             
         }
         

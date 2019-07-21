@@ -286,7 +286,15 @@ class DashboardViewController: UIViewController {
             calendarView.calendarCollectionView.selectItem(at: [0, 6], animated: true, scrollPosition: .right)
         }
 //        calendarLauncher.calendarCollectionView.selectItem(at: todayCellIndexPath, animated: true, scrollPosition: .right)
-        weekNumberLabel.text = "W\(weekNumber)"
+        //        Origininally weekNumberToDisplay was weekNumber but when the actual day was a Monday the weeknumberlabel  was showing the previous week instead of the actual current week
+        var weekNumberToDisplay = 0
+        if weekday == 1 {
+            weekNumberToDisplay = weekNumber + 1
+        } else {
+            weekNumberToDisplay = weekNumber
+        }
+        
+        weekNumberLabel.text = "W\(weekNumberToDisplay)"
         let currentMonth = months[calendar.component(.month, from: date) - 1]
         monthLabel.text = "\(currentMonth)\n\(year)"
 
@@ -379,6 +387,10 @@ class DashboardViewController: UIViewController {
 //                    businessDataModel.weather = businessHourData.weather
                     
                     dataArray.append(businessDataModel)
+                        dataArray.forEach { data in
+                            print(data.datetime)
+                            print(data.totalEarnings)
+                        }
 //                    print(dataArray)
 //                    print(dataArray[0].averageOrderValue)
 //                    print(dataArray[0].totalEarnings)
