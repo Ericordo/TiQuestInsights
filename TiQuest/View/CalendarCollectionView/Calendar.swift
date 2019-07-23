@@ -21,11 +21,11 @@ class CalendarView: NSObject {
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let daysOfMonth = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    let daysOfMonthSmallWidth = ["M", "T", "W", "T", "F", "S", "S"]
     let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var currentMonth = String()
     
-    let dates = Dates().dates
-    let datesbis = DatesBis().dates
+
     let calendarHeight : CGFloat = 50
     var cellWidth : CGFloat = 150
     
@@ -104,73 +104,26 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCollectionViewCell
-//        cell.dateLabel.text = dates[indexPath.item]
-//        cell.dateLabel.text = datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number)
-//        let stringForCell = NSAttributedString(string: datesbis[indexPath.item].day + " " + String(datesbis[indexPath.item].number))
-//        cell.dateLabel.attributedText = stringForCell
-//        cell.dateLabel.text = "\(daysOfMonth[weekday-1]) "+"\(day)"
-        switch indexPath.row {
-        case 0:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Monday "+"\(daysOfCurrentWeek[indexPath.row])"
+
+        var daysToDisplay = [String]()
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width < 500 {
+                daysToDisplay = daysOfMonthSmallWidth
             } else {
-                cell.dateLabel.text = "Monday "+"\(daysOfSelectedWeek[indexPath.row])"
+                daysToDisplay = daysOfMonth
             }
-        case 1:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Tuesday "+"\(daysOfCurrentWeek[indexPath.row])"
-            } else {
-                cell.dateLabel.text = "Tuesday "+"\(daysOfSelectedWeek[indexPath.row])"
-            }
-        case 2:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Wednesday "+"\(daysOfCurrentWeek[indexPath.row])"
-            } else {
-                cell.dateLabel.text = "Wednesday "+"\(daysOfSelectedWeek[indexPath.row])"
-            }
-        case 3:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Thursday "+"\(daysOfCurrentWeek[indexPath.row])"
-            } else {
-                cell.dateLabel.text = "Thursday "+"\(daysOfSelectedWeek[indexPath.row])"
-            }
-        case 4:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Friday "+"\(daysOfCurrentWeek[indexPath.row])"
-            } else {
-                cell.dateLabel.text = "Friday "+"\(daysOfSelectedWeek[indexPath.row])"
-            }
-        case 5:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Saturday "+"\(daysOfCurrentWeek[indexPath.row])"
-            } else {
-                cell.dateLabel.text = "Saturday "+"\(daysOfSelectedWeek[indexPath.row])"
-            }
-        case 6:
-            if daysOfSelectedWeek.isEmpty {
-                cell.dateLabel.text = "Sunday "+"\(daysOfCurrentWeek[indexPath.row])"
-            } else {
-                cell.dateLabel.text = "Sunday "+"\(daysOfSelectedWeek[indexPath.row])"
-            }
-        default:
-            break
         }
+        
+        if daysOfSelectedWeek.isEmpty {
+            cell.dateLabel.text = "\(daysToDisplay[indexPath.row]) "+"\(daysOfCurrentWeek[indexPath.row])"
+        } else {
+            cell.dateLabel.text = "\(daysToDisplay[indexPath.row]) "+"\(daysOfSelectedWeek[indexPath.row])"
+        }
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = calendarCollectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCollectionViewCell
-//        let selectionImage = circleAroundDigit(datesbis[indexPath.item].number, circleColor: .blue,
-//                                   digitColor: .white, diameter: 30, font:UIFont(name: "GillSans", size: 20)!)
-//        let selectedString = NSMutableAttributedString(string: datesbis[indexPath.item].day)
-//        let selectedStringAttachment = NSTextAttachment()
-//        selectedStringAttachment.image = selectionImage
-//        let selectedImageString = NSAttributedString(attachment: selectedStringAttachment)
-//        selectedString.append(selectedImageString)
-//        cell.dateLabel.attributedText = selectedString
-        
-//        dataUpdateDelegate.updateChartBar()
-        
         if daysOfSelectedWeek.isEmpty {
             selectedDay = daysOfCurrentWeek[indexPath.row]
         } else {
@@ -191,7 +144,7 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
                 let hour = calendar.component(.hour, from: calendar.date(byAdding: .hour, value: -2, to: date)!)
                 hourArray.append(hour)
             }
-//            print("hourArray \(hourArray)")
+
             
             let defaultsOpeningHours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
             
@@ -440,20 +393,6 @@ extension CalendarView : CalendarUpdateDelegate {
         })
         
 
-  
-        
-        
-//        func dayRangeOf(weekOfYear: Int, for date: Date)
-//        {
-//            let startComponents = DateComponents(weekOfYear: selectedWeekNumber, yearForWeekOfYear: year)
-//            let startDate = calendar.date(from: startComponents)!
-//            let endComponents = DateComponents(day:7, second: -1)
-//            let endDate = calendar.date(byAdding: endComponents, to: startDate)!
-//            print(startDate...endDate)
-////
-//        }
-//
-//        dayRangeOf(weekOfYear: 12, for: Date())
     
     }
     

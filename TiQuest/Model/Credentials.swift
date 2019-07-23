@@ -8,7 +8,11 @@
 
 import Foundation
 
-//let credentials : [String : String] = ["admin" : "password", "tacos" : "tacos", "cavolinostri" : "cavolinostri"]
+enum BusinessList : Int {
+    case demoshop = 1
+    case tacos = 2
+    case cavolinostri = 3
+}
 
 struct Credentials {
     let username : String

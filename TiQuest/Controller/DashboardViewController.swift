@@ -10,6 +10,8 @@ import UIKit
 import Charts
 
 
+var tableViewHeight : CGFloat?
+
 class DashboardViewController: UIViewController {
     
     static var businessId: Int = 0
@@ -32,7 +34,8 @@ class DashboardViewController: UIViewController {
     var selectButton : UIBarButtonItem?
     var adminButton : UIBarButtonItem?
 //    var refreshButton : UIBarButtonItem?
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,8 @@ class DashboardViewController: UIViewController {
         
         //        MARK: Configuration of the Navigation Bar
         self.navigationItem.title = DashboardViewController.businessName
+        let attributes = [NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 20)!, NSAttributedString.Key.foregroundColor : UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
         selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
         let todayButton = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
         exportButton = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(didTapExport))
@@ -169,6 +174,11 @@ class DashboardViewController: UIViewController {
         stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
         
+        
+        
+        
+        
+        
         detailedHourView.topSellersUpdateDelegate = topSellersView
         
 //        if let jsonData = jsonString.data(using: .utf8)
@@ -188,6 +198,13 @@ class DashboardViewController: UIViewController {
 
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableViewHeight = self.view.frame.height - (71 + calendarView.calendarHeight + 20 + self.view.frame.height / 2.5 + 10 + detailedHourView.detailedViewHeight)
+        print(tableViewHeight)
+    }
+    
+  
     
 //    override func viewWillAppear(_ animated: Bool) {
 //        print("viewWillAppear")

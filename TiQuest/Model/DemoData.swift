@@ -8,6 +8,16 @@
 
 import Foundation
 
+struct Sales {
+    var hour: String
+    var sales: Double
+}
+
+struct dailySales {
+    var day: String
+    var totalSales: [Sales]
+}
+
 // Put Fake Data for Demo Version
 
 let salesOfDayOne = [

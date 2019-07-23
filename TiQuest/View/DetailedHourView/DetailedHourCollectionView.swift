@@ -79,7 +79,12 @@ class DetailedHourView: NSObject {
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
-        cv.isScrollEnabled = false
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width > 500 {
+                cv.isScrollEnabled = false
+            }
+        }
+        
         cv.sizeThatFits(layout.estimatedItemSize)
         return cv
     }()

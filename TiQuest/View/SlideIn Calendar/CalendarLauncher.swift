@@ -30,6 +30,7 @@ class CalendarLauncher: NSObject {
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let daysOfMonth = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    let daysOfMonthSmallWidth = ["M", "T", "W", "T", "F", "S", "S"]
     var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var currentMonth = String()
     
@@ -47,10 +48,11 @@ class CalendarLauncher: NSObject {
     let darkView = UIView()
     
     let calendarCollectionViewHeight : CGFloat = 320
-    let monthLabelHeight : CGFloat = 50
-    let weekdayStackViewHeight : CGFloat = 50
-    let backgroundViewHeight : CGFloat = 450
-    var stackViewBottomConstant : CGFloat = 50
+    let monthLabelHeight : CGFloat = 40
+    let weekdayStackViewHeight : CGFloat = 20
+    
+    let backgroundViewHeight : CGFloat = 400
+//    var stackViewBottomConstant : CGFloat = 50
     
     let backgroundView : UIView = {
         let bView = UIView(frame: .zero)
@@ -67,7 +69,7 @@ class CalendarLauncher: NSObject {
     
     let previousButton : UIButton = {
         let button = UIButton()
-        button.setTitle("Previous", for: .normal)
+        button.setImage(UIImage(named: "left-arrow"), for: .normal)
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
         return button
@@ -75,7 +77,7 @@ class CalendarLauncher: NSObject {
     
     let nextButton : UIButton = {
         let button = UIButton()
-        button.setTitle("Next", for: .normal)
+        button.setImage(UIImage(named: "right-arrow"), for: .normal)
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
         return button
@@ -102,7 +104,7 @@ class CalendarLauncher: NSObject {
             darkView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             
             print(date)
-  
+            
             view.addSubview(darkView)
             view.addSubview(backgroundView)
             backgroundView.addSubview(calendarCollectionView)
@@ -271,7 +273,15 @@ class CalendarLauncher: NSObject {
         
         for i in 0..<7 {
             let dayLabel = UILabel()
-            dayLabel.text = daysOfMonth[i]
+            if let view = UIApplication.shared.keyWindow {
+                if view.frame.width < 500 {
+                    dayLabel.text = daysOfMonthSmallWidth[i]
+                } else {
+                    dayLabel.text = daysOfMonth[i]
+                }
+            }
+            
+      
             dayLabel.textAlignment = .center
             dayLabel.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
             weekdayStackView.addArrangedSubview(dayLabel)
