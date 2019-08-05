@@ -10,7 +10,7 @@ import Foundation
 
 enum BusinessList : Int {
     case demoshop = 1
-    case tacos = 2
+    case tacos = 4
     case cavolinostri = 3
 }
 
@@ -21,7 +21,7 @@ struct Credentials {
     let businessName : String
 }
 
-let credentials : [Credentials] = [Credentials(username: "admin", password: "password", id: 1, businessName: "Demo"), Credentials(username: "tacos", password: "tacos", id: 2, businessName: "Taco's"), Credentials(username: "cavolinostri", password: "cavolinostri", id: 3, businessName: "Cavoli Nostri")]
+let credentials : [Credentials] = [Credentials(username: "admin", password: "password", id: 1, businessName: "Demo"), Credentials(username: "tacos", password: "tacos", id: 4, businessName: "Taco's"), Credentials(username: "cavolinostri", password: "cavolinostri", id: 3, businessName: "Cavoli Nostri")]
 
 
 

@@ -207,8 +207,15 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
                 productsSold += data.soldProducts
             }
             
+            
 //            We remove Coperto
             productsSold = productsSold.filter({$0.product?.title != "Coperto" })
+            productsSold = productsSold.filter({$0.product?.title != "COPERTO" })
+            
+            productsSold.forEach { product in
+                print(product.product?.title)
+    
+            }
 //            We sort by product name
             productsSold = productsSold.sorted(by: { $0.product!.title! < $1.product!.title! })
 //            We need to find out the duplicated to keep only one product but with the sum of the quantities
@@ -251,7 +258,8 @@ extension DetailedHourView : DetailedViewUpdateDelegate {
                 
                 let formattedTime = formattedTimes[key]
                 let sales = "\(Int(data.totalEarnings)) €"
-                let productsSold = data.soldProducts.filter({$0.product?.title != "Coperto" })
+                var productsSold = data.soldProducts.filter({$0.product?.title != "Coperto" })
+                productsSold = data.soldProducts.filter({$0.product?.title != "COPERTO" })
                 let productsSoldSorted = productsSold.sorted(by: { $0.counter! < $1.counter! })
                 topSellersData[key] = productsSoldSorted
                 

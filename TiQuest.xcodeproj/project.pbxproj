@@ -13,6 +13,7 @@
 		3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E657B1622A56F9A0017A4A2 /* DummyJson.swift */; };
 		880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */; };
 		88232EEF22AFB912008C7A1A /* TodaySalesViewCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */; };
+		884E6CB822E9980E00B7F302 /* DashboardViewControllerBis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E6CB722E9980E00B7F302 /* DashboardViewControllerBis.swift */; };
 		88557EDD2292ECDC007DBE21 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88557EDB2292ECDC007DBE21 /* LoginViewController.swift */; };
 		885D599722B2FBFD006B8F50 /* MonthLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599622B2FBFD006B8F50 /* MonthLabel.swift */; };
 		885D599922B3B3ED006B8F50 /* CalendarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D599822B3B3ED006B8F50 /* CalendarData.swift */; };
@@ -66,6 +67,7 @@
 		74ADADF95A9C723D4614757E /* Pods-TiQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiQuest.release.xcconfig"; path = "Target Support Files/Pods-TiQuest/Pods-TiQuest.release.xcconfig"; sourceTree = "<group>"; };
 		880DFD442292F1640054F2C8 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		88232EEE22AFB912008C7A1A /* TodaySalesViewCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySalesViewCharts.swift; sourceTree = "<group>"; };
+		884E6CB722E9980E00B7F302 /* DashboardViewControllerBis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewControllerBis.swift; sourceTree = "<group>"; };
 		88557EDB2292ECDC007DBE21 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		885D599622B2FBFD006B8F50 /* MonthLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthLabel.swift; sourceTree = "<group>"; };
 		885D599822B3B3ED006B8F50 /* CalendarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarData.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				885D59AA22B6F89F006B8F50 /* SplashScreenViewController.swift */,
 				88557EDB2292ECDC007DBE21 /* LoginViewController.swift */,
 				888C6018228EFE540047A736 /* DashboardViewController.swift */,
+				884E6CB722E9980E00B7F302 /* DashboardViewControllerBis.swift */,
 				885D599A22B3DE7F006B8F50 /* SettingsViewController.swift */,
 				88B7C75722C389B80021FF6F /* DemoViewController.swift */,
 			);
@@ -473,6 +476,7 @@
 				885D59A922B56F15006B8F50 /* UserDefaults.swift in Sources */,
 				3E3A433022A00E7F00FE660F /* TopSellersTableViewCell.swift in Sources */,
 				88B7C75222C22DFB0021FF6F /* OpeningHoursValidation.swift in Sources */,
+				884E6CB822E9980E00B7F302 /* DashboardViewControllerBis.swift in Sources */,
 				8874614F229EDA2000D65346 /* WeekNumberLabel.swift in Sources */,
 				885D59A322B3E919006B8F50 /* LogOutTableViewCell.swift in Sources */,
 				8899884B22D6428C00012C18 /* NativeBarChart.swift in Sources */,

@@ -184,7 +184,7 @@ class DashboardViewController: UIViewController {
 //        if let jsonData = jsonString.data(using: .utf8)
 //        {
 //            let decoder = JSONDecoder()
-//            
+//
 //            do {
 //                let menuItems = try decoder.decode(MenuItems.self, from: jsonData)
 //                topCategoriesView.add(items: menuItems.data.map {$0.category})
