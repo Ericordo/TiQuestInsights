@@ -47,6 +47,7 @@ class CalendarView: NSObject {
         cv.isScrollEnabled = false
         cv.decelerationRate = .fast
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
+        
         return cv
     }()
     
@@ -68,12 +69,24 @@ class CalendarView: NSObject {
         currentMonth = months[month]
        
         getCurrentWeek()
-     
+        
+  
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+   
+
+    
+    
+    @objc func didSwipeRight() {
+        print("swipedright")
+    }
+    
     
     func circleAroundDigit(_ num:Int, circleColor:UIColor,
                            digitColor:UIColor, diameter:CGFloat,

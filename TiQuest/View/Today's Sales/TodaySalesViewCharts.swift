@@ -101,6 +101,8 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.drawValueAboveBarEnabled = true
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         self.xAxis.labelTextColor = UIColor.black
+        
+//        self.setVisibleXRangeMaximum(5)
         //        self.xAxis.centerAxisLabelsEnabled = true
         //        self.xAxis.spaceMin = 0.5
         //        self.xAxis.spaceMax = 0.5
@@ -144,10 +146,19 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         chartDataSet.valueTextColor = .black
         chartDataSet.valueFont = UIFont.systemFont(ofSize: 15, weight: .bold)
         
+        let valueFormatter = NumberFormatter()
+        valueFormatter.zeroSymbol = ""
+        valueFormatter.numberStyle = .currency
+        valueFormatter.locale = Locale(identifier: "es_ES")
+        valueFormatter.currencySymbol = "€"
+        chartDataSet.valueFormatter = DefaultValueFormatter(formatter: valueFormatter)
+    
+        
 //        3 - Create Bar Chart Data with our data set
         
         chartData = BarChartData(dataSet: chartDataSet)
         chartData.barWidth = 0.6
+        
         
 
         

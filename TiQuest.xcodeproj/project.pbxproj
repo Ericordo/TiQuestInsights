@@ -43,6 +43,10 @@
 		88B7C75622C235860021FF6F /* BusinessDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75522C235860021FF6F /* BusinessDataStructs.swift */; };
 		88B7C75822C389B80021FF6F /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75722C389B80021FF6F /* DemoViewController.swift */; };
 		88B7C75A22C389C40021FF6F /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7C75922C389C40021FF6F /* DemoData.swift */; };
+		88B7ED9E231C2A0300F2C48E /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7ED9D231C2A0300F2C48E /* ItemListViewController.swift */; };
+		88B7EDA1231C2A4000F2C48E /* ItemTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7EDA0231C2A4000F2C48E /* ItemTableView.swift */; };
+		88B7EDA3231C2A5900F2C48E /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7EDA2231C2A5900F2C48E /* ItemTableViewCell.swift */; };
+		88B7EDA5231C2E8500F2C48E /* ToItemListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7EDA4231C2E8500F2C48E /* ToItemListTableViewCell.swift */; };
 		88BA1C812294116D00F96603 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C802294116D00F96603 /* Calendar.swift */; };
 		88BA1C872295A78A00F96603 /* TopCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */; };
 		88BA1C8A2296982E00F96603 /* TopCategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */; };
@@ -97,6 +101,10 @@
 		88B7C75522C235860021FF6F /* BusinessDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDataStructs.swift; sourceTree = "<group>"; };
 		88B7C75722C389B80021FF6F /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		88B7C75922C389C40021FF6F /* DemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
+		88B7ED9D231C2A0300F2C48E /* ItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
+		88B7EDA0231C2A4000F2C48E /* ItemTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableView.swift; sourceTree = "<group>"; };
+		88B7EDA2231C2A5900F2C48E /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		88B7EDA4231C2E8500F2C48E /* ToItemListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToItemListTableViewCell.swift; sourceTree = "<group>"; };
 		88BA1C802294116D00F96603 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		88BA1C862295A78A00F96603 /* TopCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		88BA1C892296982E00F96603 /* TopCategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoriesTableView.swift; sourceTree = "<group>"; };
@@ -168,10 +176,12 @@
 		885D599C22B3DE8F006B8F50 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				88B7ED9F231C2A1600F2C48E /* ItemList */,
 				885D599D22B3DEBB006B8F50 /* SettingsView.swift */,
 				885D59A022B3E908006B8F50 /* OpeningSelectionTableViewCell.swift */,
 				885D59A622B5601C006B8F50 /* ClosingSelectionTableViewCell.swift */,
 				885D59A222B3E919006B8F50 /* LogOutTableViewCell.swift */,
+				88B7EDA4231C2E8500F2C48E /* ToItemListTableViewCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -235,6 +245,7 @@
 				888C6018228EFE540047A736 /* DashboardViewController.swift */,
 				884E6CB722E9980E00B7F302 /* DashboardViewControllerBis.swift */,
 				885D599A22B3DE7F006B8F50 /* SettingsViewController.swift */,
+				88B7ED9D231C2A0300F2C48E /* ItemListViewController.swift */,
 				88B7C75722C389B80021FF6F /* DemoViewController.swift */,
 			);
 			path = Controller;
@@ -260,6 +271,15 @@
 				8899885D22D64D1E00012C18 /* BasicBarChartPresenter.swift */,
 			);
 			path = NativeBarChart;
+			sourceTree = "<group>";
+		};
+		88B7ED9F231C2A1600F2C48E /* ItemList */ = {
+			isa = PBXGroup;
+			children = (
+				88B7EDA0231C2A4000F2C48E /* ItemTableView.swift */,
+				88B7EDA2231C2A5900F2C48E /* ItemTableViewCell.swift */,
+			);
+			path = ItemList;
 			sourceTree = "<group>";
 		};
 		88BA1C882295A7D500F96603 /* TopCategoriesTableView */ = {
@@ -471,6 +491,7 @@
 				88BA1C912296DE4000F96603 /* Constants.swift in Sources */,
 				885D59AF22B7BF05006B8F50 /* CalendarLauncher.swift in Sources */,
 				8899885922D64A5400012C18 /* ArrayExtension.swift in Sources */,
+				88B7ED9E231C2A0300F2C48E /* ItemListViewController.swift in Sources */,
 				88B7C75422C235410021FF6F /* BusinessDataModel.swift in Sources */,
 				889ABAD722D4F920006FBF7C /* Credentials.swift in Sources */,
 				885D59A922B56F15006B8F50 /* UserDefaults.swift in Sources */,
@@ -485,6 +506,8 @@
 				88B7C75622C235860021FF6F /* BusinessDataStructs.swift in Sources */,
 				880DFD462292F1640054F2C8 /* CalendarCollectionViewCell.swift in Sources */,
 				88BA1C8D2296CC8600F96603 /* TodaySalesLabel.swift in Sources */,
+				88B7EDA3231C2A5900F2C48E /* ItemTableViewCell.swift in Sources */,
+				88B7EDA5231C2E8500F2C48E /* ToItemListTableViewCell.swift in Sources */,
 				885D599722B2FBFD006B8F50 /* MonthLabel.swift in Sources */,
 				8899885E22D64D1E00012C18 /* BasicBarChartPresenter.swift in Sources */,
 				88B7C75A22C389C40021FF6F /* DemoData.swift in Sources */,
@@ -501,6 +524,7 @@
 				3E657B1722A56F9A0017A4A2 /* DummyJson.swift in Sources */,
 				88B7C75822C389B80021FF6F /* DemoViewController.swift in Sources */,
 				885D599B22B3DE7F006B8F50 /* SettingsViewController.swift in Sources */,
+				88B7EDA1231C2A4000F2C48E /* ItemTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

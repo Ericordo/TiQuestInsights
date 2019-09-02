@@ -35,6 +35,7 @@ class SettingsView : NSObject {
         settingsTableView.register(LogOutTableViewCell.self, forCellReuseIdentifier: "LogOutCell")
         settingsTableView.register(OpeningSelectionTableViewCell.self, forCellReuseIdentifier: "OpeningCell")
         settingsTableView.register(ClosingSelectionTableViewCell.self, forCellReuseIdentifier: "ClosingCell")
+        settingsTableView.register(ToItemListTableViewCell.self, forCellReuseIdentifier: "toItemListCell")
         settingsTableView.frame.size.height = settingsTableView.contentSize.height
         
     }
@@ -62,7 +63,7 @@ class SettingsView : NSObject {
 extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,15 +79,22 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
         let logOutCell = tableView.dequeueReusableCell(withIdentifier: "LogOutCell") as! LogOutTableViewCell
         let openingSelectionCell = tableView.dequeueReusableCell(withIdentifier: "OpeningCell") as! OpeningSelectionTableViewCell
         let closingSelectionCell = tableView.dequeueReusableCell(withIdentifier: "ClosingCell") as! ClosingSelectionTableViewCell
+        let toItemListCell = tableView.dequeueReusableCell(withIdentifier: "toItemListCell") as! ToItemListTableViewCell
        
-        if indexPath == [0,0] {
+      
+        
+        switch indexPath {
+        case [0,0]:
             return openingSelectionCell
-        } else if indexPath == [0, 1] {
-            return  closingSelectionCell
-        } else {
+        case [0,1]:
+            return closingSelectionCell
+        case [1,0]:
+            return toItemListCell
+        case [2,0]:
+            return logOutCell
+        default:
             return logOutCell
         }
-        
         
     
   
@@ -99,10 +107,16 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
+        
+        switch section {
+        case 0:
             return "Opening Hours (Select a day in the Dashboard to refresh)"
-        } else {
+        case 1:
+            return "Item Management"
+        case 2:
             return "Account"
+        default:
+            return "Error"
         }
     }
     
@@ -128,8 +142,16 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [1,0] {
+        
+        
+        switch indexPath {
+        case [1,0]:
+            let itemList = ItemListViewController()
+            
+        case [2,0]:
             showLogOutAlert()
+        default:
+            break
         }
     }
     
