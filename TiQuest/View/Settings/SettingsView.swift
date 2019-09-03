@@ -20,7 +20,8 @@ class SettingsView : NSObject {
     
     let settingsTableView : UITableView = {
         let tv = UITableView()
-        tv.isScrollEnabled = false
+        tv.isScrollEnabled = true
+        tv.showsVerticalScrollIndicator = false
         tv.allowsSelection = true
         tv.tableFooterView = UITableViewHeaderFooterView(frame: .zero)
         tv.frame.size.height = tv.contentSize.height
@@ -103,7 +104,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 50
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -121,7 +122,7 @@ extension SettingsView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 30
     }
     
     

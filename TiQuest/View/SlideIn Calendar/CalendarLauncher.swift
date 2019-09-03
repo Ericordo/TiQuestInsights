@@ -71,6 +71,7 @@ class CalendarLauncher: NSObject {
         let button = UIButton()
         button.setImage(UIImage(named: "left-arrow"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
+         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
         return button
@@ -80,6 +81,7 @@ class CalendarLauncher: NSObject {
         let button = UIButton()
         button.setImage(UIImage(named: "right-arrow"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
         return button
@@ -127,13 +129,15 @@ class CalendarLauncher: NSObject {
             previousButton.translatesAutoresizingMaskIntoConstraints = false
             previousButton.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 0).isActive = true
             previousButton.trailingAnchor.constraint(equalTo: monthLabel.leadingAnchor, constant: 0).isActive = true
-            previousButton.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0).isActive = true
+//            previousButton.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0).isActive = true
+//            previousButton.centerYAnchor.constraint(equalTo: monthLabel.centerYAnchor, constant: 0).isActive = true
             previousButton.heightAnchor.constraint(equalToConstant: monthLabelHeight).isActive = true
             
             nextButton.translatesAutoresizingMaskIntoConstraints = false
             nextButton.leadingAnchor.constraint(equalTo: monthLabel.trailingAnchor, constant: 0).isActive = true
             nextButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: 0).isActive = true
-            nextButton.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0).isActive = true
+//            nextButton.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 10).isActive = true
+//            nextButton.centerYAnchor.constraint(equalTo: monthLabel.centerYAnchor, constant: 0).isActive = true
             nextButton.heightAnchor.constraint(equalToConstant: monthLabelHeight).isActive = true
             
             weekdayStackView.translatesAutoresizingMaskIntoConstraints = false

@@ -24,10 +24,10 @@ class SettingsViewController: UIViewController {
         print("table height \(tableViewHeight)")
         self.view.addSubview(settingsTableView)
         settingsTableView.translatesAutoresizingMaskIntoConstraints = false
-        settingsTableView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 40).isActive = true
-        settingsTableView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -200).isActive = true
-        settingsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-        settingsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+        settingsTableView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 0).isActive = true
+        settingsTableView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 0).isActive = true
+        settingsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        settingsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
 //        settingsTableView.heightAnchor.constraint(equalToConstant: settingsTableView.frame.height)
         
        

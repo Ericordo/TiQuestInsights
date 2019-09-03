@@ -26,22 +26,26 @@ class ClosingSelectionTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         hourPicker.delegate = self
         hourPicker.dataSource = self
+        
+        self.addSubview(hourPicker)
+        hourPicker.translatesAutoresizingMaskIntoConstraints = false
+        self.hourPicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        //        self.hourPicker.leadingAnchor.constraint(equalTo: self.hourLabel.trailingAnchor, constant: 10).isActive = true
+        self.hourPicker.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        self.hourPicker.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        self.hourPicker.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
         self.addSubview(hourLabel)
         hourLabel.translatesAutoresizingMaskIntoConstraints = false
-//                self.hourLabel.trailingAnchor.constraint(equalTo: hourPicker.leadingAnchor, constant: 0).isActive = true
-        self.hourLabel.widthAnchor.constraint(equalToConstant: 400).isActive = true
+        self.hourLabel.trailingAnchor.constraint(equalTo: hourPicker.leadingAnchor, constant: 10).isActive = true
+//        self.hourLabel.widthAnchor.constraint(equalToConstant: 400).isActive = true
         self.hourLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         self.hourLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.hourLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
 //        hourLabel.text = "Closing Time: " + hourSelectedClosing
         updateLabel()
-        self.addSubview(hourPicker)
-        hourPicker.translatesAutoresizingMaskIntoConstraints = false
-                self.hourPicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-//        self.hourPicker.leadingAnchor.constraint(equalTo: self.hourLabel.trailingAnchor, constant: 10).isActive = true
-        self.hourPicker.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        self.hourPicker.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        self.hourPicker.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+
         
 //        self.hourPicker.selectRow(row, inComponent: 0, animated: true)
         let todaySalesChart = TodaySalesChart()
