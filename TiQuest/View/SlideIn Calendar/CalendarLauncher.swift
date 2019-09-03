@@ -48,7 +48,7 @@ class CalendarLauncher: NSObject {
     let darkView = UIView()
     
     let calendarCollectionViewHeight : CGFloat = 320
-    let monthLabelHeight : CGFloat = 40
+    let monthLabelHeight : CGFloat = 50
     let weekdayStackViewHeight : CGFloat = 20
     
     let backgroundViewHeight : CGFloat = 400
@@ -70,6 +70,7 @@ class CalendarLauncher: NSObject {
     let previousButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "left-arrow"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
         return button
@@ -78,6 +79,7 @@ class CalendarLauncher: NSObject {
     let nextButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "right-arrow"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         button.setTitleColor(.black, for: .normal)
         return button
