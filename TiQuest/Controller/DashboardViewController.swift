@@ -108,8 +108,8 @@ class DashboardViewController: UIViewController {
             bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
             return bottomLineSeparator
         }()
-            bottomLineSeparatorMonthLabel.frame = CGRect(x: 0, y: monthLabel.frame.height-0.5, width: monthLabel.frame.width, height: 0.5)
-            monthLabel.layer.addSublayer(bottomLineSeparatorMonthLabel)
+        bottomLineSeparatorMonthLabel.frame = CGRect(x: 0, y: monthLabel.frame.height-0.5, width: monthLabel.frame.width, height: 0.5)
+        monthLabel.layer.addSublayer(bottomLineSeparatorMonthLabel)
         monthLabel.translatesAutoresizingMaskIntoConstraints = false
         monthLabel.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         monthLabel.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
@@ -136,9 +136,18 @@ class DashboardViewController: UIViewController {
 //        detailedHourView.showDetailedHourView()
         let detailedView = detailedHourView.detailedHourCollectionView
         detailedView.frame = CGRect(x: 0, y: 371 + detailedHourView.detailedViewHeight, width: view.frame.width, height: detailedHourView.detailedViewHeight)
+        
         detailedHourView.cellWidth = (view.frame.width - 80) / 6
-//        detailedView.sizeThatFits(CGSize(width: detailedHourView.cellWidth, height: 60))
+
         self.view.addSubview(detailedView)
+//        let bottomLineSeparatorDetailedView : CALayer = {
+//            let bottomLineSeparator = CALayer()
+//            bottomLineSeparator.backgroundColor = UIColor.lightGray.cgColor
+//            return bottomLineSeparator
+//        }()
+//        bottomLineSeparatorDetailedView.frame = CGRect(x: 0, y: detailedHourView.detailedViewHeight - 0.5, width: view.frame.width, height: 0.5)
+//        detailedView.layer.addSublayer(bottomLineSeparatorDetailedView)
+//        
         detailedView.translatesAutoresizingMaskIntoConstraints = false
         detailedView.topAnchor.constraint(equalTo: todaySalesChart.bottomAnchor, constant: 10).isActive = true
         detailedView.heightAnchor.constraint(equalToConstant: detailedHourView.detailedViewHeight).isActive = true
@@ -173,8 +182,8 @@ class DashboardViewController: UIViewController {
         stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
         stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
-        
-        
+
+
         
         
         

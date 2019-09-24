@@ -75,17 +75,19 @@ class DetailedHourView: NSObject {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        layout.estimatedItemSize = CGSize(width: 100, height: 60)
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//        layout.estimatedItemSize = CGSize(width: 150, height: 60)
+//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 250/255, alpha: 1.0)
         if let view = UIApplication.shared.keyWindow {
             if view.frame.width > 500 {
                 cv.isScrollEnabled = false
             }
+            if view.frame.width < 500 {
+                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            }
         }
         
-        cv.sizeThatFits(layout.estimatedItemSize)
         return cv
     }()
     
@@ -107,10 +109,10 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
         let cell = detailedHourCollectionView.dequeueReusableCell(withReuseIdentifier: "DetailCell", for: indexPath) as! DetailedHourCollectionViewCell
        
         cell.clipsToBounds = true
-        cell.infoLabel.adjustsFontSizeToFitWidth = true
-        cell.infoLabel.sizeToFit()
-        cell.autoresizesSubviews = true
-        cell.sizeThatFits(UICollectionViewFlowLayout.automaticSize)
+//        cell.infoLabel.adjustsFontSizeToFitWidth = true
+//        cell.infoLabel.sizeToFit()
+//        cell.autoresizesSubviews = true
+//        cell.sizeThatFits(UICollectionViewFlowLayout.automaticSize)
 //        cell.sizeThatFits(CGSize(width: cellWidth, height: detailedViewHeight))
    
 
@@ -121,39 +123,54 @@ extension DetailedHourView : UICollectionViewDelegate, UICollectionViewDataSourc
 //                return cell
 //            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Time\n", downString: formattedTime)
+            
+            cell.titleLabel.text = "Time"
+            cell.variableLabel.text = formattedTime
         case 1:
 //            guard let sales = sales else {
 //                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: "")
 //                return cell
 //            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Sales\n", downString: sales)
+            cell.titleLabel.text = "Sales"
+            cell.variableLabel.text = sales
         case 2:
 //            guard let topSeller = topSeller else {
 //                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: "")
 //                return cell
 //            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Top Seller\n", downString: topSeller)
+            cell.titleLabel.text = "Top Seller"
+            cell.variableLabel.text = topSeller
+     
         case 3:
 //            guard let worstSeller = worstSeller else {
 //                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: "")
 //                return cell
 //            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Worst Seller\n", downString: worstSeller)
+            cell.titleLabel.text = "Worst Seller"
+            cell.variableLabel.text = worstSeller
         case 4:
 //            guard let totalReceipts = totalReceipts else {
 //                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: "")
 //                return cell
 //            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Total receipts\n", downString: totalReceipts)
+            cell.titleLabel.text = "Total receipts"
+            cell.variableLabel.text = totalReceipts
         case 5:
 //            guard let averageTicket = averageTicket else {
 //                cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: "")
 //                return cell
 //            }
             cell.infoLabel.attributedText = makeDoubleLabelText(upString: "Average ticket\n", downString: averageTicket)
+            cell.titleLabel.text = "Average ticket"
+            cell.variableLabel.text = averageTicket
         default:
             break
         }
+        
         return cell
         
     }
@@ -168,10 +185,17 @@ extension DetailedHourView : UICollectionViewDelegateFlowLayout {
 //        } else {
 //             return CGSize(width: cellWidth, height: detailedViewHeight)
 //        }
-        return CGSize(width: cellWidth, height: detailedViewHeight)
 
+        
+        
+            
+                return CGSize(width: cellWidth, height: detailedViewHeight)
 
-    }
+        }
+    
+       
+
+    
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
