@@ -102,12 +102,21 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         self.xAxis.labelTextColor = UIColor.black
         
-//        self.setVisibleXRangeMaximum(5)
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width < 500 {
+                self.setVisibleXRangeMaximum(5)
+            }
+        }
+        
+        
+        
         //        self.xAxis.centerAxisLabelsEnabled = true
         //        self.xAxis.spaceMin = 0.5
         //        self.xAxis.spaceMax = 0.5
-        //        self.xAxis.granularityEnabled = true
-        //        self.xAxis.granularity = 1
+        
+//        Avoid repetition of the labels on the xAxis
+                self.xAxis.granularityEnabled = true
+                self.xAxis.granularity = 1
     }
     
     func setBarData(xValues: [Int], yValues: [Double]) {
@@ -151,6 +160,7 @@ class TodaySalesChart : BarChartView, ChartViewDelegate {
         valueFormatter.numberStyle = .currency
         valueFormatter.locale = Locale(identifier: "es_ES")
         valueFormatter.currencySymbol = "€"
+        valueFormatter.maximumFractionDigits = 0
         chartDataSet.valueFormatter = DefaultValueFormatter(formatter: valueFormatter)
     
         
@@ -318,8 +328,16 @@ extension TodaySalesChart: ClosingTimeUpdateDelegate {
 }
 
 extension TodaySalesChart: IAxisValueFormatter {
+
+//    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+//        return hours[Int(value)]
+//    }
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+//        Avoid fatal error index out of range 
+        if Int(value) >= hours.count {
+            return ""
+        }
         return hours[Int(value)]
     }
 }

@@ -9,8 +9,9 @@
 import UIKit
 
 class MonthLabel: UILabel {
-    
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+//
+//    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+//    let monthsSmallWidth = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     let daysOfMonth = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var currentMonth = String()
@@ -34,7 +35,15 @@ class MonthLabel: UILabel {
 //        bottomLineSeparator.frame = CGRect(x: 0, y: self.frame.height-0.5, width: self.frame.width, height: 0.5)
 //        self.layer.addSublayer(bottomLineSeparator)
         self.adjustsFontSizeToFitWidth = true
-        currentMonth = months[month]
+        
+//        if let view = UIApplication.shared.keyWindow {
+//            if view.frame.width < 500 {
+//                currentMonth = monthsSmallWidth[month]
+//            } else {
+//                currentMonth = months[month]
+//            }
+//        }
+        
 //        self.text = "\(currentMonth)" + "\n" + "\(year)"
         self.text = "\(currentMonth)\n\(year)"
         self.textColor = .lightGray

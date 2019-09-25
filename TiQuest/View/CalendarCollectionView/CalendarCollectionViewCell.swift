@@ -69,6 +69,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .center
+        label.numberOfLines = 2
 
     
     

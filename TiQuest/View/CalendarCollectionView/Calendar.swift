@@ -20,8 +20,8 @@ class CalendarView: NSObject {
     var dataUpdateDelegate : DataUpdateDelegate!
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    let daysOfMonth = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    let daysOfMonthSmallWidth = ["M", "T", "W", "T", "F", "S", "S"]
+    let daysOfMonth = ["Monday ", "Tuesday ", "Wednesday ", "Thursday ", "Friday ", "Saturday ", "Sunday "]
+    let daysOfMonthSmallWidth = ["M\n", "T\n", "W\n", "T\n", "F\n", "S\n", "S\n"]
     let daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var currentMonth = String()
     
@@ -128,9 +128,9 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
         }
         
         if daysOfSelectedWeek.isEmpty {
-            cell.dateLabel.text = "\(daysToDisplay[indexPath.row]) "+"\(daysOfCurrentWeek[indexPath.row])"
+            cell.dateLabel.text = "\(daysToDisplay[indexPath.row])"+"\(daysOfCurrentWeek[indexPath.row])"
         } else {
-            cell.dateLabel.text = "\(daysToDisplay[indexPath.row]) "+"\(daysOfSelectedWeek[indexPath.row])"
+            cell.dateLabel.text = "\(daysToDisplay[indexPath.row])  "+"\(daysOfSelectedWeek[indexPath.row])"
         }
 
         return cell
@@ -264,10 +264,18 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 extension CalendarView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let view = UIApplication.shared.keyWindow {
-            cellWidth = ((view.frame.width - 150) / 7)
-//            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
+            if view.frame.width < 500 {
+                cellWidth = ((view.frame.width - 100) / 7)
+            } else {
+                cellWidth = ((view.frame.width - 150) / 7)
+            }
         }
+//            cellWidth = ((view.frame.width - 150) / 7)
+////            calendarCollectionView.frame = CGRect(x: 100, y: 71, width: view.frame.width-100, height: calendarHeight)
+//        }
         return CGSize(width: cellWidth, height: calendarHeight)
+      
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

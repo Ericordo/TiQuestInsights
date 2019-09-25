@@ -29,6 +29,7 @@ class CalendarLauncher: NSObject {
     
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let monthsSmallWidth = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     let daysOfMonth = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     let daysOfMonthSmallWidth = ["M", "T", "W", "T", "F", "S", "S"]
     var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -265,6 +266,8 @@ class CalendarLauncher: NSObject {
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         calendarCollectionView.register(SlideCalendarCollectionViewCell.self, forCellWithReuseIdentifier: "SlideCalendarCell")
+        
+  
         currentMonth = months[monthDisplayed]
         monthLabel.text = "\(currentMonth) " + "\(yearDisplayed)"
         if yearDisplayed%4 == 0 {
@@ -360,6 +363,13 @@ extension CalendarLauncher: UICollectionViewDataSource, UICollectionViewDelegate
         
         calendarUpdateDelegate.updateSelectedWeek(day: selectedDay, month: monthDisplayed+1, year: yearDisplayed)
         weekNumberUpdateDelegate.updateWeekNumber(day: selectedDay, month: monthDisplayed+1, year: yearDisplayed)
+        
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width < 500 {
+                currentMonth = monthsSmallWidth[monthDisplayed]
+           
+            }
+        }
         monthLabelUpdateDelegate.updateSelectedMonth(month: "\(currentMonth)\n\(yearDisplayed)")
         
         

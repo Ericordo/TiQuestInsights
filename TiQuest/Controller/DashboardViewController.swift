@@ -50,7 +50,7 @@ class DashboardViewController: UIViewController {
         self.navigationItem.title = DashboardViewController.businessName
         let attributes = [NSAttributedString.Key.font : UIFont(name: "Helvetica", size: 20)!, NSAttributedString.Key.foregroundColor : UIColor.black]
         self.navigationController?.navigationBar.titleTextAttributes = attributes
-        selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
+//        selectButton = UIBarButtonItem.init(title: "Select", style: .plain, target: self, action: #selector(didTapSelect))
         let todayButton = UIBarButtonItem.init(title: "Today", style: .plain, target: self, action: #selector(didTapToday))
         exportButton = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(didTapExport))
         let settingsButton = UIBarButtonItem.init(title: "Settings", style: .plain, target: self, action: #selector(didTapSettings))
@@ -63,7 +63,8 @@ class DashboardViewController: UIViewController {
             self.navigationItem.rightBarButtonItems = [settingsButton, exportButton!]
         }
         
-        self.navigationItem.leftBarButtonItems = [selectButton!, todayButton]
+//        self.navigationItem.leftBarButtonItems = [selectButton!, todayButton]
+        self.navigationItem.leftBarButtonItems = [todayButton]
         
         
         
@@ -75,7 +76,14 @@ class DashboardViewController: UIViewController {
         calendarView.calendarCollectionView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         calendarView.calendarCollectionView.heightAnchor.constraint(equalToConstant: calendarView.calendarHeight).isActive = true
         calendarView.calendarCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
-        calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width < 500 {
+                calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
+            } else {
+                calendarView.calendarCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
+            }
+        }
+        
 
         
         // MARK: Configuration of the WeekNumberLabel
@@ -116,6 +124,10 @@ class DashboardViewController: UIViewController {
         monthLabel.leadingAnchor.constraint(equalTo: calendarView.calendarCollectionView.trailingAnchor, constant: 0).isActive = true
         monthLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         calendarLauncher.monthLabelUpdateDelegate = monthLabel
+        
+        let tapOnMonth = UITapGestureRecognizer(target: self, action: #selector(didTapSelect))
+        monthLabel.isUserInteractionEnabled = true
+        monthLabel.addGestureRecognizer(tapOnMonth)
         
         
                 // MARK: Configuration of the Today Sales Chart using Charts Framework
@@ -321,7 +333,13 @@ class DashboardViewController: UIViewController {
         }
         
         weekNumberLabel.text = "W\(weekNumberToDisplay)"
-        let currentMonth = months[calendar.component(.month, from: date) - 1]
+        
+        var currentMonth = months[calendar.component(.month, from: date) - 1]
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width < 500 {
+                currentMonth = monthsSmallWidth[calendar.component(.month, from: date) - 1]
+            }
+        }
         monthLabel.text = "\(currentMonth)\n\(year)"
 
     }
