@@ -130,7 +130,7 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
         if daysOfSelectedWeek.isEmpty {
             cell.dateLabel.text = "\(daysToDisplay[indexPath.row])"+"\(daysOfCurrentWeek[indexPath.row])"
         } else {
-            cell.dateLabel.text = "\(daysToDisplay[indexPath.row])  "+"\(daysOfSelectedWeek[indexPath.row])"
+            cell.dateLabel.text = "\(daysToDisplay[indexPath.row])"+"\(daysOfSelectedWeek[indexPath.row])"
         }
 
         return cell

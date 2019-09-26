@@ -27,7 +27,11 @@ class DashboardViewController: UIViewController {
     let calendarLauncher = CalendarLauncher()
     var weekNumberLabel = WeekNumberLabel()
     var monthLabel = MonthLabel()
+    let switchItemCategories = SwitchItemsCategories().switchItemsCategories
     
+    
+    var iPhone: Bool?
+    var sideMargins: CGFloat = 40
     
     
     var exportButton : UIBarButtonItem?
@@ -40,6 +44,15 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
   
+        if let view = UIApplication.shared.keyWindow {
+            if view.frame.width < 500 {
+                iPhone = true
+                sideMargins = 15
+            } else {
+                iPhone = false
+            }
+        }
+        
         calendar.firstWeekday = 2
         calendar.timeZone = .autoupdatingCurrent
         
@@ -136,8 +149,8 @@ class DashboardViewController: UIViewController {
         view.addSubview(todaySalesChart)
         todaySalesChart.translatesAutoresizingMaskIntoConstraints = false
         todaySalesChart.topAnchor.constraint(equalTo: calendarView.calendarCollectionView.bottomAnchor, constant: 20).isActive = true
-        todaySalesChart.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-        todaySalesChart.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+        todaySalesChart.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+        todaySalesChart.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
         todaySalesChart.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2.5).isActive = true
         
 
@@ -163,37 +176,61 @@ class DashboardViewController: UIViewController {
         detailedView.translatesAutoresizingMaskIntoConstraints = false
         detailedView.topAnchor.constraint(equalTo: todaySalesChart.bottomAnchor, constant: 10).isActive = true
         detailedView.heightAnchor.constraint(equalToConstant: detailedHourView.detailedViewHeight).isActive = true
-        detailedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-        detailedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:  -40).isActive = true
+        detailedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+        detailedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
         
         
-        
-
     
 //        infoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
 //        infoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         
-      
+        let topCategoriesTableView = topCategoriesView.topCategoriesTableView
+        let topSellersTableView = topSellersView.topSellersTableView
+        
+        if iPhone! {
+            view.addSubview(switchItemCategories)
+//            let switchControl = switchItemCategories.switchItemsCategories
+            switchItemCategories.translatesAutoresizingMaskIntoConstraints = false
+            switchItemCategories.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 5).isActive = true
+            switchItemCategories.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+            switchItemCategories.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
+            switchItemCategories.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            switchItemCategories.addTarget(self, action: #selector(didChangeIndex), for: .valueChanged)
+            
+            
+
+            view.addSubview(topSellersTableView)
+            topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
+            topSellersTableView.topAnchor.constraint(equalTo: switchItemCategories.bottomAnchor, constant: 10).isActive = true
+            topSellersTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+            topSellersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+            topSellersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
+            
+        } else {
+            let stackView = UIStackView()
+            stackView.axis = .horizontal
+            stackView.alignment = .fill
+            stackView.spacing = 20
+            stackView.distribution = .fillEqually
+            view.addSubview(stackView)
+            stackView.addArrangedSubview(topCategoriesTableView)
+            stackView.addArrangedSubview(topSellersTableView)
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
+            stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+            stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+            stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
+        }
+
+        
+        
         
         //         MARK: Configuration of the TableViews
         
         
-        let topCategoriesTableView = topCategoriesView.topCategoriesTableView
-        let topSellersTableView = topSellersView.topSellersTableView
+        
 
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.spacing = 20
-        stackView.distribution = .fillEqually
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(topCategoriesTableView)
-        stackView.addArrangedSubview(topSellersTableView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: detailedView.bottomAnchor, constant: 10).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40).isActive = true
+        
 
 
         
@@ -256,6 +293,30 @@ class DashboardViewController: UIViewController {
 //        self.view.layoutIfNeeded()
 //    }
 
+    @objc func didChangeIndex(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            topCategoriesView.topCategoriesTableView.removeFromSuperview()
+            view.addSubview(topSellersView.topSellersTableView)
+            topSellersView.topSellersTableView.translatesAutoresizingMaskIntoConstraints = false
+            topSellersView.topSellersTableView.topAnchor.constraint(equalTo: switchItemCategories.bottomAnchor, constant: 10).isActive = true
+            topSellersView.topSellersTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+            topSellersView.topSellersTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+            topSellersView.topSellersTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
+        case 1:
+            topSellersView.topSellersTableView.removeFromSuperview()
+            view.addSubview(topCategoriesView.topCategoriesTableView)
+            topCategoriesView.topCategoriesTableView.translatesAutoresizingMaskIntoConstraints = false
+            topCategoriesView.topCategoriesTableView.topAnchor.constraint(equalTo: switchItemCategories.bottomAnchor, constant: 10).isActive = true
+            topCategoriesView.topCategoriesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+            topCategoriesView.topCategoriesTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: sideMargins).isActive = true
+            topCategoriesView.topCategoriesTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -sideMargins).isActive = true
+            
+        default:
+            break
+        }
+    }
+    
     @objc func didTapAdmin() {
         
     }
